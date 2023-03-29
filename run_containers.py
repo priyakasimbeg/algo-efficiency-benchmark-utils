@@ -11,7 +11,7 @@ flags.DEFINE_boolean('dry_run', False, 'Whether or not to actually run the comma
 
 FLAGS = flags.FLAGS
 
-RUN_FRACTION = 0.15
+RUN_FRACTION = 0.1
 
 DATASETS = ['imagenet',
             'fastmri',
@@ -69,7 +69,7 @@ def main(_):
         wait_until_container_not_running()
         print('='*100)
         dataset = WORKLOADS[workload]['dataset']
-        max_steps = int(WORKLOADS[workload]['max_steps'] * 0.15)
+        max_steps = int(WORKLOADS[workload]['max_steps'] * RUN_FRACTION)
         experiment_name = f'timing_{algorithm}'
         command = ('docker run -t -d -v /home/kasimbeg/data/:/data/ '
                    '-v /home/kasimbeg/experiment_runs/:/experiment_runs '
@@ -78,9 +78,9 @@ def main(_):
                    'us-central1-docker.pkg.dev/training-algorithms-external/mlcommons-docker-repo/base_image:criteo_pytorch_fix '
                    f'-d {dataset} '
                    f'-f {framework} '
-                   f'-s reference_algorithms/target_setting_algorithms/{framework}_{algorithm}.py '
+                   f'-s baselines/{algorithm}/{framework}/submission.py '
                    f'-w {workload} '
-                   f'-t reference_algorithms/target_setting_algorithms/{workload}/tuning_search_space.json '
+                   f'-t baselines/{algorithm}/tuning_search_space.json '
                    f'-e {experiment_name} '
                    f'-m {max_steps}')
         if not FLAGS.dry_run:
