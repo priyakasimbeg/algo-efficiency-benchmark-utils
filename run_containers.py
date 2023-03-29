@@ -80,7 +80,7 @@ def main(_):
                    f'-f {framework} '
                    f'-s reference_algorithms/target_setting_algorithms/{framework}_{algorithm}.py '
                    f'-w {workload} '
-                   f'-t reference_algorithms/target_setting_algorithms/{framework}/tuning_search_space.json '
+                   f'-t reference_algorithms/target_setting_algorithms/{workload}/tuning_search_space.json '
                    f'-e {experiment_name} '
                    f'-m {max_steps}')
         if not FLAGS.dry_run:
