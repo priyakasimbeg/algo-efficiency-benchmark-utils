@@ -7,7 +7,7 @@ import time
 flags.DEFINE_string('algorithm', None,
                     'Optimization algorithm in reference algorithms.')
 flags.DEFINE_string('framework', None, 'Can be either pytorch or jax')
-flags.DEFINE_boolean('dry_run', True, 'Whether or not to actually run the command')
+flags.DEFINE_boolean('dry_run', False, 'Whether or not to actually run the command')
 
 FLAGS = flags.FLAGS
 
@@ -67,12 +67,13 @@ def main(_):
     # For each runnable workload check if there are any containers running and if not launch next container command
     for workload in WORKLOADS.keys():
         wait_until_container_not_running()
+        print('='*100)
         dataset = WORKLOADS[workload]['dataset']
         max_steps = int(WORKLOADS[workload]['max_steps'] * 0.15)
         experiment_name = f'timing_{algorithm}'
         command = ('docker run -t -d -v /home/kasimbeg/data/:/data/ '
                    '-v /home/kasimbeg/experiment_runs/:/experiment_runs '
-                   '-v / home/kasimbeg/experiment_runs/logs: / logs '
+                   '-v /home/kasimbeg/experiment_runs/logs:/logs '
                    '--gpus all --ipc=host '
                    'us-central1-docker.pkg.dev/training-algorithms-external/mlcommons-docker-repo/base_image '
                    f'-d {dataset} '
@@ -83,18 +84,19 @@ def main(_):
                    f'-e {experiment_name} '
                    f'-m {max_steps}')
         if not FLAGS.dry_run:
+            print('Running docker container command')
+            print('Container ID: ')
             return_code = os.system(command)
         else:
             return_code = 0
         if return_code == 0:
-            print('='*100)
             print(f'SUCCESS: container for {framework} {workload} {algorithm} launched successfully')
             print(f'Command: {command}')
             print(f'Results will be logged to {experiment_name}')
-            print('='*100)
         else:
             print(f'Failed: container for {framework} {workload} {algorithm} failed with exit code {return_code}.')
             print(f'Command: {command}')
+        print('='*100)
 
 
 if __name__ == '__main__':
