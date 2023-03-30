@@ -75,7 +75,7 @@ def main(_):
                    '-v /home/kasimbeg/experiment_runs/:/experiment_runs '
                    '-v /home/kasimbeg/experiment_runs/logs:/logs '
                    '--gpus all --ipc=host '
-                   'us-central1-docker.pkg.dev/training-algorithms-external/mlcommons-docker-repo/base_image:criteo_pytorch_fix '
+                   'us-central1-docker.pkg.dev/training-algorithms-external/mlcommons-docker-repo/base_image '
                    f'-d {dataset} '
                    f'-f {framework} '
                    f'-s baselines/{algorithm}/{framework}/submission.py '
