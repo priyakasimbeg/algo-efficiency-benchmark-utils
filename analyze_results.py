@@ -67,10 +67,10 @@ def convert_metrics_line_to_dict(line):
     
     return dict_of_lists
 
-def extract_results_dict(logfile):
+def extract_results_df(logfile):
     line = get_metrics_line(logfile)
     results = convert_metrics_line_to_dict(line)
-    return results
+    return pd.DataFrame(results)
 
 def get_max_time(workload, df):
     end_time = df['total_duration'].iloc[-1]
@@ -84,9 +84,8 @@ def get_max_times_from_logdir(logdir):
     logfilenames = get_logfilenames(logdir)
     for f in logfilenames:
         print(f"Log name: {f}")
-        results = extract_results_dict(f)
-        df = pd.DataFrame(results)
-        max_time = get_max_time('fastmri', df)
+        results = extract_results_df(f)
+        max_time = get_max_time('fastmri', results)
         print(f"Max time: {max_time}")
 
 
