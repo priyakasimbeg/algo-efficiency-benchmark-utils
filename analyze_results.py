@@ -22,8 +22,6 @@ def get_logfilenames(logdir):
     for f in filenames:
         if f.endswith(".log"):
             f = os.path.join(logdir, f)
-            if f == 'librispeech_deepspeech_jax_03-15-2023-19-07-09.log':
-                continue
             logfilenames.append(f)
     return logfilenames
 
@@ -52,7 +50,14 @@ def convert_metrics_line_to_dict(line):
     dict_str = dict_str.replace("'", "\"")
     dict_str = dict_str.replace("(", "")
     dict_str = dict_str.replace(")", "")
-    metrics_dict = json.loads(dict_str)
+    dict_str = dict_str.replace("DeviceArray", "")
+    dict_str = dict_str.replace(", dtype=float32", "")
+    try:
+        metrics_dict = json.loads(dict_str)
+    except Exception as e:
+        "HIIII"
+        print(dict_str)
+        raise(e)
     for item in metrics_dict['eval_results']:
         if isinstance(item, dict):
             eval_results.append(item)
