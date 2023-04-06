@@ -1,9 +1,9 @@
 import os
 
-root_dir = "/home/kasimbeg/mlcommons-runs"
+root_dir = "/home/kasimbeg/mlcommons-runs/timing_v2/"
 sub_dirs = os.listdir(root_dir)
 
-destination_dir = "/home/kasimbeg/algo-efficiency-timing/step_time_logs"
+destination_dir = "/home/kasimbeg/algo-efficiency-timing/logs/v2"
 
 for algo_dir in sub_dirs:
     if 'timing_' in algo_dir:

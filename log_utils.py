@@ -33,7 +33,7 @@ def convert_metrics_line_to_dict(line):
     try:
         metrics_dict = json.loads(dict_str)
     except Exception as e:
-        print(dict_str[830:])
+        print('Error loading metrics line')
         raise(e)
     for item in metrics_dict['eval_results']:
         if isinstance(item, dict):

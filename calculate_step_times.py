@@ -45,8 +45,6 @@ def get_algo_speeds(logdir=LOG_DIR, framework="jax"):
         steps_per_second = global_step / total_duration
         step_time_df.at[algo, workload] = steps_per_second
 
-    print("total time:")
-    print(total_time/3600 * 16)
     return step_time_df
 
 
@@ -57,4 +55,3 @@ df.to_csv("/home/kasimbeg/mlcommons-runs/jax_speed_info.csv")
 df = get_algo_speeds(framework='pytorch')
 print('Pytorch workload steps/sec:')
 df.to_csv("/home/kasimbeg/mlcommons-runs/pytorch_speed_info.csv")
-print(df)
