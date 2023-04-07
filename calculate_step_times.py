@@ -2,7 +2,11 @@ import log_utils
 import os
 import pandas as pd
 
-LOG_DIR = 'step_time_logs'
+LOG_DIR = 'logs/step_time_logs_v1'
+OUTPUT_DIR = 'tables/speed_v1'
+
+if not os.path.exists(OUTPUT_DIR):
+    os.makedirs(OUTPUT_DIR)
 
 def get_workload_name_from_logfilename(logfile):
     filename = os.path.basename(logfile)
@@ -50,8 +54,10 @@ def get_algo_speeds(logdir=LOG_DIR, framework="jax"):
 
 df = get_algo_speeds(framework='jax')
 print('Jax workload steps/sec:')
-df.to_csv("/home/kasimbeg/mlcommons-runs/jax_speed_info.csv")
+print(df)
+df.to_csv(os.path.join(OUTPUT_DIR, 'jax_speed.info.csv'))
 
 df = get_algo_speeds(framework='pytorch')
 print('Pytorch workload steps/sec:')
-df.to_csv("/home/kasimbeg/mlcommons-runs/pytorch_speed_info.csv")
+print(df)
+df.to_csv(os.path.join(OUTPUT_DIR, 'pytorch_speed_info.csv'))
