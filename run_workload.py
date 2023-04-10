@@ -71,7 +71,7 @@ def main(_):
     num_runs = FLAGS.num_runs
     experiment_postfix = f'_{FLAGS.experiment_postfix}' if FLAGS.experiment_postfix else ''
 
-    if workload not in workloads:
+    if workload not in WORKLOADS:
         raise ValueError(f'Invalid value for workload: {workload}.')
 
     # For each runnable workload check if there are any containers running and if not launch next container command
