@@ -8,6 +8,7 @@ flags.DEFINE_string('algorithm', None,
                     'Optimization algorithm in reference algorithms.')
 flags.DEFINE_string('framework', None, 'Can be either pytorch or jax')
 flags.DEFINE_boolean('dry_run', False, 'Whether or not to actually run the command')
+flags.DEFINE_string('tag', None, 'Optional Docker image tag')
 
 FLAGS = flags.FLAGS
 
@@ -63,6 +64,7 @@ def wait_until_container_not_running(sleep_interval=5*60):
 def main(_):
     framework = FLAGS.framework
     algorithm = FLAGS.algorithm
+    tag = f':{FLAGS.tag}' if FLAGS.tag is not None else ''
 
     # For each runnable workload check if there are any containers running and if not launch next container command
     for workload in WORKLOADS.keys():
@@ -75,7 +77,7 @@ def main(_):
                    '-v /home/kasimbeg/experiment_runs/:/experiment_runs '
                    '-v /home/kasimbeg/experiment_runs/logs:/logs '
                    '--gpus all --ipc=host '
-                   'us-central1-docker.pkg.dev/training-algorithms-external/mlcommons-docker-repo/base_image '
+                   f'us-central1-docker.pkg.dev/training-algorithms-external/mlcommons-docker-repo/base_image{tag} '
                    f'-d {dataset} '
                    f'-f {framework} '
                    f'-s baselines/{algorithm}/{framework}/submission.py '
