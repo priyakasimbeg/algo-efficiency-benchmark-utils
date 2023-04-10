@@ -12,6 +12,8 @@ flags.DEFINE_string('tag', None, 'Optional Docker image tag')
 flags.DEFINE_integer('num_runs', 1, 'Number of times to run the container.')
 flags.DEFINE_string('workload', None, 'Workload to run.')
 flags.DEFINE_string('experiment_postfix', None, 'Postfix on experiment name.')
+FLAGS = flags.FLAGS
+
 RUN_FRACTION = 0.1
 
 DATASETS = ['imagenet',
