@@ -9,8 +9,8 @@ SAVE_DIR = os.path.join('plots', 'timing_test')
 workload = 'librispeech_conformer'
 
 def get_color_and_alpha_for_run(logfile):
-    vm_index = logfile.split('-')[0][0]
-    run_index = logfile.split('.log')[0][-1]
+    vm = int(logfile.split('-')[1][0])
+    run_index = int(logfile.split('.log')[0][-1])
     if vm == 1:
         color = 'red'
     if vm == 2:
@@ -18,10 +18,10 @@ def get_color_and_alpha_for_run(logfile):
     if vm == 3:
         color = 'green'
     if vm == 4:
-        color = 'yellow'
+        color = 'purple'
 
     if run_index == 1:
-        alpha = 0.8
+        alpha = 0.5
     else:
         alpha = 1
     return color, alpha
@@ -33,9 +33,11 @@ def plot_speeds(log_dir='logs/step_time_test_logs',
         os.makedirs(save_dir)
 
     logfiles = log_utils.get_logfilenames(LOG_DIR)
+    logfiles = sorted(logfiles)
 
     step_time_df = pd.DataFrame(index=[os.path.basename(f) for f in logfiles], columns=[workload])
     
+    run_names = []
     # Build step time df
     for logfile in logfiles:
         print(logfile)
@@ -52,18 +54,21 @@ def plot_speeds(log_dir='logs/step_time_test_logs',
 
         step_time_df.at[os.path.basename(logfile), workload] = {'steps': steps, 'steps_per_sec': steps_per_sec}
 
-    print(step_time_df)
-
+    speed_stacked = np.array([1, 2, 3])
     plt.figure()
     for logfile in logfiles:
         logfile = os.path.basename(logfile)
-        run_name = f'{logfile}'
+        vm_and_run = (logfile.split('-')[1]).split('.log')[0]
+        run_name = f'vm_{vm_and_run}'
+        run_names.append(run_name)
         print(f'Run name: {run_name}')
         print('-' * 20)
         try: 
             x = step_time_df.at[logfile, workload]['steps'][:-1]
             y = step_time_df.at[logfile, workload]['steps_per_sec'][:-1]
-            plt.plot(x, y, label=logfile)
+            speed_stacked = np.vstack((speed_stacked, y))
+            color, alpha = get_color_and_alpha_for_run(logfile)
+            plt.plot(x, y, label=run_name, color=color, alpha=alpha)
         except TypeError as e:
             print(f'FAILURE: Can\'t plot {logfile}')
     plt.title(f'librispeech_conformer momentum')
@@ -73,5 +78,8 @@ def plot_speeds(log_dir='logs/step_time_test_logs',
     plt.legend()
     plt.savefig(os.path.join(SAVE_DIR, f'librispeech_conformer.png'))
 
-df = plot_speeds()
-print(df)
+    speed_df = pd.DataFrame(speed_stacked[1:, :], index=run_names)
+    speed_df.to_csv(os.path.join(LOG_DIR, 'steps_per_sec.csv'))
+    print(speed_df)
+
+plot_speeds()
