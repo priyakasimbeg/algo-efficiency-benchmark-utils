@@ -27,9 +27,9 @@ def get_algo_name_from_logfilename(logfile):
     return algo
 
 
-def plot_algo_speeds(logdir=LOG_DIR, framework="jax", plot_first_batch=True):
-    if not os.path.exists(SAVE_DIR):
-        os.makedirs(SAVE_DIR)
+def plot_algo_speeds_per_workload(logdir=LOG_DIR, framework="jax", plot_first_batch=True, save_dir=SAVE_DIR):
+    if not os.path.exists(save_dir):
+        os.makedirs(save_dir)
 
     logfiles = log_utils.get_logfilenames(LOG_DIR)
     logfiles = [f for f in logfiles if framework in f]
@@ -79,7 +79,6 @@ def plot_algo_speeds(logdir=LOG_DIR, framework="jax", plot_first_batch=True):
         plt.savefig(os.path.join(SAVE_DIR, f'steps_per_sec_{workload}_{framework}.png'))
 
     return step_time_df
-
 
 df = plot_algo_speeds(framework='jax')
 print(df)
