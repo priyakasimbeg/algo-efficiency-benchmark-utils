@@ -8,7 +8,7 @@ flags.DEFINE_string('algorithm', None,
                     'Optimization algorithm in reference algorithms.')
 flags.DEFINE_string('framework', None, 'Can be either pytorch or jax')
 flags.DEFINE_boolean('dry_run', False, 'Whether or not to actually run the command')
-flags.DEFINE_string('tag', None, 'Optional Docker image tag')
+flags.DEFINE_string('docker_tag', None, 'Optional Docker image tag')
 flags.DEFINE_integer('num_runs', 1, 'Number of times to run the container.')
 flags.DEFINE_string('workload', None, 'Workload to run.')
 flags.DEFINE_string('experiment_postfix', None, 'Postfix on experiment name.')
@@ -67,7 +67,7 @@ def main(_):
     framework = FLAGS.framework
     algorithm = FLAGS.algorithm
     workload = FLAGS.workload
-    tag = f'{FLAGS.tag}' if FLAGS.tag is not None else 'latest'
+    docker_tag = f'{FLAGS.docker_tag}' if FLAGS.docker_tag is not None else 'latest'
     num_runs = FLAGS.num_runs
     experiment_postfix = f'_{FLAGS.experiment_postfix}' if FLAGS.experiment_postfix else ''
 
@@ -85,7 +85,7 @@ def main(_):
                    '-v /home/kasimbeg/experiment_runs/:/experiment_runs '
                    '-v /home/kasimbeg/experiment_runs/logs:/logs '
                    '--gpus all --ipc=host '
-                   f'us-central1-docker.pkg.dev/training-algorithms-external/mlcommons-docker-repo/base_image:{tag} '
+                   f'us-central1-docker.pkg.dev/training-algorithms-external/mlcommons-docker-repo/base_image:{docker_tag} '
                    f'-d {dataset} '
                    f'-f {framework} '
                    f'-s baselines/{algorithm}/{framework}/submission.py '

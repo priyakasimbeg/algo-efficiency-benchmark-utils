@@ -28,7 +28,7 @@ def get_algo_name_from_logfilename(logfile):
 
 
 def get_algo_speeds(logdir=LOG_DIR, framework="jax"):
-    logfiles = log_utils.get_logfilenames(LOG_DIR)
+    logfiles = log_utils.get_logfile_paths(LOG_DIR)
     logfiles = [f for f in logfiles if framework in f]
 
     workloads = sorted(list(set([get_workload_name_from_logfilename(f) for f in logfiles])))

@@ -31,7 +31,7 @@ def get_max_time(workload, df):
     return max_time
 
 def get_max_times_from_logdir(logdir):
-    logfilenames =log_utils.get_logfilenames(logdir)
+    logfilenames =log_utils.get_logfile_paths(logdir)
     for f in logfilenames:
         print(f"Log name: {f}")
         results = log_utils.extract_results_df(f)

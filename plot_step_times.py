@@ -31,7 +31,7 @@ def plot_algo_speeds_per_workload(logdir=LOG_DIR, framework="jax", plot_first_ba
     if not os.path.exists(save_dir):
         os.makedirs(save_dir)
 
-    logfiles = log_utils.get_logfilenames(LOG_DIR)
+    logfiles = log_utils.get_logfile_pathsmes(LOG_DIR)
     logfiles = [f for f in logfiles if framework in f]
 
     workloads = sorted(list(set([get_workload_name_from_logfilename(f) for f in logfiles])))

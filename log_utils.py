@@ -4,14 +4,14 @@ import json
 
 metrics_prefix = 'Metrics: '
 
-def get_logfilenames(logdir):
+def get_logfile_paths(logdir):
     filenames = os.listdir(logdir)
-    logfilenames = []
+    logfile_paths= []
     for f in filenames:
         if f.endswith(".log"):
             f = os.path.join(logdir, f)
-            logfilenames.append(f)
-    return logfilenames
+            logfile_paths.append(f)
+    return logfile_paths
 
 
 def get_metrics_line(logfile):
@@ -22,6 +22,9 @@ def get_metrics_line(logfile):
     raise ValueError(f"Log file does not have a metrics line {logfile}")
 
 def convert_metrics_line_to_dict(line):
+    """Convert metrics line to dict where keys are metric names and vals are
+    lists of values, where every value corresponds to an eval.
+    """
     eval_results = []
     dict_str = line.split(metrics_prefix)[1]
     dict_str = dict_str.replace("'", "\"")

@@ -32,7 +32,7 @@ def plot_speeds(log_dir='logs/step_time_test_logs',
     if not os.path.exists(save_dir):
         os.makedirs(save_dir)
 
-    logfiles = log_utils.get_logfilenames(LOG_DIR)
+    logfiles = log_utils.get_logfile_paths(LOG_DIR)
     logfiles = sorted(logfiles)
 
     step_time_df = pd.DataFrame(index=[os.path.basename(f) for f in logfiles], columns=[workload])
@@ -42,6 +42,8 @@ def plot_speeds(log_dir='logs/step_time_test_logs',
     for logfile in logfiles:
         print(logfile)
         run_df = log_utils.extract_results_df(logfile)
+        print('number of evals: ')
+        print(len(run_df['global_step']))
         global_step = run_df['global_step'].iloc[1:].to_numpy() - run_df['global_step'].iloc[:-1].to_numpy()
         total_duration = run_df['total_duration'].iloc[1:].to_numpy()- run_df['total_duration'].iloc[:-1].to_numpy()
         steps_per_sec = global_step / total_duration
