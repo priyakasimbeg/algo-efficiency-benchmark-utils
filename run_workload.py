@@ -80,7 +80,7 @@ def main(_):
         print('='*100)
         dataset = WORKLOADS[workload]['dataset']
         max_steps = int(WORKLOADS[workload]['max_steps'] * RUN_FRACTION)
-        experiment_name = f'timing_test/timing_{algorithm}{experiment_postfix}_run{run}'
+        experiment_name = f'timing_test_v2/timing_{algorithm}{experiment_postfix}_run{run}'
         command = ('docker run -t -d -v /home/kasimbeg/data/:/data/ '
                    '-v /home/kasimbeg/experiment_runs/:/experiment_runs '
                    '-v /home/kasimbeg/experiment_runs/logs:/logs '
