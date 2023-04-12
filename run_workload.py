@@ -12,6 +12,7 @@ flags.DEFINE_string('docker_tag', None, 'Optional Docker image tag')
 flags.DEFINE_integer('num_runs', 1, 'Number of times to run the container.')
 flags.DEFINE_string('workload', None, 'Workload to run.')
 flags.DEFINE_string('experiment_postfix', None, 'Postfix on experiment name.')
+flags.DEFINE_boolean('clear_cache', True, 'Whether or not to clear cache between runs')
 FLAGS = flags.FLAGS
 
 RUN_FRACTION = 0.1
@@ -107,6 +108,10 @@ def main(_):
             print(f'Failed: container for {framework} {workload} {algorithm} failed with exit code {return_code}.')
             print(f'Command: {command}')
         print('='*100)
+        wait_until_container_not_running()
+        if FLAGS.clear_cache:
+            os.system("sudo sh -c 'echo 3 > /proc/sys/vm/drop_caches'") # clear caches
+
 
 
 if __name__ == '__main__':
