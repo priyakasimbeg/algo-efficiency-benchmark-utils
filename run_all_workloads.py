@@ -9,6 +9,7 @@ flags.DEFINE_string('algorithm', None,
 flags.DEFINE_string('framework', None, 'Can be either pytorch or jax')
 flags.DEFINE_boolean('dry_run', False, 'Whether or not to actually run the command')
 flags.DEFINE_string('tag', None, 'Optional Docker image tag')
+flags.DEFINE_integer('run_percentage', 10, 'Percentage of max num steps to run for.')
 
 FLAGS = flags.FLAGS
 
@@ -65,13 +66,14 @@ def main(_):
     framework = FLAGS.framework
     algorithm = FLAGS.algorithm
     tag = f':{FLAGS.tag}' if FLAGS.tag is not None else ''
+    run_fraction = FLAGS.run_percentage/100.
 
     # For each runnable workload check if there are any containers running and if not launch next container command
     for workload in WORKLOADS.keys():
         wait_until_container_not_running()
         print('='*100)
         dataset = WORKLOADS[workload]['dataset']
-        max_steps = int(WORKLOADS[workload]['max_steps'] * RUN_FRACTION)
+        max_steps = int(WORKLOADS[workload]['max_steps'] * run_fraction)
         experiment_name = f'timing_v2/timing_{algorithm}'
         command = ('docker run -t -d -v /home/kasimbeg/data/:/data/ '
                    '-v /home/kasimbeg/experiment_runs/:/experiment_runs '

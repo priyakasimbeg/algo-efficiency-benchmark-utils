@@ -13,9 +13,8 @@ flags.DEFINE_integer('num_runs', 1, 'Number of times to run the container.')
 flags.DEFINE_string('workload', None, 'Workload to run.')
 flags.DEFINE_string('experiment_postfix', None, 'Postfix on experiment name.')
 flags.DEFINE_boolean('clear_cache', True, 'Whether or not to clear cache between runs')
+flags.DEFINE_boolean('run_percentage', 10, 'Percentage of max num steps to run for.')
 FLAGS = flags.FLAGS
-
-RUN_FRACTION = 0.1
 
 DATASETS = ['imagenet',
             'fastmri',
@@ -68,6 +67,7 @@ def main(_):
     framework = FLAGS.framework
     algorithm = FLAGS.algorithm
     workload = FLAGS.workload
+    run_fraction = FLAGS.run_percentage/100.
     docker_tag = f'{FLAGS.docker_tag}' if FLAGS.docker_tag is not None else 'latest'
     num_runs = FLAGS.num_runs
     experiment_postfix = f'_{FLAGS.experiment_postfix}' if FLAGS.experiment_postfix else ''
@@ -80,7 +80,7 @@ def main(_):
         wait_until_container_not_running()
         print('='*100)
         dataset = WORKLOADS[workload]['dataset']
-        max_steps = int(WORKLOADS[workload]['max_steps'] * RUN_FRACTION)
+        max_steps = int(WORKLOADS[workload]['max_steps'] * run_fraction)
         experiment_name = f'timing_test_v2/timing_{algorithm}{experiment_postfix}_run{run}'
         command = ('docker run -t -d -v /home/kasimbeg/data/:/data/ '
                    '-v /home/kasimbeg/experiment_runs/:/experiment_runs '
