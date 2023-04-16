@@ -13,7 +13,7 @@ flags.DEFINE_integer('num_runs', 1, 'Number of times to run the container.')
 flags.DEFINE_string('workload', None, 'Workload to run.')
 flags.DEFINE_string('experiment_postfix', None, 'Postfix on experiment name.')
 flags.DEFINE_boolean('clear_cache', True, 'Whether or not to clear cache between runs')
-flags.DEFINE_boolean('run_percentage', 10, 'Percentage of max num steps to run for.')
+flags.DEFINE_integer('run_percentage', 10, 'Percentage of max num steps to run for.')
 FLAGS = flags.FLAGS
 
 DATASETS = ['imagenet',
