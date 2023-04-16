@@ -14,6 +14,7 @@ flags.DEFINE_string('workload', None, 'Workload to run.')
 flags.DEFINE_string('experiment_postfix', None, 'Postfix on experiment name.')
 flags.DEFINE_boolean('clear_cache', True, 'Whether or not to clear cache between runs')
 flags.DEFINE_integer('run_percentage', 10, 'Percentage of max num steps to run for.')
+flags.DEFINE_string('experiment_base_name', 'timing', 'Name of top sub directory in experiment dir.')
 FLAGS = flags.FLAGS
 
 DATASETS = ['imagenet',
@@ -71,6 +72,7 @@ def main(_):
     docker_tag = f'{FLAGS.docker_tag}' if FLAGS.docker_tag is not None else 'latest'
     num_runs = FLAGS.num_runs
     experiment_postfix = f'_{FLAGS.experiment_postfix}' if FLAGS.experiment_postfix else ''
+    experiment_base_name = FLAGS.experiment_base_name
 
     if workload not in WORKLOADS:
         raise ValueError(f'Invalid value for workload: {workload}.')
@@ -81,7 +83,7 @@ def main(_):
         print('='*100)
         dataset = WORKLOADS[workload]['dataset']
         max_steps = int(WORKLOADS[workload]['max_steps'] * run_fraction)
-        experiment_name = f'timing_test_v2/timing_{algorithm}{experiment_postfix}_run{run}'
+        experiment_name = f'{experiment_base_name}/timing_{algorithm}{experiment_postfix}_run{run}'
         command = ('docker run -t -d -v /home/kasimbeg/data/:/data/ '
                    '-v /home/kasimbeg/experiment_runs/:/experiment_runs '
                    '-v /home/kasimbeg/experiment_runs/logs:/logs '
