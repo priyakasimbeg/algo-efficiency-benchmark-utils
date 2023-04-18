@@ -73,6 +73,7 @@ def main(_):
     # For each runnable workload check if there are any containers running and if not launch next container command
     for workload in WORKLOADS.keys():
         wait_until_container_not_running()
+        os.system("sudo sh -c 'echo 3 > /proc/sys/vm/drop_caches'") # clear caches
         print('='*100)
         dataset = WORKLOADS[workload]['dataset']
         max_steps = int(WORKLOADS[workload]['max_steps'] * run_fraction)
@@ -102,6 +103,9 @@ def main(_):
         else:
             print(f'Failed: container for {framework} {workload} {algorithm} failed with exit code {return_code}.')
             print(f'Command: {command}')
+        wait_until_container_not_running()
+        os.system("sudo sh -c 'echo 3 > /proc/sys/vm/drop_caches'") # clear caches
+
         print('='*100)
 
 
