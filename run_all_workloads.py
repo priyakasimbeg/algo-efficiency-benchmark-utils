@@ -67,7 +67,7 @@ def main(_):
     algorithm = FLAGS.algorithm
     tag = f':{FLAGS.tag}' if FLAGS.tag is not None else ''
     run_fraction = FLAGS.run_percentage/100.
-    experiment_base_name=FLAGS.experiment_base_name
+    experiment_basename=FLAGS.experiment_basename
 
     # For each runnable workload check if there are any containers running and if not launch next container command
     for workload in WORKLOADS.keys():
