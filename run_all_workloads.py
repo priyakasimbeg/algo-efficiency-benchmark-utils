@@ -9,12 +9,11 @@ flags.DEFINE_string('algorithm', None,
 flags.DEFINE_string('framework', None, 'Can be either pytorch or jax')
 flags.DEFINE_boolean('dry_run', False, 'Whether or not to actually run the command')
 flags.DEFINE_string('tag', None, 'Optional Docker image tag')
-flags.DEFINE_integer('run_percentage', 10, 'Percentage of max num steps to run for.')
+flags.DEFINE_integer('run_percentage', 20, 'Percentage of max num steps to run for.')
 flags.DEFINE_string('experiment_basename', 'timing', 'Name of top sub directory in experiment dir.')
 
 FLAGS = flags.FLAGS
 
-RUN_FRACTION = 0.1
 
 DATASETS = ['imagenet',
             'fastmri',
