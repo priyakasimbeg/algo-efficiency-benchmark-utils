@@ -3,7 +3,7 @@ import os
 import pandas as pd
 
 LOG_DIR = 'logs/step_time_logs_v3'
-OUTPUT_DIR = 'tables/speed_v2_per_phase'
+OUTPUT_DIR = 'tables/speed_v3'
 
 MAX_STEPS = {
     'imagenet_resnet': 140000,
@@ -42,45 +42,61 @@ def get_equilibrium_speed(df):
     total_duration = df['total_duration'].iloc[-1] - df['total_duration'].iloc[0]
     return total_steps/total_duration
 
-def get_warmup_speed(df):
-    total_steps = df['global_step'].iloc[0]
-    total_duration = df['total_duration'].iloc[0]
-    return total_steps/total_duration
 
 def get_algo_speeds(logdir=LOG_DIR, framework="jax"):
+
+    # Set up dataframe
     logfiles = log_utils.get_logfile_paths(LOG_DIR)
     logfiles = [f for f in logfiles if framework in f]
 
     workloads = sorted(list(set([get_workload_name_from_logfilename(f) for f in logfiles])))
     algos = sorted(list(set([get_algo_name_from_logfilename(f) for f in logfiles])))
 
-    columns = ['warmup steps/sec', 'equilibrium steps/sec', 'max steps']
+    # columns = ['max steps', 
+    #            'global step'
+    #            'total duration', 
+    #            'total submission time'
+    #            'total eval time', 
+    #            'total logging & checkpointing time',
+    #            'submission time at eval 2',
+    #            'num steps at eval 2',
+    #            'submission time since eval 2',
+    #            'num steps since eval 2']
+    columns = []
     workload_algo = []
     for workload in workloads:
         for algo in algos:
             workload_algo.append(f'{workload}_{algo}')
 
-    step_time_df = pd.DataFrame(index=workload_algo, columns=columns)
+    df = pd.DataFrame(index=workload_algo, columns=columns)
 
-
+    # Populate dataframe
     for logfile in logfiles:
         workload = get_workload_name_from_logfilename(logfile)
         algo = get_algo_name_from_logfilename(logfile)
+        index = f'{workload}_{algo}'
 
-        run_df = log_utils.extract_results_df(logfile)
-        step_time_df.at[f'{workload}_{algo}', 'warmup steps/sec'] = get_warmup_speed(run_df)
-        step_time_df.at[f'{workload}_{algo}', 'equilibrium steps/sec'] = get_equilibrium_speed(run_df)
-        step_time_df.at[f'{workload}_{algo}', 'max steps'] = MAX_STEPS[workload]
+        try:
+            run_df = log_utils.extract_results_df(logfile)
+        except ValueError as e:
+            continue
+        print(run_df)
+        df.at[index, 'max steps'] = MAX_STEPS[workload]
+        df.at[index, 'global step'] = run_df['global_step'].iloc[-1]
+        df.at[index, 'total duration'] = run_df['total_duration'].iloc[-1]
+        df.at[index, 'total eval time'] = run_df['accumulated_eval_time'].iloc[-1]
+        df.at[index, 'total logging & checkpointing_time'] = run_df['accumulated_logging_time'].iloc[-1]
+        df.at[index, 'total submission time'] = run_df['accumulated_submission_time'].iloc[-1]
+        df.at[index, 'submission time till eval 2'] = run_df['accumulated_submission_time'].iloc[1]
+        df.at[index, 'num steps till eval 2'] = run_df['global_step'].iloc[1]
+        df.at[index, 'submission time since eval 2'] = run_df['accumulated_submission_time'].iloc[-1] - run_df['accumulated_submission_time'].iloc[1]
+        df.at[index, 'num steps since eval 2'] = run_df['global_step'].iloc[-1] - run_df['global_step'].iloc[1]
 
-    return step_time_df
+    return df
 
 
 df = get_algo_speeds(framework='jax')
-print('Jax workload steps/sec:')
 print(df)
-df.to_csv(os.path.join(OUTPUT_DIR, 'jax_speed_info.csv'))
+print(df.keys())
+df.to_csv(os.path.join(OUTPUT_DIR, 'jax_speed_info_3.csv'))
 
-df = get_algo_speeds(framework='pytorch')
-print('Pytorch workload steps/sec:')
-print(df)
-df.to_csv(os.path.join(OUTPUT_DIR, 'pytorch_speed_info.csv'))

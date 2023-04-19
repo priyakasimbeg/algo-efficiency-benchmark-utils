@@ -1,9 +1,9 @@
 import os
 
-root_dir = "/home/kasimbeg/mlcommons-runs/timing_test"
+root_dir = "/home/kasimbeg/mlcommons-runs/timing_v3"
 sub_dirs = os.listdir(root_dir)
 
-destination_dir = "/home/kasimbeg/algo-efficiency-timing/logs/step_time_test_logs"
+destination_dir = "/home/kasimbeg/algo-efficiency-timing/logs/step_time_logs_v3"
 
 def copy_logs_per_experiment_dir():
     for algo_dir in sub_dirs:
@@ -30,3 +30,8 @@ def copy_logs_from_experiment_dir():
                 log_file_source_path = os.path.join(experiment_path, log_file)
                 log_file_destination_path = os.path.join(destination_dir, f'{experiment_dir}')
                 os.system(f"cp {log_file_source_path} {log_file_destination_path}")
+
+if not os.path.exists(destination_dir):
+    print(f'Making directory {destination_dir}')
+    os.makedirs(destination_dir)
+copy_logs_per_experiment_dir()
