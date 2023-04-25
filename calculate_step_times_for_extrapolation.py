@@ -2,8 +2,8 @@ import log_utils
 import os
 import pandas as pd
 
-LOG_DIR = 'logs/step_time_logs_v3'
-OUTPUT_DIR = 'tables/speed_v3'
+LOG_DIR = 'logs/step_time_logs_v3_a'
+OUTPUT_DIR = 'tables/speed_v3_a'
 
 MAX_STEPS = {
     'imagenet_resnet': 140000,
@@ -98,5 +98,5 @@ def get_algo_speeds(logdir=LOG_DIR, framework="jax"):
 df = get_algo_speeds(framework='jax')
 print(df)
 print(df.keys())
-df.to_csv(os.path.join(OUTPUT_DIR, 'jax_speed_info_3.csv'))
+df.to_csv(os.path.join(OUTPUT_DIR, 'jax_speed_info_3_a.csv'))
 

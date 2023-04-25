@@ -1,3 +1,8 @@
+"""
+Example usage:
+python run _target_setting_workload.py
+
+""" 
 from absl import flags
 from absl import app
 import os
@@ -13,7 +18,7 @@ flags.DEFINE_integer('num_runs', 1, 'Number of times to run the container.')
 flags.DEFINE_string('workload', None, 'Workload to run.')
 flags.DEFINE_string('experiment_postfix', None, 'Postfix on experiment name.')
 flags.DEFINE_boolean('clear_cache', True, 'Whether or not to clear cache between runs')
-flags.DEFINE_integer('run_percentage', 10, 'Percentage of max num steps to run for.')
+flags.DEFINE_integer('run_percentage', 100, 'Percentage of max num steps to run for.')
 flags.DEFINE_string('experiment_base_name', 'timing', 'Name of top sub directory in experiment dir.')
 FLAGS = flags.FLAGS
 
@@ -83,7 +88,7 @@ def main(_):
         print('='*100)
         dataset = WORKLOADS[workload]['dataset']
         max_steps = int(WORKLOADS[workload]['max_steps'] * run_fraction)
-        experiment_name = f'{experiment_base_name}/timing_{algorithm}{experiment_postfix}_run{run}'
+        experiment_name = f'{experiment_base_name}/{experiment_postfix}_run{run}'
         command = ('docker run -t -d -v /home/kasimbeg/data/:/data/ '
                    '-v /home/kasimbeg/experiment_runs/:/experiment_runs '
                    '-v /home/kasimbeg/experiment_runs/logs:/logs '
@@ -91,9 +96,9 @@ def main(_):
                    f'us-central1-docker.pkg.dev/training-algorithms-external/mlcommons-docker-repo/base_image:{docker_tag} '
                    f'-d {dataset} '
                    f'-f {framework} '
-                   f'-s baselines/{algorithm}/{framework}/submission.py '
+                   f'-s reference_algorithms/target_setting_algorithms/{framework}_{algorithm}.py '
                    f'-w {workload} '
-                   f'-t baselines/{algorithm}/tuning_search_space.json '
+                   f'-t reference_algorithms/target_setting_algorithms/{workload}/tuning_search_space.json '
                    f'-e {experiment_name} '
                    f'-m {max_steps}')
         if not FLAGS.dry_run:

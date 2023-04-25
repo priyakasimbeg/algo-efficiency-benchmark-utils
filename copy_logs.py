@@ -3,7 +3,7 @@ import os
 root_dir = "/home/kasimbeg/mlcommons-runs/timing_v3"
 sub_dirs = os.listdir(root_dir)
 
-destination_dir = "/home/kasimbeg/algo-efficiency-timing/logs/step_time_logs_v3"
+destination_dir = "/home/kasimbeg/algo-efficiency-timing/logs/step_time_logs_v3_a"
 
 def copy_logs_per_experiment_dir():
     for algo_dir in sub_dirs:
