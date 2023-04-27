@@ -88,7 +88,9 @@ def main(_):
                    f'-w {workload} '
                    f'-t baselines/{algorithm}/tuning_search_space.json '
                    f'-e {experiment_name} '
-                   f'-m {max_steps}')
+                   f'-m {max_steps} '
+                   '-c False '
+                   '-o True ')
         if not FLAGS.dry_run:
             print('Running docker container command')
             print('Container ID: ')

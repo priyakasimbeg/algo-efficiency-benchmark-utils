@@ -3,7 +3,8 @@ import os
 import pandas as pd
 
 LOG_DIR = 'logs/step_time_logs_v3_a'
-OUTPUT_DIR = 'tables/speed_v3_a'
+OUTPUT_DIR = 'tables/speed_v3_a_redo'
+OUTPUT_FILENAME = 'jax_speed_info_3_a.csv'
 
 MAX_STEPS = {
     'imagenet_resnet': 140000,
@@ -52,16 +53,6 @@ def get_algo_speeds(logdir=LOG_DIR, framework="jax"):
     workloads = sorted(list(set([get_workload_name_from_logfilename(f) for f in logfiles])))
     algos = sorted(list(set([get_algo_name_from_logfilename(f) for f in logfiles])))
 
-    # columns = ['max steps', 
-    #            'global step'
-    #            'total duration', 
-    #            'total submission time'
-    #            'total eval time', 
-    #            'total logging & checkpointing time',
-    #            'submission time at eval 2',
-    #            'num steps at eval 2',
-    #            'submission time since eval 2',
-    #            'num steps since eval 2']
     columns = []
     workload_algo = []
     for workload in workloads:
@@ -98,5 +89,5 @@ def get_algo_speeds(logdir=LOG_DIR, framework="jax"):
 df = get_algo_speeds(framework='jax')
 print(df)
 print(df.keys())
-df.to_csv(os.path.join(OUTPUT_DIR, 'jax_speed_info_3_a.csv'))
+df.to_csv(os.path.join(OUTPUT_DIR, OUTPUT_FILENAME))
 
