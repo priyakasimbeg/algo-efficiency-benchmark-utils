@@ -2,9 +2,9 @@ import log_utils
 import os
 import pandas as pd
 
-LOG_DIR = 'logs/step_time_logs_v3_b'
-OUTPUT_DIR = 'tables/speed_v3_b_redo'
-OUTPUT_FILENAME = 'jax_speed_info_3_b_final.csv'
+LOG_DIR = 'logs/step_time_fancy'
+OUTPUT_DIR = 'tables/step_time_fancy'
+OUTPUT_FILENAME = 'jax_speed_info_fancy.csv'
 
 MAX_STEPS = {
     'imagenet_resnet': 140000,
@@ -72,16 +72,19 @@ def get_algo_speeds(logdir=LOG_DIR, framework="jax"):
         except ValueError as e:
             continue
         print(run_df)
-        df.at[index, 'max steps'] = MAX_STEPS[workload]
+        df.at[index, 'target setting steps'] = MAX_STEPS[workload]
+        df.at[index, 'baseline steps'] = MAX_STEPS[workload]/0.75
         df.at[index, 'global step'] = run_df['global_step'].iloc[-1]
-        df.at[index, 'total duration'] = run_df['total_duration'].iloc[-1]
-        df.at[index, 'total eval time'] = run_df['accumulated_eval_time'].iloc[-1]
-        df.at[index, 'total logging & checkpointing_time'] = run_df['accumulated_logging_time'].iloc[-1]
-        df.at[index, 'total submission time'] = run_df['accumulated_submission_time'].iloc[-1]
-        df.at[index, 'submission time till eval 2'] = run_df['accumulated_submission_time'].iloc[1]
+        df.at[index, 'total duration (s)'] = run_df['total_duration'].iloc[-1]
+        df.at[index, 'total eval time (s)'] = run_df['accumulated_eval_time'].iloc[-1]
+        df.at[index, 'total logging & checkpointing_time (s)'] = run_df['accumulated_logging_time'].iloc[-1]
+        df.at[index, 'total submission time (s)'] = run_df['accumulated_submission_time'].iloc[-1]
+        df.at[index, 'submission time till eval 2 (s)'] = run_df['accumulated_submission_time'].iloc[1]
         df.at[index, 'num steps till eval 2'] = run_df['global_step'].iloc[1]
-        df.at[index, 'submission time since eval 2'] = run_df['accumulated_submission_time'].iloc[-1] - run_df['accumulated_submission_time'].iloc[1]
+        df.at[index, 'submission time since eval 2 (s)'] = run_df['accumulated_submission_time'].iloc[-1] - run_df['accumulated_submission_time'].iloc[1]
         df.at[index, 'num steps since eval 2'] = run_df['global_step'].iloc[-1] - run_df['global_step'].iloc[1]
+        df.at[index, 'equilibrium step time (s)'] = df.at[index, 'submission time since eval 2 (s)']/df.at[index, 'num steps since eval 2'] 
+        df.at[index, 'projected max submission time (s)'] = df.at[index, 'submission time till eval 2 (s)'] + df.at[index, 'equilibrium step time (s)'] * (df.at[index, 'baseline steps'] - df.at[index, 'num steps till eval 2'])
 
     return df
 
