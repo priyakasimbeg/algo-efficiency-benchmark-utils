@@ -1,8 +1,8 @@
 import os
 import log_utils
 
-root_dir = "/home/kasimbeg/mlcommons-runs/timing_fancy"
-destination_dir = "/home/kasimbeg/algo-efficiency-timing/logs/step_time_fancy"
+root_dir = "/home/kasimbeg/mlcommons-runs/timing_fancy_2"
+destination_dir = "/home/kasimbeg/algo-efficiency-timing/logs/step_time_fancy_2"
 
 def copy_logs_per_experiment_dir(root_dir=root_dir):
     sub_dirs = os.listdir(root_dir)

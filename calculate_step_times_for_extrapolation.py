@@ -2,9 +2,9 @@ import log_utils
 import os
 import pandas as pd
 
-LOG_DIR = 'logs/step_time_fancy'
-OUTPUT_DIR = 'tables/step_time_fancy'
-OUTPUT_FILENAME = 'jax_speed_info_fancy.csv'
+LOG_DIR = 'logs/step_time_fancy_2'
+OUTPUT_DIR = 'tables/step_time_fancy_2'
+OUTPUT_FILENAME = 'jax_speed_info_fancy_2.csv'
 
 MAX_STEPS = {
     'imagenet_resnet': 140000,

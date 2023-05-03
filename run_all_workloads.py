@@ -31,7 +31,12 @@ WORKLOADS = ['imagenet_resnet'
              'librispeech_conformer',
              'criteo1tb']
 
-WORKLOADS = {'imagenet_resnet': {'max_steps': 140000,
+WORKLOADS = {
+             'librispeech_conformer': {'max_steps': 100000,
+                                       'dataset': 'librispeech'},
+             'criteo1tb': {'max_steps': 8000,
+                           'dataset': 'criteo1tb'},
+             'imagenet_resnet': {'max_steps': 140000,
                                  'dataset': 'imagenet'},
              'imagenet_vit': {'max_steps': 140000,
                               'dataset': 'imagenet'},
@@ -43,10 +48,6 @@ WORKLOADS = {'imagenet_resnet': {'max_steps': 140000,
                      'dataset': 'wmt'},
              'librispeech_deepspeech': {'max_steps': 80000,
                                         'dataset': 'librispeech'},
-             'librispeech_conformer': {'max_steps': 100000,
-                                       'dataset': 'librispeech'},
-             'criteo1tb': {'max_steps': 8000,
-                           'dataset': 'criteo1tb'},
              }
 
 def container_running():
@@ -77,6 +78,10 @@ def main(_):
         dataset = WORKLOADS[workload]['dataset']
         max_steps = int(WORKLOADS[workload]['max_steps'] * run_fraction)
         experiment_name = f'{experiment_basename}/timing_{algorithm}'
+        if workload == 'conformer':
+            tuning_tag = '_conformer'
+        else:
+            tuning_tag = ''
         command = ('docker run -t -d -v /home/kasimbeg/data/:/data/ '
                    '-v /home/kasimbeg/experiment_runs/:/experiment_runs '
                    '-v /home/kasimbeg/experiment_runs/logs:/logs '
@@ -86,7 +91,7 @@ def main(_):
                    f'-f {framework} '
                    f'-s baselines/{algorithm}/{framework}/submission.py '
                    f'-w {workload} '
-                   f'-t baselines/{algorithm}/tuning_search_space.json '
+                   f'-t baselines/{algorithm}/tuning_search_space{tuning_tag}.json '
                    f'-e {experiment_name} '
                    f'-m {max_steps} '
                    '-c False '
