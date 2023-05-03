@@ -1,6 +1,6 @@
 """
 Example usage:
-python run _target_setting_workload.pygit 
+python run_target_setting_workload.py
 
 """ 
 from absl import flags
