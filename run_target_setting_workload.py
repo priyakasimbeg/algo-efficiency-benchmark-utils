@@ -1,6 +1,9 @@
 """
 Example usage:
-python run_target_setting_workload.py
+python run_target_setting_workload.py --algorithm nadamw \
+  --framework jax --docker_tag criteo --num_runs 5 \
+  --workload criteo1tb --experiment_base_name criteo1tb_debugging \
+  --experiment_postfix vm5
 
 """ 
 from absl import flags
