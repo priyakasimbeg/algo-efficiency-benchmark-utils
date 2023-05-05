@@ -97,8 +97,8 @@ def main(_):
                    f'-e {experiment_name} '
                    f'-m {max_steps} '
                    '-c False '
-                   '-o True 
-                   '-r {rsync_data}')
+                   '-o True ' 
+                   f'-r {rsync_data} ')
         if not FLAGS.dry_run:
             print('Running docker container command')
             print('Container ID: ')
