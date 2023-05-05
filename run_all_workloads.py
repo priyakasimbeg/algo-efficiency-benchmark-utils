@@ -11,6 +11,7 @@ flags.DEFINE_boolean('dry_run', False, 'Whether or not to actually run the comma
 flags.DEFINE_string('tag', None, 'Optional Docker image tag')
 flags.DEFINE_integer('run_percentage', 20, 'Percentage of max num steps to run for.')
 flags.DEFINE_string('experiment_basename', 'timing', 'Name of top sub directory in experiment dir.')
+flags.DEFINE_boolean('rsync_data', True, 'Whether or not to transfer the data from GCP w rsync.')
 
 FLAGS = flags.FLAGS
 
@@ -32,22 +33,22 @@ WORKLOADS = ['imagenet_resnet'
              'criteo1tb']
 
 WORKLOADS = {
-            #  'librispeech_conformer': {'max_steps': 100000,
-            #                            'dataset': 'librispeech'},
+             'librispeech_conformer': {'max_steps': 100000,
+                                       'dataset': 'librispeech'},
              'criteo1tb': {'max_steps': 8000,
                            'dataset': 'criteo1tb'},
-            #  'imagenet_resnet': {'max_steps': 140000,
-            #                      'dataset': 'imagenet'},
-            #  'imagenet_vit': {'max_steps': 140000,
-            #                   'dataset': 'imagenet'},
+             'imagenet_resnet': {'max_steps': 140000,
+                                 'dataset': 'imagenet'},
+             'imagenet_vit': {'max_steps': 140000,
+                              'dataset': 'imagenet'},
              'fastmri': {'max_steps': 27142,
                          'dataset': 'fastmri'},
-            #  'ogbg': {'max_steps': 60000,
-            #           'dataset': 'ogbg'},
-            #  'wmt': {'max_steps': 100000,
-            #          'dataset': 'wmt'},
-            #  'librispeech_deepspeech': {'max_steps': 80000,
-            #                             'dataset': 'librispeech'},
+             'ogbg': {'max_steps': 60000,
+                      'dataset': 'ogbg'},
+             'wmt': {'max_steps': 100000,
+                     'dataset': 'wmt'},
+             'librispeech_deepspeech': {'max_steps': 80000,
+                                        'dataset': 'librispeech'},
              }
 
 def container_running():
@@ -69,6 +70,7 @@ def main(_):
     tag = f':{FLAGS.tag}' if FLAGS.tag is not None else ''
     run_fraction = FLAGS.run_percentage/100.
     experiment_basename=FLAGS.experiment_basename
+    rsync_data = FLAGS.rsync_data
 
     # For each runnable workload check if there are any containers running and if not launch next container command
     for workload in WORKLOADS.keys():
@@ -95,7 +97,8 @@ def main(_):
                    f'-e {experiment_name} '
                    f'-m {max_steps} '
                    '-c False '
-                   '-o True ')
+                   '-o True 
+                   '-r {rsync_data}')
         if not FLAGS.dry_run:
             print('Running docker container command')
             print('Container ID: ')
