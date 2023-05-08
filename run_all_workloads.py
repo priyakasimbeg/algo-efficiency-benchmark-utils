@@ -33,10 +33,7 @@ WORKLOADS = ['imagenet_resnet'
              'criteo1tb']
 
 WORKLOADS = {
-             'librispeech_conformer': {'max_steps': 100000,
-                                       'dataset': 'librispeech'},
-             'criteo1tb': {'max_steps': 8000,
-                           'dataset': 'criteo1tb'},
+
              'imagenet_resnet': {'max_steps': 140000,
                                  'dataset': 'imagenet'},
              'imagenet_vit': {'max_steps': 140000,
@@ -49,6 +46,10 @@ WORKLOADS = {
                      'dataset': 'wmt'},
              'librispeech_deepspeech': {'max_steps': 80000,
                                         'dataset': 'librispeech'},
+             'librispeech_conformer': {'max_steps': 100000,
+                                       'dataset': 'librispeech'},
+             'criteo1tb': {'max_steps': 8000,
+                           'dataset': 'criteo1tb'},
              }
 
 def container_running():
