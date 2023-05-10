@@ -72,7 +72,7 @@ def main(_):
     tag = f':{FLAGS.tag}' if FLAGS.tag is not None else ''
     run_fraction = FLAGS.run_percentage/100.
     experiment_basename=FLAGS.experiment_basename
-    rsync_data = FLAGS.rsync_data
+    rsync_data = 'true' if FLAGS.rsync_data else 'false'
 
     # For each runnable workload check if there are any containers running and if not launch next container command
     for workload in WORKLOADS.keys():
@@ -100,7 +100,7 @@ def main(_):
                    f'-m {max_steps} '
                    '-c False '
                    '-o True ' 
-                   f'-r {'true' if rsync else 'false'} ')
+                   f'-r {rsync_data} ')
         if not FLAGS.dry_run:
             print('Running docker container command')
             print('Container ID: ')
