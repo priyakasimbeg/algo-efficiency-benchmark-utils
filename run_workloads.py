@@ -26,8 +26,8 @@ WORKLOADS = {
 
             #  'imagenet_resnet': {'max_steps': 140000,
             #                      'dataset': 'imagenet'},
-             'imagenet_vit': {'max_steps': 140000,
-                              'dataset': 'imagenet'},
+            #  'imagenet_vit': {'max_steps': 140000,
+            #                   'dataset': 'imagenet'},
             #  'fastmri': {'max_steps': 27142,
             #              'dataset': 'fastmri'},
             #  'ogbg': {'max_steps': 60000,
@@ -38,8 +38,8 @@ WORKLOADS = {
             #                             'dataset': 'librispeech'},
             #  'criteo1tb': {'max_steps': 8000,
             #                'dataset': 'criteo1tb'},
-            #  'librispeech_conformer': {'max_steps': 100000,
-            #                            'dataset': 'librispeech'},
+             'librispeech_conformer': {'max_steps': 100000,
+                                       'dataset': 'librispeech'},
 
              }
 

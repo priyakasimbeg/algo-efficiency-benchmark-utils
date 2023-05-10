@@ -1,10 +1,12 @@
 import log_utils
 import os
 import pandas as pd
+import re
 
-LOG_DIR = 'logs/step_time_fancy_2'
-OUTPUT_DIR = 'tables/step_time_fancy_2'
-OUTPUT_FILENAME = 'jax_speed_info_fancy_2.csv'
+LOG_DIR = 'logs/step_time_sam'
+OUTPUT_DIR = 'tables/step_time_sam_verify'
+OUTPUT_FILENAME = 'jax_speed_info_sam_verify.csv'
+logfilename_regex = '(.*)_(.*)_(.*)_(.*).log'
 
 MAX_STEPS = {
     'imagenet_resnet': 140000,
@@ -22,20 +24,14 @@ if not os.path.exists(OUTPUT_DIR):
 
 def get_workload_name_from_logfilename(logfile):
     filename = os.path.basename(logfile)
-    if 'jax' in filename:
-        workload = (filename.split("_jax")[0]).split("_", 1)[1]
-    elif 'pytorch' in filename:
-        workload = (filename.split("_pytorch")[0]).split("_", 1)[1]
-    return workload
+    if re.match(logfilename_regex, filename):
+        workload = re.match(logfilename_regex, filename).group(2)
+        return workload
 
 def get_algo_name_from_logfilename(logfile):
     filename = os.path.basename(logfile)
-    if 'jax' in filename:
-        algo = (filename.split("_jax")[0]).split("_", 1)[0]
-    elif 'pytorch' in filename:
-        algo = (filename.split("_pytorch")[0]).split("_", 1)[0]
-    else:
-        raise ValueError('Invalid filename: {logfile}')
+    if re.match(logfilename_regex, filename):
+        algo = re.match(logfilename_regex, filename).group(1)
     return algo
 
 def get_equilibrium_speed(df):
@@ -78,6 +74,10 @@ def get_algo_speeds(logdir=LOG_DIR, framework="jax"):
         df.at[index, 'total duration (s)'] = run_df['total_duration'].iloc[-1]
         df.at[index, 'total eval time (s)'] = run_df['accumulated_eval_time'].iloc[-1]
         df.at[index, 'total logging & checkpointing_time (s)'] = run_df['accumulated_logging_time'].iloc[-1]
+        try:
+            df.at[index, 'total data selection time (s)'] = run_df['accumulated_data_selection_time'].iloc[-1]
+        except Exception:
+            pass
         df.at[index, 'total submission time (s)'] = run_df['accumulated_submission_time'].iloc[-1]
         df.at[index, 'submission time till eval 2 (s)'] = run_df['accumulated_submission_time'].iloc[1]
         df.at[index, 'num steps till eval 2'] = run_df['global_step'].iloc[1]
