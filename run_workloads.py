@@ -10,7 +10,7 @@ flags.DEFINE_boolean('dry_run', False, 'Whether or not to actually run the comma
 flags.DEFINE_string('tag', None, 'Optional Docker image tag')
 flags.DEFINE_integer('run_percentage', 20, 'Percentage of max num steps to run for.')
 flags.DEFINE_string('experiment_basename', 'timing', 'Name of top sub directory in experiment dir.')
-flags.DEFINE_boolean('rsync_data', True, 'Whether or not to transfer the data from GCP w rsync.')
+flags.DEFINE_string('rsync_data', 'true', 'Whether or not to transfer the data from GCP w rsync.')
 
 FLAGS = flags.FLAGS
 
