@@ -43,6 +43,11 @@ WORKLOADS = {
 
              }
 
+ALGORITHMS = [
+    'adamw',
+    'adafactor'
+]
+
 def container_running():
     docker_client = docker.from_env()
     containers = docker_client.containers.list()
