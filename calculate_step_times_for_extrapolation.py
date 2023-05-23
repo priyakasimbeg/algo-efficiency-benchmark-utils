@@ -3,10 +3,19 @@ import os
 import pandas as pd
 import re
 
-LOG_DIR = 'logs/step_time_sam'
-OUTPUT_DIR = 'tables/step_time_sam_verify'
-OUTPUT_FILENAME = 'jax_speed_info_sam_verify.csv'
-logfilename_regex = '(.*)_(.*)_(.*)_(.*).log'
+
+LOG_DIR = 'logs/timing_v3_b_pytorch'
+OUTPUT_DIR = 'tables/timing_v3_b_pytorch'
+OUTPUT_FILENAME = 'pytorch_speed_info_v3_b.csv'
+logfilename_regex = ('(adamw|momentum|nadamw|nesterov)_'
+                     '(imagenet_resnet|'
+                     'imagenet_vit|'
+                     'librispeech_conformer|'
+                     'librispeech_deepspeech|'
+                     'criteo1tb|'
+                     'fastmri|'
+                     'ogbg|'
+                     'wmt)_(pytorch|jax)_(.*).log')
 
 MAX_STEPS = {
     'imagenet_resnet': 140000,
@@ -27,12 +36,16 @@ def get_workload_name_from_logfilename(logfile):
     if re.match(logfilename_regex, filename):
         workload = re.match(logfilename_regex, filename).group(2)
         return workload
+    else:
+        print(f"no workload name {logfile}")
 
 def get_algo_name_from_logfilename(logfile):
     filename = os.path.basename(logfile)
     if re.match(logfilename_regex, filename):
         algo = re.match(logfilename_regex, filename).group(1)
-    return algo
+        return algo
+    else:
+        print('no algo name')
 
 def get_equilibrium_speed(df):
     total_steps = df['global_step'].iloc[-1] - df['global_step'].iloc[0] 
@@ -89,7 +102,7 @@ def get_algo_speeds(logdir=LOG_DIR, framework="jax"):
     return df
 
 
-df = get_algo_speeds(framework='jax')
+df = get_algo_speeds(framework='pytorch')
 print(df)
 print(df.keys())
 df.to_csv(os.path.join(OUTPUT_DIR, OUTPUT_FILENAME))

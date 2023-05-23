@@ -33,7 +33,6 @@ WORKLOADS = ['imagenet_resnet'
              'criteo1tb']
 
 WORKLOADS = {
-
              'imagenet_resnet': {'max_steps': 140000,
                                  'dataset': 'imagenet'},
              'imagenet_vit': {'max_steps': 140000,
