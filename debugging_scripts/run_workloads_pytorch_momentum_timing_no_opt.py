@@ -37,14 +37,14 @@ WORKLOADS = {
             #                             'dataset': 'librispeech'},
             #  'criteo1tb': {'max_steps': 8000,
             #                'dataset': 'criteo1tb'},
-             'librispeech_conformer': {'max_steps': 100000,
-                                       'dataset': 'librispeech'},
+            #  'librispeech_conformer': {'max_steps': 100000,
+            #                            'dataset': 'librispeech'},
 
              }
 
 ALGORITHMS = [
     'momentum',
-    'nesterov'
+    'adamw'
 ]
 
 def container_running():
