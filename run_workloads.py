@@ -24,8 +24,8 @@ DATASETS = ['imagenet',
 
 WORKLOADS = {
 
-            #  'imagenet_resnet': {'max_steps': 140000,
-            #                      'dataset': 'imagenet'},
+             'imagenet_resnet': {'max_steps': 140000,
+                                 'dataset': 'imagenet'},
             #  'imagenet_vit': {'max_steps': 140000,
             #                   'dataset': 'imagenet'},
             #  'fastmri': {'max_steps': 27142,
