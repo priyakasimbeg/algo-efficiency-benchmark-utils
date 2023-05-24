@@ -93,7 +93,7 @@ def main(_):
         print('='*100)
         dataset = WORKLOADS[workload]['dataset']
         max_steps = int(WORKLOADS[workload]['max_steps'] * run_fraction)
-        experiment_name = f'{experiment_basename}/timing_{algorithm}'
+        experiment_name = f'{experiment_basename}/{algorithm}'
         if workload == 'conformer':
             tuning_tag = '_conformer'
         else:
