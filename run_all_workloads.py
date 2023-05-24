@@ -1,3 +1,13 @@
+"""
+Usage:
+
+python run_all_workloads.py --framework jax \
+--algorithm adamw \
+--experiment_basename jax_upgrade \
+--docker_image_url <url_for_docker_image> \
+--tag <some_docker_tag> \
+--run_percentage 10 \
+"""
 from absl import flags
 from absl import app
 import os
@@ -9,6 +19,7 @@ flags.DEFINE_string('algorithm', None,
 flags.DEFINE_string('framework', None, 'Can be either pytorch or jax')
 flags.DEFINE_boolean('dry_run', False, 'Whether or not to actually run the command')
 flags.DEFINE_string('tag', None, 'Optional Docker image tag')
+flags.DEFINE_string('docker_image_url', 'us-central1-docker.pkg.dev/training-algorithms-external/mlcommons-docker-repo/base_image', 'URL to docker image') 
 flags.DEFINE_integer('run_percentage', 20, 'Percentage of max num steps to run for.')
 flags.DEFINE_string('experiment_basename', 'timing', 'Name of top sub directory in experiment dir.')
 flags.DEFINE_boolean('rsync_data', True, 'Whether or not to transfer the data from GCP w rsync.')
@@ -72,6 +83,7 @@ def main(_):
     run_fraction = FLAGS.run_percentage/100.
     experiment_basename=FLAGS.experiment_basename
     rsync_data = 'true' if FLAGS.rsync_data else 'false'
+    docker_image_url = FLAGS.docker_image_url
 
     # For each runnable workload check if there are any containers running and if not launch next container command
     for workload in WORKLOADS.keys():
@@ -89,7 +101,7 @@ def main(_):
                    '-v /home/kasimbeg/experiment_runs/:/experiment_runs '
                    '-v /home/kasimbeg/experiment_runs/logs:/logs '
                    '--gpus all --ipc=host '
-                   f'us-central1-docker.pkg.dev/training-algorithms-external/mlcommons-docker-repo/base_image{tag} '
+                   f'{docker_image_url}{tag} '
                    f'-d {dataset} '
                    f'-f {framework} '
                    f'-s baselines/{algorithm}/{framework}/submission.py '
