@@ -1,5 +1,5 @@
 """
-Usage:
+Example Usage:
 python run_all_workloads.py --framework jax \
 --algorithm adamw \
 --experiment_basename jax_upgrade \
@@ -16,7 +16,7 @@ import docker
 import time 
 
 flags.DEFINE_string('algorithm', None,
-                    'Optimization algorithm in reference algorithms.')
+                    'Optimization algorithm in baseline algorithms.')
 flags.DEFINE_string('framework', None, 'Can be either pytorch or jax')
 flags.DEFINE_boolean('dry_run', False, 'Whether or not to actually run the command')
 flags.DEFINE_string('tag', None, 'Optional Docker image tag')
