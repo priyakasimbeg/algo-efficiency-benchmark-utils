@@ -44,6 +44,7 @@ WORKLOADS = {
 
 ALGORITHMS = [
     'momentum',
+    'nesterov'
 ]
 
 def container_running():
