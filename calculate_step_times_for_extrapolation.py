@@ -6,7 +6,7 @@ import re
 FRAMEWORK = 'pytorch'
 LOG_DIR = 'logs/step_time_logs_v4_a_pytorch'
 OUTPUT_DIR = 'tables/timing_pytorch_v4a'
-OUTPUT_FILENAME = 'pytorch_timing_4b_fixed_deepspeech.csv'
+OUTPUT_FILENAME = 'pytorch_timing_4a.csv'
 
 # LOG_DIR = 'logs/step_time_deepspeech_fixed_3b'
 # OUTPUT_DIR = 'tables/timing_v3_jax_fixed_deepspeech'
