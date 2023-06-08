@@ -31,6 +31,7 @@ def convert_metrics_line_to_dict(line):
     dict_str = dict_str.replace("(", "")
     dict_str = dict_str.replace(")", "")
     dict_str = dict_str.replace("DeviceArray", "")
+    dict_str = dict_str.replace("Array", "")
     dict_str = dict_str.replace(", dtype=float32", "")
     dict_str = dict_str.replace("nan", "0")
     try:

@@ -3,11 +3,17 @@ import os
 import pandas as pd
 import re
 
+FRAMEWORK = 'pytorch'
+LOG_DIR = 'logs/step_time_logs_v4_a_pytorch'
+OUTPUT_DIR = 'tables/timing_pytorch_v4a'
+OUTPUT_FILENAME = 'pytorch_timing_4b_fixed_deepspeech.csv'
 
-LOG_DIR = 'logs/timing_v3_b_pytorch'
-OUTPUT_DIR = 'tables/timing_v3_b_pytorch'
-OUTPUT_FILENAME = 'pytorch_speed_info_v3_b.csv'
-logfilename_regex = ('(adamw|momentum|nadamw|nesterov)_'
+# LOG_DIR = 'logs/step_time_deepspeech_fixed_3b'
+# OUTPUT_DIR = 'tables/timing_v3_jax_fixed_deepspeech'
+# OUTPUT_FILENAME = 'jax_timing_deepspeech_fixed_3b.csv'
+
+logfilename_regex = ('(adamw|momentum|nadamw|nesterov|'
+                     'adafactor|shampoo|sam|lamb)_'
                      '(imagenet_resnet|'
                      'imagenet_vit|'
                      'librispeech_conformer|'
@@ -102,7 +108,7 @@ def get_algo_speeds(logdir=LOG_DIR, framework="jax"):
     return df
 
 
-df = get_algo_speeds(framework='pytorch')
+df = get_algo_speeds(framework=FRAMEWORK)
 print(df)
 print(df.keys())
 df.to_csv(os.path.join(OUTPUT_DIR, OUTPUT_FILENAME))
