@@ -45,23 +45,22 @@ WORKLOADS = ['imagenet_resnet'
              'criteo1tb']
 
 WORKLOADS = {
-             'imagenet_resnet': {'max_steps': 140000,
-                                 'dataset': 'imagenet'},
-             'imagenet_vit': {'max_steps': 140000,
-                              'dataset': 'imagenet'},
-             'fastmri': {'max_steps': 27142,
-                         'dataset': 'fastmri'},
-             'ogbg': {'max_steps': 60000,
-                      'dataset': 'ogbg'},
-             'wmt': {'max_steps': 100000,
-                     'dataset': 'wmt'},
+            #  'imagenet_resnet': {'max_steps': 140000,
+            #                      'dataset': 'imagenet'},
+            #  'imagenet_vit': {'max_steps': 140000,
+            #                   'dataset': 'imagenet'},
+            #  'fastmri': {'max_steps': 27142,
+            #              'dataset': 'fastmri'},
+            #  'ogbg': {'max_steps': 60000,
+            #           'dataset': 'ogbg'},
+            #  'wmt': {'max_steps': 100000,
+            #          'dataset': 'wmt'},
              'librispeech_deepspeech': {'max_steps': 80000,
                                         'dataset': 'librispeech'},
-             'criteo1tb': {'max_steps': 8000,
-                           'dataset': 'criteo1tb'},
-             'librispeech_conformer': {'max_steps': 100000,
-                                       'dataset': 'librispeech'},
-
+            #  'criteo1tb': {'max_steps': 8000,
+            #                'dataset': 'criteo1tb'},
+            #  'librispeech_conformer': {'max_steps': 100000,
+            #                            'dataset': 'librispeech'},
              }
 
 def container_running():
