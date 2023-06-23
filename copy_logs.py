@@ -1,8 +1,8 @@
 import os
 import log_utils
 
-root_dir = "/home/kasimbeg/mlcommons-runs/timing_v4_b_pytorch"
-destination_dir = "/home/kasimbeg/algo-efficiency-timing/logs/step_time_logs_v4_b_pytorch"
+root_dir = "/home/kasimbeg/mlcommons-runs/timing_v4_a_pytorch_redo"
+destination_dir = "/home/kasimbeg/algo-efficiency-timing/logs/step_time_logs_v4_a_pytorch_redo"
 # root_dir = "/home/kasimbeg/mlcommons-runs/timing_fancy_jax_upgrade_b"
 # destination_dir = "/home/kasimbeg/algo-efficiency-timing/logs/step_time_fancy_deepspeech_fixed_b"
 
@@ -22,6 +22,7 @@ def copy_logs_per_experiment_dir(root_dir=root_dir):
             except NotADirectoryError as e:
                 continue
             log_files = [f for f in workload_contents if f.endswith(".log")]
+            print(log_files)
             for log_file in log_files:
                 log_file_source_path = os.path.join(workload_path, log_file)
                 try: 

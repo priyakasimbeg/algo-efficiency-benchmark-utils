@@ -4,9 +4,9 @@ import pandas as pd
 import re
 
 FRAMEWORK = 'pytorch'
-LOG_DIR = 'logs/step_time_logs_v4_b_pytorch'
-OUTPUT_DIR = 'tables/timing_pytorch_v4b'
-OUTPUT_FILENAME = 'pytorch_timing_4b.csv'
+LOG_DIR = 'logs/step_time_logs_v4_a_pytorch_redo'
+OUTPUT_DIR = 'tables/timing_pytorch_v4a'
+OUTPUT_FILENAME = 'pytorch_timing_4a_redo.csv'
 
 # LOG_DIR = 'logs/step_time_deepspeech_fixed_3b'
 # OUTPUT_DIR = 'tables/timing_v3_jax_fixed_deepspeech'
