@@ -20,7 +20,7 @@ flags.DEFINE_string('algorithm', None,
 flags.DEFINE_string('framework', None, 'Can be either pytorch or jax')
 flags.DEFINE_boolean('dry_run', False, 'Whether or not to actually run the command')
 flags.DEFINE_string('tag', None, 'Optional Docker image tag')
-flags.DEFINE_string('docker_image_url', 'us-central1-docker.pkg.dev/training-algorithms-external/mlcommons-docker-repo/base_image', 'URL to docker image') 
+flags.DEFINE_string('docker_image_url', 'us-central1-docker.pkg.dev/training-algorithms-external/mlcommons-docker-repo/algoperf_jax_dev', 'URL to docker image') 
 flags.DEFINE_integer('run_percentage', 20, 'Percentage of max num steps to run for.')
 flags.DEFINE_string('experiment_basename', 'timing', 'Name of top sub directory in experiment dir.')
 flags.DEFINE_boolean('rsync_data', True, 'Whether or not to transfer the data from GCP w rsync.')
@@ -47,20 +47,20 @@ WORKLOADS = ['imagenet_resnet'
 WORKLOADS = {
              'imagenet_resnet': {'max_steps': 140000,
                                  'dataset': 'imagenet'},
-            #  'imagenet_vit': {'max_steps': 140000,
-            #                   'dataset': 'imagenet'},
-            #  'fastmri': {'max_steps': 27142,
-            #              'dataset': 'fastmri'},
-            #  'ogbg': {'max_steps': 60000,
-            #           'dataset': 'ogbg'},
-            #  'wmt': {'max_steps': 100000,
-            #          'dataset': 'wmt'},
-            #  'librispeech_deepspeech': {'max_steps': 80000,
-            #                             'dataset': 'librispeech'},
-            #  'criteo1tb': {'max_steps': 8000,
-            #                'dataset': 'criteo1tb'},
-            #  'librispeech_conformer': {'max_steps': 100000,
-            #                            'dataset': 'librispeech'},
+             'imagenet_vit': {'max_steps': 140000,
+                              'dataset': 'imagenet'},
+             'fastmri': {'max_steps': 27142,
+                         'dataset': 'fastmri'},
+             'ogbg': {'max_steps': 60000,
+                      'dataset': 'ogbg'},
+             'wmt': {'max_steps': 100000,
+                     'dataset': 'wmt'},
+             'librispeech_deepspeech': {'max_steps': 80000,
+                                        'dataset': 'librispeech'},
+             'criteo1tb': {'max_steps': 8000,
+                           'dataset': 'criteo1tb'},
+             'librispeech_conformer': {'max_steps': 100000,
+                                       'dataset': 'librispeech'},
              }
 
 def container_running():

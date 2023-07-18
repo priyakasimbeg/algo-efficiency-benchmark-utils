@@ -1,16 +1,26 @@
+"""
+Main script to calculate max times.
+"""
+
 import log_utils
 import os
 import pandas as pd
 import re
 
-FRAMEWORK = 'pytorch'
-LOG_DIR = 'logs/step_time_logs_v4_a_pytorch_redo'
-OUTPUT_DIR = 'tables/timing_pytorch_v4a'
-OUTPUT_FILENAME = 'pytorch_timing_4a_redo.csv'
+# FRAMEWORK = 'pytorch'
+# LOG_DIR = 'logs/step_time_logs_v4_a_pytorch_redo'
+# OUTPUT_DIR = 'tables/timing_pytorch_v4a'
+# OUTPUT_FILENAME = 'pytorch_timing_4a_redo.csv'
 
 # LOG_DIR = 'logs/step_time_deepspeech_fixed_3b'
 # OUTPUT_DIR = 'tables/timing_v3_jax_fixed_deepspeech'
 # OUTPUT_FILENAME = 'jax_timing_deepspeech_fixed_3b.csv'
+
+FRAMEWORK = 'pytorch'
+LOG_DIR = 'logs/test_logs_06_27_2023'
+OUTPUT_DIR = 'tables/preliminary_timing_06_2023'
+OUTPUT_FILENAME = f'test_06_27_2023_{FRAMEWORK}.csv'
+
 
 logfilename_regex = ('(adamw|momentum|nadamw|nesterov|'
                      'adafactor|shampoo|sam|lamb)_'

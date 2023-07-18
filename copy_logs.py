@@ -1,12 +1,12 @@
 import os
 import log_utils
 
-root_dir = "/home/kasimbeg/mlcommons-runs/timing_v4_a_pytorch_redo"
-destination_dir = "/home/kasimbeg/algo-efficiency-timing/logs/step_time_logs_v4_a_pytorch_redo"
+root_dir = "/home/kasimbeg/mlcommons-runs/test_today"
+destination_dir = "/home/kasimbeg/algo-efficiency-timing/logs/test_logs_06_27_2023"
 # root_dir = "/home/kasimbeg/mlcommons-runs/timing_fancy_jax_upgrade_b"
 # destination_dir = "/home/kasimbeg/algo-efficiency-timing/logs/step_time_fancy_deepspeech_fixed_b"
 
-def copy_logs_per_experiment_dir(root_dir=root_dir):
+def copy_logs_per_experiment_dir(root_dir=root_dir, logfile_filter_string=None):
     sub_dirs = os.listdir(root_dir)
     for algo_dir in sub_dirs:
         if 'timing_' in algo_dir:
@@ -30,13 +30,22 @@ def copy_logs_per_experiment_dir(root_dir=root_dir):
                 except Exception as e:
                     print(e)
                     print(log_file)
-                    raise(e)
                     continue
                 log_file_destination_path = os.path.join(destination_dir, f"{algo}_{log_file}")
-                print(log_file_destination_path)
-                os.system(f"cp {log_file_source_path} {log_file_destination_path}")
+                if logfile_filter_string:
+                    print(log_file_source_path)
+                    filter = logfile_filter_string in log_file_source_path
+                    print(filter)
+                    if logfile_filter_string in log_file_source_path:
+                        print(log_file_destination_path)
+                        os.system(f"cp {log_file_source_path} {log_file_destination_path}")
+                else:
+                    print(log_file_destination_path)
+                    os.system(f"cp {log_file_source_path} {log_file_destination_path}")
+ 
 
 if not os.path.exists(destination_dir):
     print(f'Making directory {destination_dir}')
     os.makedirs(destination_dir)
-copy_logs_per_experiment_dir()
+
+copy_logs_per_experiment_dir(logfile_filter_string='06-26')
