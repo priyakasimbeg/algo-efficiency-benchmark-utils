@@ -1,0 +1,43 @@
+python3 submission_runner.py --framework=jax --workload=criteo1tb --submission_path=baselines/adamw/jax/submission.py --tuning_search_space=baselines/adamw/tuning_search_space.json --data_dir=/data/criteo1tb --num_tuning_trials=1 --experiment_dir=/experiment_runs --experiment_name=test_today/adamw --overwrite=True --save_checkpoints=False --max_global_steps=10 2>&1 | tee -a /logs/criteo1tb_jax_06-29-2023-19-08-29.log
+2023-06-29 19:08:31.546705: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+I0629 19:08:44.123932 140483232421696 logger_utils.py:61] Removing existing experiment directory /experiment_runs/test_today/adamw/criteo1tb_jax because --overwrite was set.
+I0629 19:08:44.934860 140483232421696 logger_utils.py:76] Creating experiment directory at /experiment_runs/test_today/adamw/criteo1tb_jax.
+I0629 19:08:46.233579 140483232421696 xla_bridge.py:455] Unable to initialize backend 'rocm': NOT_FOUND: Could not find registered platform with name: "rocm". Available platform names are: CUDA Interpreter Host
+I0629 19:08:46.234949 140483232421696 xla_bridge.py:455] Unable to initialize backend 'tpu': module 'jaxlib.xla_extension' has no attribute 'get_tpu_client'
+I0629 19:08:46.235120 140483232421696 xla_bridge.py:455] Unable to initialize backend 'plugin': xla_extension has no attributes named get_plugin_device_client. Compile TensorFlow with //tensorflow/compiler/xla/python:enable_plugin_device set to true (defaults to false) to enable this.
+I0629 19:08:46.239814 140483232421696 submission_runner.py:547] Using RNG seed 852915673
+I0629 19:08:48.394062 140483232421696 submission_runner.py:556] --- Tuning run 1/1 ---
+I0629 19:08:48.394283 140483232421696 submission_runner.py:561] Creating tuning directory at /experiment_runs/test_today/adamw/criteo1tb_jax/trial_1.
+I0629 19:08:48.394486 140483232421696 logger_utils.py:92] Saving hparams to /experiment_runs/test_today/adamw/criteo1tb_jax/trial_1/hparams.json.
+I0629 19:08:48.578191 140483232421696 submission_runner.py:249] Initializing dataset.
+I0629 19:08:48.578397 140483232421696 submission_runner.py:256] Initializing model.
+I0629 19:08:54.169543 140483232421696 submission_runner.py:268] Initializing optimizer.
+I0629 19:08:57.572261 140483232421696 submission_runner.py:275] Initializing metrics bundle.
+I0629 19:08:57.572467 140483232421696 submission_runner.py:292] Initializing checkpoint and logger.
+I0629 19:08:57.573543 140483232421696 checkpoints.py:915] Found no checkpoint files in /experiment_runs/test_today/adamw/criteo1tb_jax/trial_1 with prefix checkpoint_
+I0629 19:08:57.573826 140483232421696 logger_utils.py:239] Unable to record workload.train_mean information. Continuing without it.
+I0629 19:08:57.573902 140483232421696 logger_utils.py:239] Unable to record workload.train_stddev information. Continuing without it.
+I0629 19:08:58.475953 140483232421696 submission_runner.py:313] Saving meta data to /experiment_runs/test_today/adamw/criteo1tb_jax/trial_1/meta_data_0.json.
+I0629 19:08:58.476923 140483232421696 submission_runner.py:316] Saving flags to /experiment_runs/test_today/adamw/criteo1tb_jax/trial_1/flags_0.json.
+I0629 19:08:58.525390 140483232421696 submission_runner.py:328] Starting training loop.
+I0629 19:09:25.203490 140319141119744 logging_writer.py:48] [0] global_step=0, grad_norm=6.727975368499756, loss=0.5911787152290344
+I0629 19:09:25.213561 140483232421696 spec.py:298] Evaluating on the training split.
+I0629 19:13:23.502081 140483232421696 spec.py:310] Evaluating on the validation split.
+I0629 19:16:35.831433 140483232421696 spec.py:326] Evaluating on the test split.
+I0629 19:19:38.228050 140483232421696 submission_runner.py:424] Time since start: 639.70s, 	Step: 1, 	{'train/loss': 0.5902690214269302, 'validation/loss': 0.5919592359550562, 'validation/num_examples': 89000000, 'test/loss': 0.5925277075055483, 'test/num_examples': 89274637, 'score': 26.687986135482788, 'total_duration': 639.7025847434998, 'accumulated_submission_time': 26.687986135482788, 'accumulated_eval_time': 613.014411687851, 'accumulated_logging_time': 0}
+I0629 19:19:38.235328 140298176943872 logging_writer.py:48] [1] accumulated_eval_time=613.014412, accumulated_logging_time=0, accumulated_submission_time=26.687986, global_step=1, preemption_count=0, score=26.687986, test/loss=0.592528, test/num_examples=89274637, total_duration=639.702585, train/loss=0.590269, validation/loss=0.591959, validation/num_examples=89000000
+I0629 19:19:39.030680 140483232421696 spec.py:298] Evaluating on the training split.
+I0629 19:22:52.183875 140483232421696 spec.py:310] Evaluating on the validation split.
+I0629 19:25:25.605668 140483232421696 spec.py:326] Evaluating on the test split.
+I0629 19:27:56.323396 140483232421696 submission_runner.py:424] Time since start: 1137.80s, 	Step: 10, 	{'train/loss': 0.29785519768210017, 'validation/loss': 0.30608249438202245, 'validation/num_examples': 89000000, 'test/loss': 0.30253410047469587, 'test/num_examples': 89274637, 'score': 27.474808931350708, 'total_duration': 1137.7979428768158, 'accumulated_submission_time': 27.474808931350708, 'accumulated_eval_time': 1110.3070785999298, 'accumulated_logging_time': 0.015439987182617188}
+I0629 19:27:56.330618 140298168551168 logging_writer.py:48] [10] accumulated_eval_time=1110.307079, accumulated_logging_time=0.015440, accumulated_submission_time=27.474809, global_step=10, preemption_count=0, score=27.474809, test/loss=0.302534, test/num_examples=89274637, total_duration=1137.797943, train/loss=0.297855, validation/loss=0.306082, validation/num_examples=89000000
+I0629 19:27:56.342704 140298176943872 logging_writer.py:48] [10] global_step=10, preemption_count=0, score=27.474809
+I0629 19:28:02.573517 140483232421696 checkpoints.py:490] Saving checkpoint at step: 10
+I0629 19:28:37.344998 140483232421696 checkpoints.py:422] Saved checkpoint at /experiment_runs/test_today/adamw/criteo1tb_jax/trial_1/checkpoint_10
+I0629 19:28:37.663783 140483232421696 checkpoint_utils.py:240] Saved checkpoint to /experiment_runs/test_today/adamw/criteo1tb_jax/trial_1/checkpoint_10.
+I0629 19:28:38.044606 140483232421696 submission_runner.py:587] Tuning trial 1/1
+I0629 19:28:38.044834 140483232421696 submission_runner.py:588] Hyperparameters: Hyperparameters(learning_rate=0.0019814680146414726, one_minus_beta1=0.22838767981804783, beta2=0.999, warmup_factor=0.05, weight_decay=0.010340635370188849, label_smoothing=0.1, dropout_rate=0.0)
+I0629 19:28:38.045935 140483232421696 submission_runner.py:589] Metrics: {'eval_results': [(1, {'train/loss': 0.5902690214269302, 'validation/loss': 0.5919592359550562, 'validation/num_examples': 89000000, 'test/loss': 0.5925277075055483, 'test/num_examples': 89274637, 'score': 26.687986135482788, 'total_duration': 639.7025847434998, 'accumulated_submission_time': 26.687986135482788, 'accumulated_eval_time': 613.014411687851, 'accumulated_logging_time': 0, 'global_step': 1, 'preemption_count': 0}), (10, {'train/loss': 0.29785519768210017, 'validation/loss': 0.30608249438202245, 'validation/num_examples': 89000000, 'test/loss': 0.30253410047469587, 'test/num_examples': 89274637, 'score': 27.474808931350708, 'total_duration': 1137.7979428768158, 'accumulated_submission_time': 27.474808931350708, 'accumulated_eval_time': 1110.3070785999298, 'accumulated_logging_time': 0.015439987182617188, 'global_step': 10, 'preemption_count': 0})], 'global_step': 10}
+I0629 19:28:38.046036 140483232421696 submission_runner.py:590] Timing: 27.474808931350708
+I0629 19:28:38.046088 140483232421696 submission_runner.py:591] ====================
+I0629 19:28:38.046239 140483232421696 submission_runner.py:659] Final criteo1tb score: 27.474808931350708

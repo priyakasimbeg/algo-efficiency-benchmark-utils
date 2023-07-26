@@ -1,0 +1,61 @@
+python3 submission_runner.py --framework=jax --workload=wmt --submission_path=baselines/adamw/jax/submission.py --tuning_search_space=baselines/adamw/tuning_search_space.json --data_dir=/data/wmt --num_tuning_trials=1 --experiment_dir=/experiment_runs --experiment_name=test_today/adamw --overwrite=True --save_checkpoints=False --max_global_steps=10 2>&1 | tee -a /logs/wmt_jax_06-27-2023-19-42-57.log
+2023-06-27 19:42:59.063271: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+I0627 19:43:13.820724 140172307224384 logger_utils.py:61] Removing existing experiment directory /experiment_runs/test_today/adamw/wmt_jax because --overwrite was set.
+I0627 19:43:13.821640 140172307224384 logger_utils.py:76] Creating experiment directory at /experiment_runs/test_today/adamw/wmt_jax.
+I0627 19:43:14.782259 140172307224384 xla_bridge.py:455] Unable to initialize backend 'rocm': NOT_FOUND: Could not find registered platform with name: "rocm". Available platform names are: Interpreter CUDA Host
+I0627 19:43:14.783051 140172307224384 xla_bridge.py:455] Unable to initialize backend 'tpu': module 'jaxlib.xla_extension' has no attribute 'get_tpu_client'
+I0627 19:43:14.783190 140172307224384 xla_bridge.py:455] Unable to initialize backend 'plugin': xla_extension has no attributes named get_plugin_device_client. Compile TensorFlow with //tensorflow/compiler/xla/python:enable_plugin_device set to true (defaults to false) to enable this.
+I0627 19:43:14.787969 140172307224384 submission_runner.py:547] Using RNG seed 1221893672
+I0627 19:43:17.134948 140172307224384 submission_runner.py:556] --- Tuning run 1/1 ---
+I0627 19:43:17.135177 140172307224384 submission_runner.py:561] Creating tuning directory at /experiment_runs/test_today/adamw/wmt_jax/trial_1.
+I0627 19:43:17.135415 140172307224384 logger_utils.py:92] Saving hparams to /experiment_runs/test_today/adamw/wmt_jax/trial_1/hparams.json.
+I0627 19:43:17.330975 140172307224384 submission_runner.py:249] Initializing dataset.
+I0627 19:43:17.342415 140172307224384 dataset_info.py:578] Load dataset info from /data/wmt/wmt17_translate/de-en/1.0.0
+I0627 19:43:17.346300 140172307224384 dataset_info.py:669] Fields info.[splits, supervised_keys] from disk and from code do not match. Keeping the one from code.
+I0627 19:43:17.442990 140172307224384 logging_logger.py:49] Constructing tf.data.Dataset wmt17_translate for split train, from /data/wmt/wmt17_translate/de-en/1.0.0
+I0627 19:43:19.361172 140172307224384 submission_runner.py:256] Initializing model.
+I0627 19:43:28.553645 140172307224384 submission_runner.py:268] Initializing optimizer.
+I0627 19:43:29.736865 140172307224384 submission_runner.py:275] Initializing metrics bundle.
+I0627 19:43:29.737122 140172307224384 submission_runner.py:292] Initializing checkpoint and logger.
+I0627 19:43:29.738206 140172307224384 checkpoints.py:915] Found no checkpoint files in /experiment_runs/test_today/adamw/wmt_jax/trial_1 with prefix checkpoint_
+I0627 19:43:29.738487 140172307224384 logger_utils.py:239] Unable to record workload.train_mean information. Continuing without it.
+I0627 19:43:29.738552 140172307224384 logger_utils.py:239] Unable to record workload.train_stddev information. Continuing without it.
+I0627 19:43:30.844045 140172307224384 submission_runner.py:313] Saving meta data to /experiment_runs/test_today/adamw/wmt_jax/trial_1/meta_data_0.json.
+I0627 19:43:30.845092 140172307224384 submission_runner.py:316] Saving flags to /experiment_runs/test_today/adamw/wmt_jax/trial_1/flags_0.json.
+I0627 19:43:30.852931 140172307224384 submission_runner.py:328] Starting training loop.
+I0627 19:44:13.595766 140008434423552 logging_writer.py:48] [0] global_step=0, grad_norm=5.447103977203369, loss=11.055567741394043
+I0627 19:44:13.610574 140172307224384 spec.py:298] Evaluating on the training split.
+I0627 19:44:13.615042 140172307224384 dataset_info.py:578] Load dataset info from /data/wmt/wmt17_translate/de-en/1.0.0
+I0627 19:44:13.618074 140172307224384 dataset_info.py:669] Fields info.[splits, supervised_keys] from disk and from code do not match. Keeping the one from code.
+I0627 19:44:13.658950 140172307224384 logging_logger.py:49] Constructing tf.data.Dataset wmt17_translate for split train, from /data/wmt/wmt17_translate/de-en/1.0.0
+I0627 19:44:21.276926 140172307224384 workload.py:179] Translating evaluation dataset.
+I0627 19:49:15.415813 140172307224384 spec.py:310] Evaluating on the validation split.
+I0627 19:49:15.419697 140172307224384 dataset_info.py:578] Load dataset info from /data/wmt/wmt14_translate/de-en/1.0.0
+I0627 19:49:15.423521 140172307224384 dataset_info.py:669] Fields info.[splits, supervised_keys] from disk and from code do not match. Keeping the one from code.
+I0627 19:49:15.461433 140172307224384 logging_logger.py:49] Constructing tf.data.Dataset wmt14_translate for split validation, from /data/wmt/wmt14_translate/de-en/1.0.0
+I0627 19:49:22.682412 140172307224384 workload.py:179] Translating evaluation dataset.
+I0627 19:54:10.408828 140172307224384 spec.py:326] Evaluating on the test split.
+I0627 19:54:10.411542 140172307224384 dataset_info.py:578] Load dataset info from /data/wmt/wmt14_translate/de-en/1.0.0
+I0627 19:54:10.415443 140172307224384 dataset_info.py:669] Fields info.[splits, supervised_keys] from disk and from code do not match. Keeping the one from code.
+I0627 19:54:10.451834 140172307224384 logging_logger.py:49] Constructing tf.data.Dataset wmt14_translate for split test, from /data/wmt/wmt14_translate/de-en/1.0.0
+I0627 19:54:17.258791 140172307224384 workload.py:179] Translating evaluation dataset.
+I0627 19:59:00.902384 140172307224384 submission_runner.py:424] Time since start: 930.05s, 	Step: 1, 	{'train/accuracy': 0.0007157219806686044, 'train/loss': 11.04991340637207, 'train/bleu': 0.0, 'validation/accuracy': 0.0004835649742744863, 'validation/loss': 11.052399635314941, 'validation/bleu': 0.0, 'validation/num_examples': 3000, 'test/accuracy': 0.0007088489946909249, 'test/loss': 11.05127239227295, 'test/bleu': 0.0, 'test/num_examples': 3003, 'score': 42.75746178627014, 'total_duration': 930.0493812561035, 'accumulated_submission_time': 42.75746178627014, 'accumulated_eval_time': 887.2917232513428, 'accumulated_logging_time': 0}
+I0627 19:59:00.910215 139995690804992 logging_writer.py:48] [1] accumulated_eval_time=887.291723, accumulated_logging_time=0, accumulated_submission_time=42.757462, global_step=1, preemption_count=0, score=42.757462, test/accuracy=0.000709, test/bleu=0.000000, test/loss=11.051272, test/num_examples=3003, total_duration=930.049381, train/accuracy=0.000716, train/bleu=0.000000, train/loss=11.049913, validation/accuracy=0.000484, validation/bleu=0.000000, validation/loss=11.052400, validation/num_examples=3000
+I0627 19:59:03.758606 140172307224384 spec.py:298] Evaluating on the training split.
+I0627 19:59:06.772208 140172307224384 workload.py:179] Translating evaluation dataset.
+I0627 20:03:51.927208 140172307224384 spec.py:310] Evaluating on the validation split.
+I0627 20:03:54.596225 140172307224384 workload.py:179] Translating evaluation dataset.
+I0627 20:08:33.102012 140172307224384 spec.py:326] Evaluating on the test split.
+I0627 20:08:35.817859 140172307224384 workload.py:179] Translating evaluation dataset.
+I0627 20:13:19.434098 140172307224384 submission_runner.py:424] Time since start: 1788.58s, 	Step: 10, 	{'train/accuracy': 0.000635915610473603, 'train/loss': 10.713058471679688, 'train/bleu': 0.0, 'validation/accuracy': 0.0004835649742744863, 'validation/loss': 10.709214210510254, 'validation/bleu': 0.0, 'validation/num_examples': 3000, 'test/accuracy': 0.0007088489946909249, 'test/loss': 10.721559524536133, 'test/bleu': 0.0, 'test/num_examples': 3003, 'score': 45.59446096420288, 'total_duration': 1788.581087589264, 'accumulated_submission_time': 45.59446096420288, 'accumulated_eval_time': 1742.9671442508698, 'accumulated_logging_time': 0.018741130828857422}
+I0627 20:13:19.442496 139995699197696 logging_writer.py:48] [10] accumulated_eval_time=1742.967144, accumulated_logging_time=0.018741, accumulated_submission_time=45.594461, global_step=10, preemption_count=0, score=45.594461, test/accuracy=0.000709, test/bleu=0.000000, test/loss=10.721560, test/num_examples=3003, total_duration=1788.581088, train/accuracy=0.000636, train/bleu=0.000000, train/loss=10.713058, validation/accuracy=0.000484, validation/bleu=0.000000, validation/loss=10.709214, validation/num_examples=3000
+I0627 20:13:19.457782 139995690804992 logging_writer.py:48] [10] global_step=10, preemption_count=0, score=45.594461
+I0627 20:13:20.828126 140172307224384 checkpoints.py:490] Saving checkpoint at step: 10
+I0627 20:13:25.842380 140172307224384 checkpoints.py:422] Saved checkpoint at /experiment_runs/test_today/adamw/wmt_jax/trial_1/checkpoint_10
+I0627 20:13:25.901489 140172307224384 checkpoint_utils.py:240] Saved checkpoint to /experiment_runs/test_today/adamw/wmt_jax/trial_1/checkpoint_10.
+I0627 20:13:25.994064 140172307224384 submission_runner.py:587] Tuning trial 1/1
+I0627 20:13:25.994328 140172307224384 submission_runner.py:588] Hyperparameters: Hyperparameters(learning_rate=0.0019814680146414726, one_minus_beta1=0.22838767981804783, beta2=0.999, warmup_factor=0.05, weight_decay=0.010340635370188849, label_smoothing=0.1, dropout_rate=0.0)
+I0627 20:13:25.995581 140172307224384 submission_runner.py:589] Metrics: {'eval_results': [(1, {'train/accuracy': 0.0007157219806686044, 'train/loss': 11.04991340637207, 'train/bleu': 0.0, 'validation/accuracy': 0.0004835649742744863, 'validation/loss': 11.052399635314941, 'validation/bleu': 0.0, 'validation/num_examples': 3000, 'test/accuracy': 0.0007088489946909249, 'test/loss': 11.05127239227295, 'test/bleu': 0.0, 'test/num_examples': 3003, 'score': 42.75746178627014, 'total_duration': 930.0493812561035, 'accumulated_submission_time': 42.75746178627014, 'accumulated_eval_time': 887.2917232513428, 'accumulated_logging_time': 0, 'global_step': 1, 'preemption_count': 0}), (10, {'train/accuracy': 0.000635915610473603, 'train/loss': 10.713058471679688, 'train/bleu': 0.0, 'validation/accuracy': 0.0004835649742744863, 'validation/loss': 10.709214210510254, 'validation/bleu': 0.0, 'validation/num_examples': 3000, 'test/accuracy': 0.0007088489946909249, 'test/loss': 10.721559524536133, 'test/bleu': 0.0, 'test/num_examples': 3003, 'score': 45.59446096420288, 'total_duration': 1788.581087589264, 'accumulated_submission_time': 45.59446096420288, 'accumulated_eval_time': 1742.9671442508698, 'accumulated_logging_time': 0.018741130828857422, 'global_step': 10, 'preemption_count': 0})], 'global_step': 10}
+I0627 20:13:25.995949 140172307224384 submission_runner.py:590] Timing: 45.59446096420288
+I0627 20:13:25.996014 140172307224384 submission_runner.py:591] ====================
+I0627 20:13:25.996122 140172307224384 submission_runner.py:659] Final wmt score: 45.59446096420288

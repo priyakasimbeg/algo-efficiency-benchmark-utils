@@ -1,0 +1,64 @@
+python3 submission_runner.py --framework=jax --workload=imagenet_resnet --submission_path=baselines/adamw/jax/submission.py --tuning_search_space=baselines/adamw/tuning_search_space.json --data_dir=/data/imagenet/jax --num_tuning_trials=1 --experiment_dir=/experiment_runs --experiment_name=test_today/adamw --overwrite=True --save_checkpoints=False --max_global_steps=10 --imagenet_v2_data_dir=/data/imagenet/jax 2>&1 | tee -a /logs/imagenet_resnet_jax_06-29-2023-17-17-59.log
+2023-06-29 17:18:01.338222: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+/usr/local/lib/python3.8/dist-packages/tensorflow_addons/utils/tfa_eol_msg.py:23: UserWarning: 
+
+TensorFlow Addons (TFA) has ended development and introduction of new features.
+TFA has entered a minimal maintenance and release mode until a planned end of life in May 2024.
+Please modify downstream libraries to take dependencies from other repositories in our TensorFlow community (e.g. Keras, Keras-CV, and Keras-NLP). 
+
+For more information see: https://github.com/tensorflow/addons/issues/2807 
+
+  warnings.warn(
+I0629 17:18:14.997875 139624400664384 logger_utils.py:61] Removing existing experiment directory /experiment_runs/test_today/adamw/imagenet_resnet_jax because --overwrite was set.
+I0629 17:18:15.004580 139624400664384 logger_utils.py:76] Creating experiment directory at /experiment_runs/test_today/adamw/imagenet_resnet_jax.
+I0629 17:18:15.869423 139624400664384 xla_bridge.py:455] Unable to initialize backend 'rocm': NOT_FOUND: Could not find registered platform with name: "rocm". Available platform names are: Interpreter Host CUDA
+I0629 17:18:15.870104 139624400664384 xla_bridge.py:455] Unable to initialize backend 'tpu': module 'jaxlib.xla_extension' has no attribute 'get_tpu_client'
+I0629 17:18:15.870245 139624400664384 xla_bridge.py:455] Unable to initialize backend 'plugin': xla_extension has no attributes named get_plugin_device_client. Compile TensorFlow with //tensorflow/compiler/xla/python:enable_plugin_device set to true (defaults to false) to enable this.
+I0629 17:18:15.874579 139624400664384 submission_runner.py:547] Using RNG seed 3936853076
+I0629 17:18:18.006517 139624400664384 submission_runner.py:556] --- Tuning run 1/1 ---
+I0629 17:18:18.006707 139624400664384 submission_runner.py:561] Creating tuning directory at /experiment_runs/test_today/adamw/imagenet_resnet_jax/trial_1.
+I0629 17:18:18.006914 139624400664384 logger_utils.py:92] Saving hparams to /experiment_runs/test_today/adamw/imagenet_resnet_jax/trial_1/hparams.json.
+I0629 17:18:18.186538 139624400664384 submission_runner.py:249] Initializing dataset.
+I0629 17:18:18.202622 139624400664384 dataset_info.py:578] Load dataset info from /data/imagenet/jax/imagenet2012/5.1.0
+I0629 17:18:18.212906 139624400664384 dataset_info.py:669] Fields info.[splits, supervised_keys] from disk and from code do not match. Keeping the one from code.
+I0629 17:18:18.521538 139624400664384 logging_logger.py:49] Constructing tf.data.Dataset imagenet2012 for split train, from /data/imagenet/jax/imagenet2012/5.1.0
+I0629 17:18:19.581583 139624400664384 submission_runner.py:256] Initializing model.
+I0629 17:18:29.846353 139624400664384 submission_runner.py:268] Initializing optimizer.
+I0629 17:18:31.522768 139624400664384 submission_runner.py:275] Initializing metrics bundle.
+I0629 17:18:31.522951 139624400664384 submission_runner.py:292] Initializing checkpoint and logger.
+I0629 17:18:31.524031 139624400664384 checkpoints.py:915] Found no checkpoint files in /experiment_runs/test_today/adamw/imagenet_resnet_jax/trial_1 with prefix checkpoint_
+I0629 17:18:32.479519 139624400664384 submission_runner.py:313] Saving meta data to /experiment_runs/test_today/adamw/imagenet_resnet_jax/trial_1/meta_data_0.json.
+I0629 17:18:32.481307 139624400664384 submission_runner.py:316] Saving flags to /experiment_runs/test_today/adamw/imagenet_resnet_jax/trial_1/flags_0.json.
+I0629 17:18:32.488407 139624400664384 submission_runner.py:328] Starting training loop.
+2023-06-29 17:19:32.700524: E external/xla/xla/service/rendezvous.cc:31] This thread has been waiting for 10 seconds and may be stuck:
+2023-06-29 17:19:34.874332: E external/xla/xla/service/rendezvous.cc:36] Thread is unstuck! Warning above was a false-positive. Perhaps the timeout is too short.
+I0629 17:19:36.386798 139459416807168 logging_writer.py:48] [0] global_step=0, grad_norm=0.5996074080467224, loss=6.922242164611816
+I0629 17:19:36.402240 139624400664384 spec.py:298] Evaluating on the training split.
+I0629 17:19:37.338729 139624400664384 dataset_info.py:578] Load dataset info from /data/imagenet/jax/imagenet2012/5.1.0
+I0629 17:19:37.348003 139624400664384 dataset_info.py:669] Fields info.[splits, supervised_keys] from disk and from code do not match. Keeping the one from code.
+I0629 17:19:37.431106 139624400664384 logging_logger.py:49] Constructing tf.data.Dataset imagenet2012 for split train, from /data/imagenet/jax/imagenet2012/5.1.0
+I0629 17:19:50.285369 139624400664384 spec.py:310] Evaluating on the validation split.
+I0629 17:19:51.808449 139624400664384 dataset_info.py:578] Load dataset info from /data/imagenet/jax/imagenet2012/5.1.0
+I0629 17:19:51.832150 139624400664384 dataset_info.py:669] Fields info.[splits, supervised_keys] from disk and from code do not match. Keeping the one from code.
+I0629 17:19:51.899130 139624400664384 logging_logger.py:49] Constructing tf.data.Dataset imagenet2012 for split validation, from /data/imagenet/jax/imagenet2012/5.1.0
+I0629 17:20:11.540943 139624400664384 spec.py:326] Evaluating on the test split.
+I0629 17:20:12.357756 139624400664384 dataset_info.py:578] Load dataset info from /data/imagenet/jax/imagenet_v2/matched-frequency/3.0.0
+I0629 17:20:12.363609 139624400664384 dataset_builder.py:528] Reusing dataset imagenet_v2 (/data/imagenet/jax/imagenet_v2/matched-frequency/3.0.0)
+I0629 17:20:12.403107 139624400664384 logging_logger.py:49] Constructing tf.data.Dataset imagenet_v2 for split test, from /data/imagenet/jax/imagenet_v2/matched-frequency/3.0.0
+I0629 17:20:23.098536 139624400664384 submission_runner.py:424] Time since start: 110.61s, 	Step: 1, 	{'train/accuracy': 0.0008370535797439516, 'train/loss': 6.912813663482666, 'validation/accuracy': 0.0012599999317899346, 'validation/loss': 6.912477493286133, 'validation/num_examples': 50000, 'test/accuracy': 0.001500000013038516, 'test/loss': 6.912234783172607, 'test/num_examples': 10000, 'score': 63.91367197036743, 'total_duration': 110.61005210876465, 'accumulated_submission_time': 63.91367197036743, 'accumulated_eval_time': 46.6962308883667, 'accumulated_logging_time': 0}
+I0629 17:20:23.105531 139429805029120 logging_writer.py:48] [1] accumulated_eval_time=46.696231, accumulated_logging_time=0, accumulated_submission_time=63.913672, global_step=1, preemption_count=0, score=63.913672, test/accuracy=0.001500, test/loss=6.912235, test/num_examples=10000, total_duration=110.610052, train/accuracy=0.000837, train/loss=6.912814, validation/accuracy=0.001260, validation/loss=6.912477, validation/num_examples=50000
+I0629 17:20:25.902349 139624400664384 spec.py:298] Evaluating on the training split.
+I0629 17:20:33.176868 139624400664384 spec.py:310] Evaluating on the validation split.
+I0629 17:20:41.249007 139624400664384 spec.py:326] Evaluating on the test split.
+I0629 17:20:43.516448 139624400664384 submission_runner.py:424] Time since start: 131.03s, 	Step: 10, 	{'train/accuracy': 0.0010164221748709679, 'train/loss': 6.911594867706299, 'validation/accuracy': 0.0010400000028312206, 'validation/loss': 6.9116034507751465, 'validation/num_examples': 50000, 'test/accuracy': 0.0012000000569969416, 'test/loss': 6.911129951477051, 'test/num_examples': 10000, 'score': 66.70114731788635, 'total_duration': 131.0279712677002, 'accumulated_submission_time': 66.70114731788635, 'accumulated_eval_time': 64.31030321121216, 'accumulated_logging_time': 0.015903234481811523}
+I0629 17:20:43.524743 139430098609920 logging_writer.py:48] [10] accumulated_eval_time=64.310303, accumulated_logging_time=0.015903, accumulated_submission_time=66.701147, global_step=10, preemption_count=0, score=66.701147, test/accuracy=0.001200, test/loss=6.911130, test/num_examples=10000, total_duration=131.027971, train/accuracy=0.001016, train/loss=6.911595, validation/accuracy=0.001040, validation/loss=6.911603, validation/num_examples=50000
+I0629 17:20:43.540558 139430107002624 logging_writer.py:48] [10] global_step=10, preemption_count=0, score=66.701147
+I0629 17:20:43.855343 139624400664384 checkpoints.py:490] Saving checkpoint at step: 10
+I0629 17:20:44.697922 139624400664384 checkpoints.py:422] Saved checkpoint at /experiment_runs/test_today/adamw/imagenet_resnet_jax/trial_1/checkpoint_10
+I0629 17:20:44.700324 139624400664384 checkpoint_utils.py:240] Saved checkpoint to /experiment_runs/test_today/adamw/imagenet_resnet_jax/trial_1/checkpoint_10.
+I0629 17:20:44.865577 139624400664384 submission_runner.py:587] Tuning trial 1/1
+I0629 17:20:44.865832 139624400664384 submission_runner.py:588] Hyperparameters: Hyperparameters(learning_rate=0.0019814680146414726, one_minus_beta1=0.22838767981804783, beta2=0.999, warmup_factor=0.05, weight_decay=0.010340635370188849, label_smoothing=0.1, dropout_rate=0.0)
+I0629 17:20:44.868020 139624400664384 submission_runner.py:589] Metrics: {'eval_results': [(1, {'train/accuracy': 0.0008370535797439516, 'train/loss': 6.912813663482666, 'validation/accuracy': 0.0012599999317899346, 'validation/loss': 6.912477493286133, 'validation/num_examples': 50000, 'test/accuracy': 0.001500000013038516, 'test/loss': 6.912234783172607, 'test/num_examples': 10000, 'score': 63.91367197036743, 'total_duration': 110.61005210876465, 'accumulated_submission_time': 63.91367197036743, 'accumulated_eval_time': 46.6962308883667, 'accumulated_logging_time': 0, 'global_step': 1, 'preemption_count': 0}), (10, {'train/accuracy': 0.0010164221748709679, 'train/loss': 6.911594867706299, 'validation/accuracy': 0.0010400000028312206, 'validation/loss': 6.9116034507751465, 'validation/num_examples': 50000, 'test/accuracy': 0.0012000000569969416, 'test/loss': 6.911129951477051, 'test/num_examples': 10000, 'score': 66.70114731788635, 'total_duration': 131.0279712677002, 'accumulated_submission_time': 66.70114731788635, 'accumulated_eval_time': 64.31030321121216, 'accumulated_logging_time': 0.015903234481811523, 'global_step': 10, 'preemption_count': 0})], 'global_step': 10}
+I0629 17:20:44.868579 139624400664384 submission_runner.py:590] Timing: 66.70114731788635
+I0629 17:20:44.868677 139624400664384 submission_runner.py:591] ====================
+I0629 17:20:44.868805 139624400664384 submission_runner.py:659] Final imagenet_resnet score: 66.70114731788635

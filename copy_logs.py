@@ -1,8 +1,8 @@
 import os
 import log_utils
 
-root_dir = "/home/kasimbeg/mlcommons-runs/test_today"
-destination_dir = "/home/kasimbeg/algo-efficiency-timing/logs/test_logs_06_27_2023"
+root_dir = "/home/kasimbeg/mlcommons-runs/timing_pytorch_2_preliminary_timing"
+destination_dir = "/home/kasimbeg/algo-efficiency-timing/logs/timing_pytorch_2_preliminary_timing"
 # root_dir = "/home/kasimbeg/mlcommons-runs/timing_fancy_jax_upgrade_b"
 # destination_dir = "/home/kasimbeg/algo-efficiency-timing/logs/step_time_fancy_deepspeech_fixed_b"
 
@@ -47,5 +47,6 @@ def copy_logs_per_experiment_dir(root_dir=root_dir, logfile_filter_string=None):
 if not os.path.exists(destination_dir):
     print(f'Making directory {destination_dir}')
     os.makedirs(destination_dir)
+    
 
-copy_logs_per_experiment_dir(logfile_filter_string='06-26')
+copy_logs_per_experiment_dir(logfile_filter_string=None)

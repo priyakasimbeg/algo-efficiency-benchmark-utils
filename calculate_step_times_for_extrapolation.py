@@ -17,9 +17,9 @@ import re
 # OUTPUT_FILENAME = 'jax_timing_deepspeech_fixed_3b.csv'
 
 FRAMEWORK = 'pytorch'
-LOG_DIR = 'logs/test_logs_06_27_2023'
-OUTPUT_DIR = 'tables/preliminary_timing_06_2023'
-OUTPUT_FILENAME = f'test_06_27_2023_{FRAMEWORK}.csv'
+LOG_DIR = 'logs/timing_pytorch_2_preliminary_timing'
+OUTPUT_DIR = 'tables/pytorch_2_preliminary_timing'
+OUTPUT_FILENAME = f'timing_pytorch_2_preliminary.csv'
 
 
 logfilename_regex = ('(adamw|momentum|nadamw|nesterov|'

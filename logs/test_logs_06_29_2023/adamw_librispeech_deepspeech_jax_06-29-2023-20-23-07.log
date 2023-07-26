@@ -1,0 +1,59 @@
+python3 submission_runner.py --framework=jax --workload=librispeech_deepspeech --submission_path=baselines/adamw/jax/submission.py --tuning_search_space=baselines/adamw/tuning_search_space.json --data_dir=/data/librispeech --num_tuning_trials=1 --experiment_dir=/experiment_runs --experiment_name=test_today/adamw --overwrite=True --save_checkpoints=False --max_global_steps=10 --librispeech_tokenizer_vocab_path=/data/librispeech/spm_model.vocab 2>&1 | tee -a /logs/librispeech_deepspeech_jax_06-29-2023-20-23-07.log
+2023-06-29 20:23:09.127927: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+I0629 20:23:22.842560 140474982430528 logger_utils.py:61] Removing existing experiment directory /experiment_runs/test_today/adamw/librispeech_deepspeech_jax because --overwrite was set.
+I0629 20:23:22.850707 140474982430528 logger_utils.py:76] Creating experiment directory at /experiment_runs/test_today/adamw/librispeech_deepspeech_jax.
+I0629 20:23:23.783464 140474982430528 xla_bridge.py:455] Unable to initialize backend 'rocm': NOT_FOUND: Could not find registered platform with name: "rocm". Available platform names are: Interpreter Host CUDA
+I0629 20:23:23.784239 140474982430528 xla_bridge.py:455] Unable to initialize backend 'tpu': module 'jaxlib.xla_extension' has no attribute 'get_tpu_client'
+I0629 20:23:23.784571 140474982430528 xla_bridge.py:455] Unable to initialize backend 'plugin': xla_extension has no attributes named get_plugin_device_client. Compile TensorFlow with //tensorflow/compiler/xla/python:enable_plugin_device set to true (defaults to false) to enable this.
+I0629 20:23:23.789238 140474982430528 submission_runner.py:547] Using RNG seed 2979648988
+I0629 20:23:25.932511 140474982430528 submission_runner.py:556] --- Tuning run 1/1 ---
+I0629 20:23:25.932718 140474982430528 submission_runner.py:561] Creating tuning directory at /experiment_runs/test_today/adamw/librispeech_deepspeech_jax/trial_1.
+I0629 20:23:25.932977 140474982430528 logger_utils.py:92] Saving hparams to /experiment_runs/test_today/adamw/librispeech_deepspeech_jax/trial_1/hparams.json.
+I0629 20:23:26.113618 140474982430528 submission_runner.py:249] Initializing dataset.
+I0629 20:23:26.113829 140474982430528 submission_runner.py:256] Initializing model.
+I0629 20:23:28.447582 140474982430528 submission_runner.py:268] Initializing optimizer.
+I0629 20:23:29.130453 140474982430528 submission_runner.py:275] Initializing metrics bundle.
+I0629 20:23:29.130631 140474982430528 submission_runner.py:292] Initializing checkpoint and logger.
+I0629 20:23:29.131554 140474982430528 checkpoints.py:915] Found no checkpoint files in /experiment_runs/test_today/adamw/librispeech_deepspeech_jax/trial_1 with prefix checkpoint_
+I0629 20:23:29.131827 140474982430528 logger_utils.py:239] Unable to record workload.train_mean information. Continuing without it.
+I0629 20:23:29.131895 140474982430528 logger_utils.py:239] Unable to record workload.train_stddev information. Continuing without it.
+I0629 20:23:29.977267 140474982430528 submission_runner.py:313] Saving meta data to /experiment_runs/test_today/adamw/librispeech_deepspeech_jax/trial_1/meta_data_0.json.
+I0629 20:23:29.978331 140474982430528 submission_runner.py:316] Saving flags to /experiment_runs/test_today/adamw/librispeech_deepspeech_jax/trial_1/flags_0.json.
+I0629 20:23:29.985589 140474982430528 submission_runner.py:328] Starting training loop.
+I0629 20:23:30.272704 140474982430528 input_pipeline.py:20] Loading split = train-clean-100
+I0629 20:23:30.306580 140474982430528 input_pipeline.py:20] Loading split = train-clean-360
+I0629 20:23:30.427755 140474982430528 input_pipeline.py:20] Loading split = train-other-500
+2023-06-29 20:24:21.851324: E external/xla/xla/service/rendezvous.cc:31] This thread has been waiting for 10 seconds and may be stuck:
+2023-06-29 20:24:23.537634: E external/xla/xla/service/rendezvous.cc:36] Thread is unstuck! Warning above was a false-positive. Perhaps the timeout is too short.
+/usr/local/lib/python3.8/dist-packages/jax/_src/interpreters/mlir.py:582: UserWarning: Some donated buffers were not usable: ShapedArray(float32[512]), ShapedArray(float32[512]), ShapedArray(float32[512]), ShapedArray(float32[512]), ShapedArray(float32[512]), ShapedArray(float32[512]), ShapedArray(float32[512]), ShapedArray(float32[512]), ShapedArray(float32[512]), ShapedArray(float32[512]), ShapedArray(float32[512]), ShapedArray(float32[512]), ShapedArray(float32[512]), ShapedArray(float32[512]), ShapedArray(float32[512]), ShapedArray(float32[512]), ShapedArray(float32[512]), ShapedArray(float32[512]).
+See an explanation at https://jax.readthedocs.io/en/latest/faq.html#buffer-donation.
+  warnings.warn(f"Some donated buffers were not usable: {', '.join(unused_donations)}.\n{msg}")
+I0629 20:24:28.491148 140306817218304 logging_writer.py:48] [0] global_step=0, grad_norm=27.053422927856445, loss=32.92265701293945
+I0629 20:24:28.513617 140474982430528 spec.py:298] Evaluating on the training split.
+I0629 20:24:28.775751 140474982430528 input_pipeline.py:20] Loading split = train-clean-100
+I0629 20:24:28.813590 140474982430528 input_pipeline.py:20] Loading split = train-clean-360
+I0629 20:24:29.274103 140474982430528 input_pipeline.py:20] Loading split = train-other-500
+/usr/local/lib/python3.8/dist-packages/jax/_src/ops/scatter.py:92: FutureWarning: scatter inputs have incompatible types: cannot safely cast value from dtype=float32 to dtype=int32. In future JAX releases this will result in an error.
+  warnings.warn("scatter inputs have incompatible types: cannot safely cast "
+I0629 20:25:52.524404 140474982430528 spec.py:310] Evaluating on the validation split.
+I0629 20:25:52.716595 140474982430528 input_pipeline.py:20] Loading split = dev-clean
+I0629 20:25:52.720861 140474982430528 input_pipeline.py:20] Loading split = dev-other
+I0629 20:26:43.063894 140474982430528 spec.py:326] Evaluating on the test split.
+I0629 20:26:43.264774 140474982430528 input_pipeline.py:20] Loading split = test-clean
+I0629 20:27:17.150563 140474982430528 submission_runner.py:424] Time since start: 227.16s, 	Step: 1, 	{'train/ctc_loss': Array(30.448332, dtype=float32), 'train/wer': 1.8461882847802096, 'validation/ctc_loss': Array(29.7252, dtype=float32), 'validation/wer': 1.8896950284132024, 'validation/num_examples': 5348, 'test/ctc_loss': Array(29.687428, dtype=float32), 'test/wer': 1.876485284260557, 'test/num_examples': 2472, 'score': 58.5278160572052, 'total_duration': 227.16267228126526, 'accumulated_submission_time': 58.5278160572052, 'accumulated_eval_time': 168.63467025756836, 'accumulated_logging_time': 0}
+I0629 20:27:17.164239 140305869301504 logging_writer.py:48] [1] accumulated_eval_time=168.634670, accumulated_logging_time=0, accumulated_submission_time=58.527816, global_step=1, preemption_count=0, score=58.527816, test/ctc_loss=29.687427520751953, test/num_examples=2472, test/wer=1.876485, total_duration=227.162672, train/ctc_loss=30.448331832885742, train/wer=1.846188, validation/ctc_loss=29.725200653076172, validation/num_examples=5348, validation/wer=1.889695
+I0629 20:27:31.305150 140474982430528 spec.py:298] Evaluating on the training split.
+I0629 20:28:41.401232 140474982430528 spec.py:310] Evaluating on the validation split.
+I0629 20:29:29.587894 140474982430528 spec.py:326] Evaluating on the test split.
+I0629 20:29:53.431076 140474982430528 submission_runner.py:424] Time since start: 383.44s, 	Step: 10, 	{'train/ctc_loss': Array(31.28023, dtype=float32), 'train/wer': 2.027131264031637, 'validation/ctc_loss': Array(29.775978, dtype=float32), 'validation/wer': 1.8866848691256066, 'validation/num_examples': 5348, 'test/ctc_loss': Array(29.747242, dtype=float32), 'test/wer': 1.869924644039567, 'test/num_examples': 2472, 'score': 72.65332078933716, 'total_duration': 383.44304394721985, 'accumulated_submission_time': 72.65332078933716, 'accumulated_eval_time': 310.7581889629364, 'accumulated_logging_time': 0.028436660766601562}
+I0629 20:29:53.445223 140316087240448 logging_writer.py:48] [10] accumulated_eval_time=310.758189, accumulated_logging_time=0.028437, accumulated_submission_time=72.653321, global_step=10, preemption_count=0, score=72.653321, test/ctc_loss=29.747241973876953, test/num_examples=2472, test/wer=1.869925, total_duration=383.443044, train/ctc_loss=31.280229568481445, train/wer=2.027131, validation/ctc_loss=29.775978088378906, validation/num_examples=5348, validation/wer=1.886685
+I0629 20:29:53.461385 140316078847744 logging_writer.py:48] [10] global_step=10, preemption_count=0, score=72.653321
+I0629 20:29:53.623945 140474982430528 checkpoints.py:490] Saving checkpoint at step: 10
+I0629 20:29:54.505800 140474982430528 checkpoints.py:422] Saved checkpoint at /experiment_runs/test_today/adamw/librispeech_deepspeech_jax/trial_1/checkpoint_10
+I0629 20:29:54.522808 140474982430528 checkpoint_utils.py:240] Saved checkpoint to /experiment_runs/test_today/adamw/librispeech_deepspeech_jax/trial_1/checkpoint_10.
+I0629 20:29:55.539503 140474982430528 submission_runner.py:587] Tuning trial 1/1
+I0629 20:29:55.539715 140474982430528 submission_runner.py:588] Hyperparameters: Hyperparameters(learning_rate=0.0019814680146414726, one_minus_beta1=0.22838767981804783, beta2=0.999, warmup_factor=0.05, weight_decay=0.010340635370188849, label_smoothing=0.1, dropout_rate=0.0)
+I0629 20:29:55.543022 140474982430528 submission_runner.py:589] Metrics: {'eval_results': [(1, {'train/ctc_loss': Array(30.448332, dtype=float32), 'train/wer': 1.8461882847802096, 'validation/ctc_loss': Array(29.7252, dtype=float32), 'validation/wer': 1.8896950284132024, 'validation/num_examples': 5348, 'test/ctc_loss': Array(29.687428, dtype=float32), 'test/wer': 1.876485284260557, 'test/num_examples': 2472, 'score': 58.5278160572052, 'total_duration': 227.16267228126526, 'accumulated_submission_time': 58.5278160572052, 'accumulated_eval_time': 168.63467025756836, 'accumulated_logging_time': 0, 'global_step': 1, 'preemption_count': 0}), (10, {'train/ctc_loss': Array(31.28023, dtype=float32), 'train/wer': 2.027131264031637, 'validation/ctc_loss': Array(29.775978, dtype=float32), 'validation/wer': 1.8866848691256066, 'validation/num_examples': 5348, 'test/ctc_loss': Array(29.747242, dtype=float32), 'test/wer': 1.869924644039567, 'test/num_examples': 2472, 'score': 72.65332078933716, 'total_duration': 383.44304394721985, 'accumulated_submission_time': 72.65332078933716, 'accumulated_eval_time': 310.7581889629364, 'accumulated_logging_time': 0.028436660766601562, 'global_step': 10, 'preemption_count': 0})], 'global_step': 10}
+I0629 20:29:55.543159 140474982430528 submission_runner.py:590] Timing: 72.65332078933716
+I0629 20:29:55.543218 140474982430528 submission_runner.py:591] ====================
+I0629 20:29:55.543606 140474982430528 submission_runner.py:659] Final librispeech_deepspeech score: 72.65332078933716
