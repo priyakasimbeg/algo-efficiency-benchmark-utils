@@ -109,8 +109,8 @@ def main(_):
                    f'-t baselines/{algorithm}/tuning_search_space{tuning_tag}.json '
                    f'-e {experiment_name} '
                    f'-m {max_steps} '
-                   '-c False '
-                   '-o True ' 
+                   '-c false '
+                   '-o true ' 
                    f'-r {rsync_data} '
                    '-i true')
         if not FLAGS.dry_run:

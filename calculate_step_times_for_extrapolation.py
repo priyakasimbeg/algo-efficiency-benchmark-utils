@@ -16,10 +16,10 @@ import re
 # OUTPUT_DIR = 'tables/timing_v3_jax_fixed_deepspeech'
 # OUTPUT_FILENAME = 'jax_timing_deepspeech_fixed_3b.csv'
 
-FRAMEWORK = 'pytorch'
-LOG_DIR = 'logs/timing_pytorch_2_preliminary_timing'
-OUTPUT_DIR = 'tables/pytorch_2_preliminary_timing'
-OUTPUT_FILENAME = f'timing_pytorch_2_preliminary.csv'
+FRAMEWORK = 'jax'
+LOG_DIR = 'logs/timing_jax_upgrade_preliminary'
+OUTPUT_DIR = 'tables/jax_410_preliminary'
+OUTPUT_FILENAME = f'timing_jax_410_preliminary.csv'
 
 
 logfilename_regex = ('(adamw|momentum|nadamw|nesterov|'
@@ -31,7 +31,7 @@ logfilename_regex = ('(adamw|momentum|nadamw|nesterov|'
                      'criteo1tb|'
                      'fastmri|'
                      'ogbg|'
-                     'wmt)_(pytorch|jax)_(.*).log')
+                     'wmt)_(pytorch|jax)(.*).log')
 
 MAX_STEPS = {
     'imagenet_resnet': 140000,
