@@ -112,7 +112,7 @@ def main(_):
                    '-c false '
                    '-o true ' 
                    f'-r {rsync_data} '
-                   '-i true')
+                   '-i true ')
         if not FLAGS.dry_run:
             print('Running docker container command')
             print('Container ID: ')

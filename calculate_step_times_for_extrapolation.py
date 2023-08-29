@@ -16,10 +16,10 @@ import re
 # OUTPUT_DIR = 'tables/timing_v3_jax_fixed_deepspeech'
 # OUTPUT_FILENAME = 'jax_timing_deepspeech_fixed_3b.csv'
 
-FRAMEWORK = 'jax'
-LOG_DIR = 'logs/timing_jax_upgrade_preliminary'
-OUTPUT_DIR = 'tables/jax_410_preliminary'
-OUTPUT_FILENAME = f'timing_jax_410_preliminary.csv'
+FRAMEWORK = 'pytorch'
+LOG_DIR = 'logs/timing_pytorch_nightly_2023_08_20'
+OUTPUT_DIR = 'tables/pytorch_2_nightly_2023_08_20'
+OUTPUT_FILENAME = f'timing_pytorch_2_nightly_2023_08_20.csv'
 
 
 logfilename_regex = ('(adamw|momentum|nadamw|nesterov|'
@@ -61,7 +61,7 @@ def get_algo_name_from_logfilename(logfile):
         algo = re.match(logfilename_regex, filename).group(1)
         return algo
     else:
-        print('no algo name')
+        print('no algorithm name')
 
 def get_equilibrium_speed(df):
     total_steps = df['global_step'].iloc[-1] - df['global_step'].iloc[0] 
