@@ -1,7 +1,6 @@
 """
 Example Usage:
 python run_all_workloads.py --framework jax \
---algorithm adamw \
 --experiment_basename jax_upgrade \
 --docker_image_url <url_for_docker_image> \
 --tag <some_docker_tag> \
