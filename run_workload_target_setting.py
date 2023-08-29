@@ -115,7 +115,7 @@ def main(_):
                     f'-s reference_algorithms/target_setting_algorithms/{framework}_{algorithm}.py '
                     f'-w {workload} '
                     f'-t reference_algorithms/target_setting_algorithms/{workload}/tuning_search_space.json '
-                    f'-e {experiment_name} '
+                    f'-e {experiment_name}_run_{n} '
                     f'-m {max_steps} '
                     '-c false '
                     '-o true ' 
