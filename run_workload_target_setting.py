@@ -21,7 +21,7 @@ flags.DEFINE_string('tag', None, 'Optional Docker image tag')
 flags.DEFINE_string('docker_image_url', 'us-central1-docker.pkg.dev/training-algorithms-external/mlcommons-docker-repo/algoperf_jax_dev', 'URL to docker image') 
 flags.DEFINE_string('experiment_basename', 'timing', 'Name of top sub directory in experiment dir.')
 flags.DEFINE_boolean('rsync_data', True, 'Whether or not to transfer the data from GCP w rsync.')
-flags.DEFINE_boolean('num_runs', 1, 'Number of times to repeat a run.')
+flags.DEFINE_integer('num_runs', 1, 'Number of times to repeat a run.')
 
 FLAGS = flags.FLAGS
 
@@ -92,7 +92,7 @@ def main(_):
 
     # For each runnable workload check if there are any containers running and if not launch next container command
     for workload in WORKLOADS.keys():
-        for n in num_runs:
+        for n in range(num_runs):
             wait_until_container_not_running()
             os.system("sudo sh -c 'echo 3 > /proc/sys/vm/drop_caches'") # clear caches
             print('='*100)
