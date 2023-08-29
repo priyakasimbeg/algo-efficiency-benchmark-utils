@@ -22,6 +22,7 @@ flags.DEFINE_string('docker_image_url', 'us-central1-docker.pkg.dev/training-alg
 flags.DEFINE_string('experiment_basename', 'timing', 'Name of top sub directory in experiment dir.')
 flags.DEFINE_boolean('rsync_data', True, 'Whether or not to transfer the data from GCP w rsync.')
 flags.DEFINE_integer('num_runs', 1, 'Number of times to repeat a run.')
+flags.DEFINE_string('workload', None, 'Workload to run, if None, run all workloads.')
 
 FLAGS = flags.FLAGS
 
@@ -90,8 +91,13 @@ def main(_):
     rsync_data = 'true' if FLAGS.rsync_data else 'false'
     docker_image_url = FLAGS.docker_image_url
 
+    if FLAGS.workload:
+        workloads = [FLAGS.workload]
+    else:
+        workloads = WORKLOADS.keys()
+
     # For each runnable workload check if there are any containers running and if not launch next container command
-    for workload in WORKLOADS.keys():
+    for workload in workloads:
         for n in range(num_runs):
             wait_until_container_not_running()
             os.system("sudo sh -c 'echo 3 > /proc/sys/vm/drop_caches'") # clear caches
