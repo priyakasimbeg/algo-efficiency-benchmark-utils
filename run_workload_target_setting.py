@@ -1,10 +1,11 @@
 """
 Example Usage:
-python run_all_workloads.py --framework jax \
+python run_workload_target_setting.py \
+--framework jax \
 --experiment_basename jax_upgrade \
 --docker_image_url <url_for_docker_image> \
 --tag <some_docker_tag> \
-
+--num_runs 20  
 """
 
 from absl import flags
