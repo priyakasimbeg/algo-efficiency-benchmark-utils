@@ -4,7 +4,6 @@ python run_all_workloads.py --framework jax \
 --experiment_basename jax_upgrade \
 --docker_image_url <url_for_docker_image> \
 --tag <some_docker_tag> \
---run_percentage 10 
 
 """
 
