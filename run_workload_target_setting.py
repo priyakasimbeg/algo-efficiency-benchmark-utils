@@ -62,10 +62,10 @@ WORKLOADS = {
              'wmt': {'max_steps': 100000,
                      'dataset': 'wmt',
                      'algorithm': 'nadamw'},
-             'librispeech_deepspeech': {'max_steps': 48000,
+             'librispeech_deepspeech': {'max_steps': 36000,
                                         'dataset': 'librispeech',
                                         'algorithm': 'nadamw'},
-             'librispeech_conformer': {'max_steps': 80000,
+             'librispeech_conformer': {'max_steps': 60000,
                                        'dataset': 'librispeech',
                                        'algorithm': 'nadamw'},
              }
