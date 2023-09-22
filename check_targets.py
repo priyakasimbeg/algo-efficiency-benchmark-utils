@@ -143,4 +143,4 @@ def get_algo_speeds(logdir=LOG_DIR, framework="jax"):
 # df.to_csv(os.path.join(OUTPUT_DIR, OUTPUT_FILENAME))
 
 # get_best_metrics('logs/targets_check/jax/criteo1tb_jax_09-14-2023-04-33-24.log')
-get_best_metrics_for_all_workloads('logs/targets_check/jax_run001')
+get_best_metrics_for_all_workloads('logs/targets_check/jax_run003')
