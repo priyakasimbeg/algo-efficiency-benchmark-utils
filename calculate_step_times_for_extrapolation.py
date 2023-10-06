@@ -16,10 +16,10 @@ import re
 # OUTPUT_DIR = 'tables/timing_v3_jax_fixed_deepspeech'
 # OUTPUT_FILENAME = 'jax_timing_deepspeech_fixed_3b.csv'
 
-FRAMEWORK = 'pytorch'
-LOG_DIR = 'logs/timing_pytorch_nightly_2023_08_20'
-OUTPUT_DIR = 'tables/pytorch_2_nightly_2023_08_20'
-OUTPUT_FILENAME = f'timing_pytorch_2_nightly_2023_08_20.csv'
+FRAMEWORK = 'jax'
+LOG_DIR = f'logs/timing_prelaunch_{FRAMEWORK}'
+OUTPUT_DIR = f'tables/timing_prelaunch_{FRAMEWORK}'
+OUTPUT_FILENAME = f'timing_prelaunch_{FRAMEWORK}.csv'
 
 
 logfilename_regex = ('(adamw|momentum|nadamw|nesterov|'
@@ -74,7 +74,7 @@ def get_algo_speeds(logdir=LOG_DIR, framework="jax"):
     # Set up dataframe
     logfiles = log_utils.get_logfile_paths(LOG_DIR)
     logfiles = [f for f in logfiles if framework in f]
-
+    print(logfiles)
     workloads = sorted(list(set([get_workload_name_from_logfilename(f) for f in logfiles])))
     algos = sorted(list(set([get_algo_name_from_logfilename(f) for f in logfiles])))
 
@@ -119,7 +119,5 @@ def get_algo_speeds(logdir=LOG_DIR, framework="jax"):
 
 
 df = get_algo_speeds(framework=FRAMEWORK)
-print(df)
-print(df.keys())
 df.to_csv(os.path.join(OUTPUT_DIR, OUTPUT_FILENAME))
 

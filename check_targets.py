@@ -6,20 +6,16 @@ import log_utils
 import os
 import pandas as pd
 import re
+from absl import flags
+from absl import app
+from tabulate import tabulate
 
-# FRAMEWORK = 'pytorch'
-# LOG_DIR = 'logs/step_time_logs_v4_a_pytorch_redo'
-# OUTPUT_DIR = 'tables/timing_pytorch_v4a'
-# OUTPUT_FILENAME = 'pytorch_timing_4a_redo.csv'
 
-# LOG_DIR = 'logs/step_time_deepspeech_fixed_3b'
-# OUTPUT_DIR = 'tables/timing_v3_jax_fixed_deepspeech'
-# OUTPUT_FILENAME = 'jax_timing_deepspeech_fixed_3b.csv'
-
-FRAMEWORK = 'pytorch'
-LOG_DIR = 'logs/targets_check/jax'
-OUTPUT_DIR = 'tables/targets_check/jax'
-OUTPUT_FILENAME = f'targets_check_jax.csv'
+flags.DEFINE_string('experiment_log_dir',
+                    None, 
+                    'Path to log dir'
+                    ) 
+FLAGS = flags.FLAGS
 
 
 logfilename_regex = ('(imagenet_resnet|'
@@ -32,8 +28,8 @@ logfilename_regex = ('(imagenet_resnet|'
                      'wmt)_(pytorch|jax)(.*).log')
 
 
-if not os.path.exists(OUTPUT_DIR):
-    os.makedirs(OUTPUT_DIR)
+# if not os.path.exists(OUTPUT_DIR):
+#     os.makedirs(OUTPUT_DIR)
 
 def get_workload_name_from_logfilename(logfile):
     filename = os.path.basename(logfile)
@@ -68,27 +64,39 @@ def get_best_metrics(logfile):
     
     validation_metrics = run_df[f'validation/{metric_name}']
     test_metrics = run_df[f'test/{metric_name}']
+    train_metrics = run_df[f'train/{metric_name}']
 
     if metric_name in ['ssim', 'mean_average_precision', 'accuracy', 'bleu']:
         best_validation_metric = max(validation_metrics)
         best_test_metric = max(test_metrics)
+        best_train_metric = max(train_metrics)
     else:
         best_validation_metric = min(validation_metrics)
         best_test_metric = min(test_metrics)
-    print(f'Logfile: {logfile}')
-    print(f'Best validation/{metric_name}: {best_validation_metric}')
-    print(f'Best test/{metric_name}: {best_test_metric}')
+        best_train_metric = min(train_metrics)
+    best_metrics = {
+                    f'metric_name': f'{metric_name}',
+                    f'train/metric': f'{best_train_metric}',
+                    f'validation/metric': f'{best_validation_metric}',
+                    f'test/metric': f'{best_test_metric}',
+                    }
+
+    return best_metrics
+
 
 def get_best_metrics_for_all_workloads(experiment_dir):
     logfiles = log_utils.get_logfile_paths(experiment_dir)
-
+    best_metric_dict = {}
     for logfile in logfiles:
         try:
-            get_best_metrics(logfile)
+            best_metrics = get_best_metrics(logfile)
+            best_metric_dict[logfile] = best_metrics
         except Exception as e:
             continue
 
-def get_algo_speeds(logdir=LOG_DIR, framework="jax"):
+    return pd.DataFrame(best_metric_dict).T
+
+def get_algo_speeds(logdir, framework="jax"):
 
     # Set up dataframe
     logfiles = log_utils.get_logfile_paths(LOG_DIR)
@@ -143,4 +151,16 @@ def get_algo_speeds(logdir=LOG_DIR, framework="jax"):
 # df.to_csv(os.path.join(OUTPUT_DIR, OUTPUT_FILENAME))
 
 # get_best_metrics('logs/targets_check/jax/criteo1tb_jax_09-14-2023-04-33-24.log')
-get_best_metrics_for_all_workloads('logs/targets_check/jax_run003')
+
+def main(_):
+    if not FLAGS.experiment_log_dir:
+        log_dir = f'logs/targets_check/jax'
+    else:
+        log_dir = FLAGS.experiment_log_dir
+    df = get_best_metrics_for_all_workloads(log_dir)
+    print(tabulate(df, headers='keys', tablefmt='psql'))
+
+    # print(df)
+
+if __name__ == '__main__':
+    app.run(main)

@@ -1,8 +1,8 @@
 import os
 import log_utils
 
-root_dir = "/home/kasimbeg/mlcommons-runs/timing_pytorch_nightly_2023_08_20"
-destination_dir = "/home/kasimbeg/algo-efficiency-timing/logs/timing_pytorch_nightly_2023_08_20"
+root_dir = "/home/kasimbeg/mlcommons-runs/timing_prelaunch_jax"
+destination_dir = "/home/kasimbeg/algo-efficiency-timing/logs/timing_prelaunch_jax"
 # root_dir = "/home/kasimbeg/mlcommons-runs/timing_fancy_jax_upgrade_b"
 # destination_dir = "/home/kasimbeg/algo-efficiency-timing/logs/step_time_fancy_deepspeech_fixed_b"
 
