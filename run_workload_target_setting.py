@@ -23,7 +23,7 @@ flags.DEFINE_string('experiment_basename', 'timing', 'Name of top sub directory 
 flags.DEFINE_boolean('rsync_data', True, 'Whether or not to transfer the data from GCP w rsync.')
 flags.DEFINE_integer('num_runs', 1, 'Number of times to repeat a run.')
 flags.DEFINE_string('workload', None, 'Workload to run, if None, run all workloads.')
-
+flags.DEFINE_boolean('local', True, 'Whether or not to mount the local algorithmic-efficiency repo to the container.')
 FLAGS = flags.FLAGS
 
 
@@ -34,14 +34,15 @@ DATASETS = ['imagenet',
             'librispeech',
             'criteo1tb']
 
-WORKLOADS = ['imagenet_resnet'
+WORKLOAD_NAMES = ['imagenet_resnet',
              'imagenet_vit',
-             'fastmri'
+             'fastmri',
              'ogbg',
              'wmt',
              'librispeech_deepspeech',
              'librispeech_conformer',
-             'criteo1tb']
+             'criteo1tb'
+             ]
 
 WORKLOADS = {
              'fastmri': {'max_steps': 27142,
@@ -67,7 +68,7 @@ WORKLOADS = {
                                         'algorithm': 'nadamw'},
              'librispeech_conformer': {'max_steps': 60000,
                                        'dataset': 'librispeech',
-                                       'algorithm': 'nadamw'},
+                                       'algorithm': 'adamw'},
              }
 
 def container_running():
@@ -90,11 +91,13 @@ def main(_):
     experiment_basename=FLAGS.experiment_basename
     rsync_data = 'true' if FLAGS.rsync_data else 'false'
     docker_image_url = FLAGS.docker_image_url
-
+    mount_repo_flag = ''
+    if FLAGS.local:
+        mount_repo_flag = '-v /home/kasimbeg/algorithmic-efficiency:/algorithmic-efficiency '
     if FLAGS.workload:
         workloads = [FLAGS.workload]
     else:
-        workloads = WORKLOADS.keys()
+        workloads = WORKLOAD_NAMES
 
     # For each runnable workload check if there are any containers running and if not launch next container command
     for workload in workloads:
@@ -114,6 +117,7 @@ def main(_):
             command = ('docker run -t -d -v /home/kasimbeg/data/:/data/ '
                     '-v /home/kasimbeg/experiment_runs/:/experiment_runs '
                     '-v /home/kasimbeg/experiment_runs/logs:/logs '
+                    f'{mount_repo_flag}'
                     '--gpus all --ipc=host '
                     f'{docker_image_url}{tag} '
                     f'-d {dataset} '
