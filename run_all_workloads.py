@@ -5,7 +5,7 @@ python run_all_workloads.py --framework jax \
 --experiment_basename jax_upgrade \
 --docker_image_url <url_for_docker_image> \
 --tag <some_docker_tag> \
---run_percentage 10 
+--run_percentage 10
 
 """
 
@@ -55,11 +55,11 @@ WORKLOADS = {
                       'dataset': 'ogbg'},
              'wmt': {'max_steps': 100000,
                      'dataset': 'wmt'},
-             'librispeech_deepspeech': {'max_steps': 80000,
+             'librispeech_deepspeech': {'max_steps': 48000,
                                         'dataset': 'librispeech'},
              'criteo1tb': {'max_steps': 8000,
                            'dataset': 'criteo1tb'},
-             'librispeech_conformer': {'max_steps': 100000,
+             'librispeech_conformer': {'max_steps': 80000,
                                        'dataset': 'librispeech'},
              }
 
