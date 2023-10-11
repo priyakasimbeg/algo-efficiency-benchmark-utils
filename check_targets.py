@@ -98,7 +98,7 @@ def get_best_metrics_for_all_workloads(experiment_dir):
 
 def main(_):
     if not FLAGS.experiment_log_dir:
-        log_dir = f'logs/targets_check/jax'
+        log_dir = f'logs/targets_check/pytorch'
     else:
         log_dir = FLAGS.experiment_log_dir
     df = get_best_metrics_for_all_workloads(log_dir)
