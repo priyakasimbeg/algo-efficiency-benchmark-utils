@@ -92,6 +92,7 @@ def get_best_metrics_for_all_workloads(experiment_dir):
             best_metrics = get_best_metrics(logfile)
             best_metric_dict[logfile] = best_metrics
         except Exception as e:
+            print(f"Could not find metrics line for {logfile}")
             continue
 
     return pd.DataFrame(best_metric_dict).T

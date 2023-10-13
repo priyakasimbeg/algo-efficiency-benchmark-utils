@@ -1,0 +1,436 @@
+torchrun --redirects 1:0,2:0,3:0,4:0,5:0,6:0,7:0 --standalone --nnodes=1 --nproc_per_node=8 submission_runner.py --framework=pytorch --workload=librispeech_conformer --submission_path=baselines/nadamw/pytorch/submission.py --tuning_search_space=baselines/nadamw/tuning_search_space.json --data_dir=/data/librispeech --num_tuning_trials=1 --experiment_dir=/experiment_runs --experiment_name=timing_v4_b_pytorch/nadamw --overwrite=True --save_checkpoints=False --max_global_steps=20000 --librispeech_tokenizer_vocab_path=/data/librispeech/spm_model.vocab 2>&1 | tee -a /logs/librispeech_conformer_pytorch_06-09-2023-17-03-55.log
+WARNING:torch.distributed.run:
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+I0609 17:04:18.322404 140175324227392 distributed_c10d.py:319] Added key: store_based_barrier_key:1 to store for rank: 3
+I0609 17:04:18.322431 139997092947776 distributed_c10d.py:319] Added key: store_based_barrier_key:1 to store for rank: 5
+I0609 17:04:18.322457 140709926176576 distributed_c10d.py:319] Added key: store_based_barrier_key:1 to store for rank: 4
+I0609 17:04:18.322476 140414910416704 distributed_c10d.py:319] Added key: store_based_barrier_key:1 to store for rank: 1
+I0609 17:04:18.323272 139952088622912 distributed_c10d.py:319] Added key: store_based_barrier_key:1 to store for rank: 2
+I0609 17:04:18.323298 140138325063488 distributed_c10d.py:319] Added key: store_based_barrier_key:1 to store for rank: 6
+I0609 17:04:18.323419 140176238815040 distributed_c10d.py:319] Added key: store_based_barrier_key:1 to store for rank: 0
+I0609 17:04:18.323613 140138325063488 distributed_c10d.py:353] Rank 6: Completed store-based barrier for key:store_based_barrier_key:1 with 8 nodes.
+I0609 17:04:18.323650 139952088622912 distributed_c10d.py:353] Rank 2: Completed store-based barrier for key:store_based_barrier_key:1 with 8 nodes.
+I0609 17:04:18.323743 140176238815040 distributed_c10d.py:353] Rank 0: Completed store-based barrier for key:store_based_barrier_key:1 with 8 nodes.
+I0609 17:04:18.323573 140320631031616 distributed_c10d.py:319] Added key: store_based_barrier_key:1 to store for rank: 7
+I0609 17:04:18.323939 140320631031616 distributed_c10d.py:353] Rank 7: Completed store-based barrier for key:store_based_barrier_key:1 with 8 nodes.
+I0609 17:04:18.333057 140175324227392 distributed_c10d.py:353] Rank 3: Completed store-based barrier for key:store_based_barrier_key:1 with 8 nodes.
+I0609 17:04:18.333080 139997092947776 distributed_c10d.py:353] Rank 5: Completed store-based barrier for key:store_based_barrier_key:1 with 8 nodes.
+I0609 17:04:18.333177 140709926176576 distributed_c10d.py:353] Rank 4: Completed store-based barrier for key:store_based_barrier_key:1 with 8 nodes.
+I0609 17:04:18.333197 140414910416704 distributed_c10d.py:353] Rank 1: Completed store-based barrier for key:store_based_barrier_key:1 with 8 nodes.
+I0609 17:04:18.687167 140176238815040 logger_utils.py:76] Creating experiment directory at /experiment_runs/timing_v4_b_pytorch/nadamw/librispeech_conformer_pytorch.
+W0609 17:04:18.935228 139952088622912 xla_bridge.py:352] No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+W0609 17:04:18.935820 140414910416704 xla_bridge.py:352] No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+W0609 17:04:18.936045 140320631031616 xla_bridge.py:352] No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+W0609 17:04:18.937196 140709926176576 xla_bridge.py:352] No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+W0609 17:04:18.942327 140176238815040 xla_bridge.py:352] No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+I0609 17:04:18.947444 140176238815040 submission_runner.py:541] Using RNG seed 2242616617
+I0609 17:04:18.948817 140176238815040 submission_runner.py:550] --- Tuning run 1/1 ---
+I0609 17:04:18.948929 140176238815040 submission_runner.py:555] Creating tuning directory at /experiment_runs/timing_v4_b_pytorch/nadamw/librispeech_conformer_pytorch/trial_1.
+I0609 17:04:18.949220 140176238815040 logger_utils.py:92] Saving hparams to /experiment_runs/timing_v4_b_pytorch/nadamw/librispeech_conformer_pytorch/trial_1/hparams.json.
+W0609 17:04:18.949383 140138325063488 xla_bridge.py:352] No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+I0609 17:04:18.950275 140176238815040 submission_runner.py:255] Initializing dataset.
+I0609 17:04:18.950410 140176238815040 input_pipeline.py:20] Loading split = train-clean-100
+W0609 17:04:18.983058 139997092947776 xla_bridge.py:352] No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+W0609 17:04:18.984234 140175324227392 xla_bridge.py:352] No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+I0609 17:04:18.988072 140176238815040 input_pipeline.py:20] Loading split = train-clean-360
+I0609 17:04:19.334667 140176238815040 input_pipeline.py:20] Loading split = train-other-500
+I0609 17:04:19.793854 140176238815040 submission_runner.py:262] Initializing model.
+/usr/local/lib/python3.8/dist-packages/torch/nn/modules/lazy.py:180: UserWarning: Lazy modules are a new feature under heavy development so changes to the API or functionality can happen at any moment.
+  warnings.warn('Lazy modules are a new feature under heavy development '
+/usr/local/lib/python3.8/dist-packages/torch/nn/modules/lazy.py:180: UserWarning: Lazy modules are a new feature under heavy development so changes to the API or functionality can happen at any moment.
+  warnings.warn('Lazy modules are a new feature under heavy development '
+/usr/local/lib/python3.8/dist-packages/torch/nn/modules/lazy.py:180: UserWarning: Lazy modules are a new feature under heavy development so changes to the API or functionality can happen at any moment.
+  warnings.warn('Lazy modules are a new feature under heavy development '
+/usr/local/lib/python3.8/dist-packages/torch/nn/modules/lazy.py:180: UserWarning: Lazy modules are a new feature under heavy development so changes to the API or functionality can happen at any moment.
+  warnings.warn('Lazy modules are a new feature under heavy development '
+/usr/local/lib/python3.8/dist-packages/torch/nn/modules/lazy.py:180: UserWarning: Lazy modules are a new feature under heavy development so changes to the API or functionality can happen at any moment.
+  warnings.warn('Lazy modules are a new feature under heavy development '
+/usr/local/lib/python3.8/dist-packages/torch/nn/modules/lazy.py:180: UserWarning: Lazy modules are a new feature under heavy development so changes to the API or functionality can happen at any moment.
+  warnings.warn('Lazy modules are a new feature under heavy development '
+/usr/local/lib/python3.8/dist-packages/torch/nn/modules/lazy.py:180: UserWarning: Lazy modules are a new feature under heavy development so changes to the API or functionality can happen at any moment.
+  warnings.warn('Lazy modules are a new feature under heavy development '
+/usr/local/lib/python3.8/dist-packages/torch/nn/modules/lazy.py:180: UserWarning: Lazy modules are a new feature under heavy development so changes to the API or functionality can happen at any moment.
+  warnings.warn('Lazy modules are a new feature under heavy development '
+I0609 17:04:26.701391 140176238815040 submission_runner.py:272] Initializing optimizer.
+I0609 17:04:26.702812 140176238815040 submission_runner.py:279] Initializing metrics bundle.
+I0609 17:04:26.702954 140176238815040 submission_runner.py:297] Initializing checkpoint and logger.
+I0609 17:04:26.704175 140176238815040 logger_utils.py:239] Unable to record workload.train_mean information. Continuing without it.
+I0609 17:04:26.704286 140176238815040 logger_utils.py:239] Unable to record workload.train_stddev information. Continuing without it.
+I0609 17:04:27.329823 140176238815040 submission_runner.py:318] Saving meta data to /experiment_runs/timing_v4_b_pytorch/nadamw/librispeech_conformer_pytorch/trial_1/meta_data_0.json.
+I0609 17:04:27.330832 140176238815040 submission_runner.py:321] Saving flags to /experiment_runs/timing_v4_b_pytorch/nadamw/librispeech_conformer_pytorch/trial_1/flags_0.json.
+I0609 17:04:27.337845 140176238815040 submission_runner.py:332] Starting training loop.
+/algorithmic-efficiency/algorithmic_efficiency/workloads/librispeech_conformer/librispeech_pytorch/preprocessor.py:488: UserWarning: Specified kernel cache directory could not be created! This disables kernel caching. Specified directory is /root/.cache/torch/kernels. This warning will appear only once per process. (Triggered internally at ../aten/src/ATen/native/cuda/jit_utils.cpp:1443.)
+  spectrum = torch.abs(spectrum)
+/algorithmic-efficiency/algorithmic_efficiency/workloads/librispeech_conformer/librispeech_pytorch/preprocessor.py:488: UserWarning: Specified kernel cache directory could not be created! This disables kernel caching. Specified directory is /root/.cache/torch/kernels. This warning will appear only once per process. (Triggered internally at ../aten/src/ATen/native/cuda/jit_utils.cpp:1443.)
+  spectrum = torch.abs(spectrum)
+/algorithmic-efficiency/algorithmic_efficiency/workloads/librispeech_conformer/librispeech_pytorch/preprocessor.py:488: UserWarning: Specified kernel cache directory could not be created! This disables kernel caching. Specified directory is /root/.cache/torch/kernels. This warning will appear only once per process. (Triggered internally at ../aten/src/ATen/native/cuda/jit_utils.cpp:1443.)
+  spectrum = torch.abs(spectrum)
+/algorithmic-efficiency/algorithmic_efficiency/workloads/librispeech_conformer/librispeech_pytorch/preprocessor.py:488: UserWarning: Specified kernel cache directory could not be created! This disables kernel caching. Specified directory is /root/.cache/torch/kernels. This warning will appear only once per process. (Triggered internally at ../aten/src/ATen/native/cuda/jit_utils.cpp:1443.)
+  spectrum = torch.abs(spectrum)
+/algorithmic-efficiency/algorithmic_efficiency/workloads/librispeech_conformer/librispeech_pytorch/preprocessor.py:488: UserWarning: Specified kernel cache directory could not be created! This disables kernel caching. Specified directory is /root/.cache/torch/kernels. This warning will appear only once per process. (Triggered internally at ../aten/src/ATen/native/cuda/jit_utils.cpp:1443.)
+  spectrum = torch.abs(spectrum)
+/algorithmic-efficiency/algorithmic_efficiency/workloads/librispeech_conformer/librispeech_pytorch/preprocessor.py:488: UserWarning: Specified kernel cache directory could not be created! This disables kernel caching. Specified directory is /root/.cache/torch/kernels. This warning will appear only once per process. (Triggered internally at ../aten/src/ATen/native/cuda/jit_utils.cpp:1443.)
+  spectrum = torch.abs(spectrum)
+/algorithmic-efficiency/algorithmic_efficiency/workloads/librispeech_conformer/librispeech_pytorch/preprocessor.py:488: UserWarning: Specified kernel cache directory could not be created! This disables kernel caching. Specified directory is /root/.cache/torch/kernels. This warning will appear only once per process. (Triggered internally at ../aten/src/ATen/native/cuda/jit_utils.cpp:1443.)
+  spectrum = torch.abs(spectrum)
+I0609 17:04:35.485973 140149723744000 logging_writer.py:48] [0] global_step=0, grad_norm=58.538937, loss=32.196320
+I0609 17:04:35.505922 140176238815040 submission.py:296] 0) loss = 32.196, grad_norm = 58.539
+I0609 17:04:35.508003 140176238815040 spec.py:298] Evaluating on the training split.
+I0609 17:04:35.509299 140176238815040 input_pipeline.py:20] Loading split = train-clean-100
+I0609 17:04:35.546063 140176238815040 input_pipeline.py:20] Loading split = train-clean-360
+I0609 17:04:35.985378 140176238815040 input_pipeline.py:20] Loading split = train-other-500
+I0609 17:04:51.387514 140176238815040 spec.py:310] Evaluating on the validation split.
+I0609 17:04:51.389021 140176238815040 input_pipeline.py:20] Loading split = dev-clean
+I0609 17:04:51.393183 140176238815040 input_pipeline.py:20] Loading split = dev-other
+I0609 17:05:02.181067 140176238815040 spec.py:326] Evaluating on the test split.
+I0609 17:05:02.182685 140176238815040 input_pipeline.py:20] Loading split = test-clean
+I0609 17:05:07.797675 140176238815040 submission_runner.py:419] Time since start: 40.46s, 	Step: 1, 	{'train/ctc_loss': 31.283705716861054, 'train/wer': 1.6452841305865922, 'validation/ctc_loss': 29.34477973678923, 'validation/wer': 1.4346642205378264, 'validation/num_examples': 5348, 'test/ctc_loss': 29.527075940383252, 'test/wer': 1.485040521601365, 'test/num_examples': 2472, 'score': 8.169419050216675, 'total_duration': 40.45938324928284, 'accumulated_submission_time': 8.169419050216675, 'accumulated_eval_time': 32.28881239891052, 'accumulated_logging_time': 0}
+I0609 17:05:07.824902 140141575026432 logging_writer.py:48] [1] accumulated_eval_time=32.288812, accumulated_logging_time=0, accumulated_submission_time=8.169419, global_step=1, preemption_count=0, score=8.169419, test/ctc_loss=29.527076, test/num_examples=2472, test/wer=1.485041, total_duration=40.459383, train/ctc_loss=31.283706, train/wer=1.645284, validation/ctc_loss=29.344780, validation/num_examples=5348, validation/wer=1.434664
+I0609 17:05:07.871366 140176238815040 distributed.py:1027] Reducer buckets have been rebuilt in this iteration.
+I0609 17:05:07.871427 140414910416704 distributed.py:1027] Reducer buckets have been rebuilt in this iteration.
+I0609 17:05:07.871527 140175324227392 distributed.py:1027] Reducer buckets have been rebuilt in this iteration.
+I0609 17:05:07.871744 140320631031616 distributed.py:1027] Reducer buckets have been rebuilt in this iteration.
+I0609 17:05:07.871745 140138325063488 distributed.py:1027] Reducer buckets have been rebuilt in this iteration.
+I0609 17:05:07.871726 139997092947776 distributed.py:1027] Reducer buckets have been rebuilt in this iteration.
+I0609 17:05:07.871821 140709926176576 distributed.py:1027] Reducer buckets have been rebuilt in this iteration.
+I0609 17:05:07.871918 139952088622912 distributed.py:1027] Reducer buckets have been rebuilt in this iteration.
+I0609 17:05:08.943612 140135207376640 logging_writer.py:48] [1] global_step=1, grad_norm=57.233860, loss=31.729948
+I0609 17:05:08.947908 140176238815040 submission.py:296] 1) loss = 31.730, grad_norm = 57.234
+I0609 17:05:09.848525 140141575026432 logging_writer.py:48] [2] global_step=2, grad_norm=60.507660, loss=32.159500
+I0609 17:05:09.852131 140176238815040 submission.py:296] 2) loss = 32.160, grad_norm = 60.508
+I0609 17:05:10.851279 140135207376640 logging_writer.py:48] [3] global_step=3, grad_norm=66.035934, loss=32.119148
+I0609 17:05:10.854688 140176238815040 submission.py:296] 3) loss = 32.119, grad_norm = 66.036
+I0609 17:05:11.657086 140141575026432 logging_writer.py:48] [4] global_step=4, grad_norm=72.143616, loss=31.503824
+I0609 17:05:11.660768 140176238815040 submission.py:296] 4) loss = 31.504, grad_norm = 72.144
+I0609 17:05:12.463033 140135207376640 logging_writer.py:48] [5] global_step=5, grad_norm=81.409096, loss=31.633057
+I0609 17:05:12.467133 140176238815040 submission.py:296] 5) loss = 31.633, grad_norm = 81.409
+I0609 17:05:13.270840 140141575026432 logging_writer.py:48] [6] global_step=6, grad_norm=90.926323, loss=31.452663
+I0609 17:05:13.274234 140176238815040 submission.py:296] 6) loss = 31.453, grad_norm = 90.926
+I0609 17:05:14.080192 140135207376640 logging_writer.py:48] [7] global_step=7, grad_norm=106.166992, loss=30.153667
+I0609 17:05:14.083692 140176238815040 submission.py:296] 7) loss = 30.154, grad_norm = 106.167
+I0609 17:05:14.891662 140141575026432 logging_writer.py:48] [8] global_step=8, grad_norm=122.657570, loss=30.142624
+I0609 17:05:14.895334 140176238815040 submission.py:296] 8) loss = 30.143, grad_norm = 122.658
+I0609 17:05:15.697031 140135207376640 logging_writer.py:48] [9] global_step=9, grad_norm=137.352844, loss=29.024509
+I0609 17:05:15.700392 140176238815040 submission.py:296] 9) loss = 29.025, grad_norm = 137.353
+I0609 17:05:16.498286 140141575026432 logging_writer.py:48] [10] global_step=10, grad_norm=151.140900, loss=28.183346
+I0609 17:05:16.501842 140176238815040 submission.py:296] 10) loss = 28.183, grad_norm = 151.141
+I0609 17:05:17.306970 140135207376640 logging_writer.py:48] [11] global_step=11, grad_norm=161.037003, loss=27.359251
+I0609 17:05:17.310362 140176238815040 submission.py:296] 11) loss = 27.359, grad_norm = 161.037
+I0609 17:05:18.113930 140141575026432 logging_writer.py:48] [12] global_step=12, grad_norm=165.685379, loss=26.461931
+I0609 17:05:18.117411 140176238815040 submission.py:296] 12) loss = 26.462, grad_norm = 165.685
+I0609 17:05:18.920446 140135207376640 logging_writer.py:48] [13] global_step=13, grad_norm=165.608154, loss=24.889067
+I0609 17:05:18.924506 140176238815040 submission.py:296] 13) loss = 24.889, grad_norm = 165.608
+I0609 17:05:19.726888 140141575026432 logging_writer.py:48] [14] global_step=14, grad_norm=164.329544, loss=23.530109
+I0609 17:05:19.730435 140176238815040 submission.py:296] 14) loss = 23.530, grad_norm = 164.330
+I0609 17:05:20.531913 140135207376640 logging_writer.py:48] [15] global_step=15, grad_norm=158.131226, loss=21.567820
+I0609 17:05:20.536013 140176238815040 submission.py:296] 15) loss = 21.568, grad_norm = 158.131
+I0609 17:05:21.342322 140141575026432 logging_writer.py:48] [16] global_step=16, grad_norm=159.149017, loss=20.486073
+I0609 17:05:21.346023 140176238815040 submission.py:296] 16) loss = 20.486, grad_norm = 159.149
+I0609 17:05:22.148693 140135207376640 logging_writer.py:48] [17] global_step=17, grad_norm=153.758148, loss=18.787716
+I0609 17:05:22.152182 140176238815040 submission.py:296] 17) loss = 18.788, grad_norm = 153.758
+I0609 17:05:22.958143 140141575026432 logging_writer.py:48] [18] global_step=18, grad_norm=147.827911, loss=17.230562
+I0609 17:05:22.962172 140176238815040 submission.py:296] 18) loss = 17.231, grad_norm = 147.828
+I0609 17:05:23.764808 140135207376640 logging_writer.py:48] [19] global_step=19, grad_norm=137.748856, loss=15.483438
+I0609 17:05:23.768601 140176238815040 submission.py:296] 19) loss = 15.483, grad_norm = 137.749
+I0609 17:05:24.572110 140141575026432 logging_writer.py:48] [20] global_step=20, grad_norm=126.722717, loss=13.890278
+I0609 17:05:24.576251 140176238815040 submission.py:296] 20) loss = 13.890, grad_norm = 126.723
+I0609 17:05:25.380574 140135207376640 logging_writer.py:48] [21] global_step=21, grad_norm=115.323837, loss=12.538599
+I0609 17:05:25.384136 140176238815040 submission.py:296] 21) loss = 12.539, grad_norm = 115.324
+I0609 17:05:26.190336 140141575026432 logging_writer.py:48] [22] global_step=22, grad_norm=103.267731, loss=11.323561
+I0609 17:05:26.193866 140176238815040 submission.py:296] 22) loss = 11.324, grad_norm = 103.268
+I0609 17:05:27.000312 140135207376640 logging_writer.py:48] [23] global_step=23, grad_norm=84.442657, loss=10.051962
+I0609 17:05:27.003686 140176238815040 submission.py:296] 23) loss = 10.052, grad_norm = 84.443
+I0609 17:05:27.812332 140141575026432 logging_writer.py:48] [24] global_step=24, grad_norm=69.328087, loss=9.181037
+I0609 17:05:27.815808 140176238815040 submission.py:296] 24) loss = 9.181, grad_norm = 69.328
+I0609 17:05:28.618340 140135207376640 logging_writer.py:48] [25] global_step=25, grad_norm=52.789494, loss=8.431473
+I0609 17:05:28.621712 140176238815040 submission.py:296] 25) loss = 8.431, grad_norm = 52.789
+I0609 17:05:29.424143 140141575026432 logging_writer.py:48] [26] global_step=26, grad_norm=37.554848, loss=7.923570
+I0609 17:05:29.428396 140176238815040 submission.py:296] 26) loss = 7.924, grad_norm = 37.555
+I0609 17:05:30.233648 140135207376640 logging_writer.py:48] [27] global_step=27, grad_norm=24.258806, loss=7.548953
+I0609 17:05:30.237231 140176238815040 submission.py:296] 27) loss = 7.549, grad_norm = 24.259
+I0609 17:05:31.044451 140141575026432 logging_writer.py:48] [28] global_step=28, grad_norm=12.658560, loss=7.334709
+I0609 17:05:31.048088 140176238815040 submission.py:296] 28) loss = 7.335, grad_norm = 12.659
+I0609 17:05:31.853304 140135207376640 logging_writer.py:48] [29] global_step=29, grad_norm=4.404925, loss=7.245787
+I0609 17:05:31.857041 140176238815040 submission.py:296] 29) loss = 7.246, grad_norm = 4.405
+I0609 17:05:32.662661 140141575026432 logging_writer.py:48] [30] global_step=30, grad_norm=4.447204, loss=7.240139
+I0609 17:05:32.666125 140176238815040 submission.py:296] 30) loss = 7.240, grad_norm = 4.447
+I0609 17:05:33.469971 140135207376640 logging_writer.py:48] [31] global_step=31, grad_norm=8.840007, loss=7.285337
+I0609 17:05:33.474148 140176238815040 submission.py:296] 31) loss = 7.285, grad_norm = 8.840
+I0609 17:05:34.279243 140141575026432 logging_writer.py:48] [32] global_step=32, grad_norm=12.558506, loss=7.385455
+I0609 17:05:34.283291 140176238815040 submission.py:296] 32) loss = 7.385, grad_norm = 12.559
+I0609 17:05:35.095068 140135207376640 logging_writer.py:48] [33] global_step=33, grad_norm=15.041131, loss=7.473714
+I0609 17:05:35.098711 140176238815040 submission.py:296] 33) loss = 7.474, grad_norm = 15.041
+I0609 17:05:35.908664 140141575026432 logging_writer.py:48] [34] global_step=34, grad_norm=17.015522, loss=7.590704
+I0609 17:05:35.912981 140176238815040 submission.py:296] 34) loss = 7.591, grad_norm = 17.016
+I0609 17:05:36.720050 140135207376640 logging_writer.py:48] [35] global_step=35, grad_norm=18.505205, loss=7.709467
+I0609 17:05:36.724217 140176238815040 submission.py:296] 35) loss = 7.709, grad_norm = 18.505
+I0609 17:05:37.526882 140141575026432 logging_writer.py:48] [36] global_step=36, grad_norm=19.620569, loss=7.819982
+I0609 17:05:37.530552 140176238815040 submission.py:296] 36) loss = 7.820, grad_norm = 19.621
+I0609 17:05:38.334837 140135207376640 logging_writer.py:48] [37] global_step=37, grad_norm=20.521795, loss=7.927768
+I0609 17:05:38.338423 140176238815040 submission.py:296] 37) loss = 7.928, grad_norm = 20.522
+I0609 17:05:39.144130 140141575026432 logging_writer.py:48] [38] global_step=38, grad_norm=20.983959, loss=7.990818
+I0609 17:05:39.147640 140176238815040 submission.py:296] 38) loss = 7.991, grad_norm = 20.984
+I0609 17:05:39.959310 140135207376640 logging_writer.py:48] [39] global_step=39, grad_norm=21.657520, loss=8.075160
+I0609 17:05:39.963165 140176238815040 submission.py:296] 39) loss = 8.075, grad_norm = 21.658
+I0609 17:05:40.771087 140141575026432 logging_writer.py:48] [40] global_step=40, grad_norm=21.905870, loss=8.130833
+I0609 17:05:40.775136 140176238815040 submission.py:296] 40) loss = 8.131, grad_norm = 21.906
+I0609 17:05:41.580987 140135207376640 logging_writer.py:48] [41] global_step=41, grad_norm=22.340219, loss=8.198793
+I0609 17:05:41.584639 140176238815040 submission.py:296] 41) loss = 8.199, grad_norm = 22.340
+I0609 17:05:42.391225 140141575026432 logging_writer.py:48] [42] global_step=42, grad_norm=22.531551, loss=8.224790
+I0609 17:05:42.394582 140176238815040 submission.py:296] 42) loss = 8.225, grad_norm = 22.532
+I0609 17:05:43.198031 140135207376640 logging_writer.py:48] [43] global_step=43, grad_norm=22.725063, loss=8.245529
+I0609 17:05:43.201530 140176238815040 submission.py:296] 43) loss = 8.246, grad_norm = 22.725
+I0609 17:05:44.008809 140141575026432 logging_writer.py:48] [44] global_step=44, grad_norm=22.881609, loss=8.258637
+I0609 17:05:44.012242 140176238815040 submission.py:296] 44) loss = 8.259, grad_norm = 22.882
+I0609 17:05:44.817868 140135207376640 logging_writer.py:48] [45] global_step=45, grad_norm=22.952396, loss=8.256863
+I0609 17:05:44.821340 140176238815040 submission.py:296] 45) loss = 8.257, grad_norm = 22.952
+I0609 17:05:45.630851 140141575026432 logging_writer.py:48] [46] global_step=46, grad_norm=23.022015, loss=8.239663
+I0609 17:05:45.634214 140176238815040 submission.py:296] 46) loss = 8.240, grad_norm = 23.022
+I0609 17:05:46.439223 140135207376640 logging_writer.py:48] [47] global_step=47, grad_norm=22.851954, loss=8.196733
+I0609 17:05:46.442612 140176238815040 submission.py:296] 47) loss = 8.197, grad_norm = 22.852
+I0609 17:05:47.244169 140141575026432 logging_writer.py:48] [48] global_step=48, grad_norm=22.657078, loss=8.128399
+I0609 17:05:47.247576 140176238815040 submission.py:296] 48) loss = 8.128, grad_norm = 22.657
+I0609 17:05:48.052286 140135207376640 logging_writer.py:48] [49] global_step=49, grad_norm=22.444550, loss=8.057341
+I0609 17:05:48.056326 140176238815040 submission.py:296] 49) loss = 8.057, grad_norm = 22.445
+I0609 17:05:48.861161 140141575026432 logging_writer.py:48] [50] global_step=50, grad_norm=22.294342, loss=8.002278
+I0609 17:05:48.864596 140176238815040 submission.py:296] 50) loss = 8.002, grad_norm = 22.294
+I0609 17:05:49.672338 140135207376640 logging_writer.py:48] [51] global_step=51, grad_norm=21.985449, loss=7.931545
+I0609 17:05:49.675752 140176238815040 submission.py:296] 51) loss = 7.932, grad_norm = 21.985
+I0609 17:05:50.484109 140141575026432 logging_writer.py:48] [52] global_step=52, grad_norm=21.532389, loss=7.840817
+I0609 17:05:50.487587 140176238815040 submission.py:296] 52) loss = 7.841, grad_norm = 21.532
+I0609 17:05:51.293729 140135207376640 logging_writer.py:48] [53] global_step=53, grad_norm=20.786230, loss=7.718715
+I0609 17:05:51.297451 140176238815040 submission.py:296] 53) loss = 7.719, grad_norm = 20.786
+I0609 17:05:52.100714 140141575026432 logging_writer.py:48] [54] global_step=54, grad_norm=19.679274, loss=7.612876
+I0609 17:05:52.104171 140176238815040 submission.py:296] 54) loss = 7.613, grad_norm = 19.679
+I0609 17:05:52.908198 140135207376640 logging_writer.py:48] [55] global_step=55, grad_norm=18.419998, loss=7.493645
+I0609 17:05:52.911908 140176238815040 submission.py:296] 55) loss = 7.494, grad_norm = 18.420
+I0609 17:05:53.717022 140141575026432 logging_writer.py:48] [56] global_step=56, grad_norm=17.277275, loss=7.377637
+I0609 17:05:53.720305 140176238815040 submission.py:296] 56) loss = 7.378, grad_norm = 17.277
+I0609 17:05:54.527830 140135207376640 logging_writer.py:48] [57] global_step=57, grad_norm=15.256514, loss=7.267087
+I0609 17:05:54.531560 140176238815040 submission.py:296] 57) loss = 7.267, grad_norm = 15.257
+I0609 17:05:55.337786 140141575026432 logging_writer.py:48] [58] global_step=58, grad_norm=13.119370, loss=7.186936
+I0609 17:05:55.341116 140176238815040 submission.py:296] 58) loss = 7.187, grad_norm = 13.119
+I0609 17:05:56.143838 140135207376640 logging_writer.py:48] [59] global_step=59, grad_norm=10.308345, loss=7.095005
+I0609 17:05:56.147321 140176238815040 submission.py:296] 59) loss = 7.095, grad_norm = 10.308
+I0609 17:05:56.951078 140141575026432 logging_writer.py:48] [60] global_step=60, grad_norm=7.013810, loss=7.031171
+I0609 17:05:56.954554 140176238815040 submission.py:296] 60) loss = 7.031, grad_norm = 7.014
+I0609 17:05:57.766793 140135207376640 logging_writer.py:48] [61] global_step=61, grad_norm=4.023791, loss=6.981552
+I0609 17:05:57.770399 140176238815040 submission.py:296] 61) loss = 6.982, grad_norm = 4.024
+I0609 17:05:58.577613 140141575026432 logging_writer.py:48] [62] global_step=62, grad_norm=3.034800, loss=6.988676
+I0609 17:05:58.580908 140176238815040 submission.py:296] 62) loss = 6.989, grad_norm = 3.035
+I0609 17:05:59.385386 140135207376640 logging_writer.py:48] [63] global_step=63, grad_norm=7.233366, loss=6.998868
+I0609 17:05:59.389087 140176238815040 submission.py:296] 63) loss = 6.999, grad_norm = 7.233
+I0609 17:06:00.195967 140141575026432 logging_writer.py:48] [64] global_step=64, grad_norm=11.000978, loss=7.023852
+I0609 17:06:00.199533 140176238815040 submission.py:296] 64) loss = 7.024, grad_norm = 11.001
+I0609 17:06:01.003967 140135207376640 logging_writer.py:48] [65] global_step=65, grad_norm=15.137314, loss=7.073213
+I0609 17:06:01.007394 140176238815040 submission.py:296] 65) loss = 7.073, grad_norm = 15.137
+I0609 17:06:01.815046 140141575026432 logging_writer.py:48] [66] global_step=66, grad_norm=18.935486, loss=7.134252
+I0609 17:06:01.818575 140176238815040 submission.py:296] 66) loss = 7.134, grad_norm = 18.935
+I0609 17:06:02.625322 140135207376640 logging_writer.py:48] [67] global_step=67, grad_norm=20.920126, loss=7.154400
+I0609 17:06:02.628603 140176238815040 submission.py:296] 67) loss = 7.154, grad_norm = 20.920
+I0609 17:06:03.441234 140141575026432 logging_writer.py:48] [68] global_step=68, grad_norm=22.570005, loss=7.197477
+I0609 17:06:03.444717 140176238815040 submission.py:296] 68) loss = 7.197, grad_norm = 22.570
+I0609 17:06:04.254292 140135207376640 logging_writer.py:48] [69] global_step=69, grad_norm=25.211233, loss=7.252089
+I0609 17:06:04.258628 140176238815040 submission.py:296] 69) loss = 7.252, grad_norm = 25.211
+I0609 17:06:05.064263 140141575026432 logging_writer.py:48] [70] global_step=70, grad_norm=23.712685, loss=7.191700
+I0609 17:06:05.067849 140176238815040 submission.py:296] 70) loss = 7.192, grad_norm = 23.713
+I0609 17:06:05.876814 140135207376640 logging_writer.py:48] [71] global_step=71, grad_norm=23.029840, loss=7.167789
+I0609 17:06:05.880258 140176238815040 submission.py:296] 71) loss = 7.168, grad_norm = 23.030
+I0609 17:06:06.685111 140141575026432 logging_writer.py:48] [72] global_step=72, grad_norm=19.656284, loss=7.079751
+I0609 17:06:06.689150 140176238815040 submission.py:296] 72) loss = 7.080, grad_norm = 19.656
+I0609 17:06:07.497389 140135207376640 logging_writer.py:48] [73] global_step=73, grad_norm=17.734617, loss=7.038667
+I0609 17:06:07.500696 140176238815040 submission.py:296] 73) loss = 7.039, grad_norm = 17.735
+I0609 17:06:08.310205 140141575026432 logging_writer.py:48] [74] global_step=74, grad_norm=14.520991, loss=6.970487
+I0609 17:06:08.313781 140176238815040 submission.py:296] 74) loss = 6.970, grad_norm = 14.521
+I0609 17:06:09.118921 140135207376640 logging_writer.py:48] [75] global_step=75, grad_norm=12.189049, loss=6.925386
+I0609 17:06:09.122576 140176238815040 submission.py:296] 75) loss = 6.925, grad_norm = 12.189
+I0609 17:06:09.930347 140141575026432 logging_writer.py:48] [76] global_step=76, grad_norm=8.424988, loss=6.862727
+I0609 17:06:09.933893 140176238815040 submission.py:296] 76) loss = 6.863, grad_norm = 8.425
+I0609 17:06:10.739146 140135207376640 logging_writer.py:48] [77] global_step=77, grad_norm=5.773492, loss=6.824442
+I0609 17:06:10.742589 140176238815040 submission.py:296] 77) loss = 6.824, grad_norm = 5.773
+I0609 17:06:11.550939 140141575026432 logging_writer.py:48] [78] global_step=78, grad_norm=3.583305, loss=6.808580
+I0609 17:06:11.554292 140176238815040 submission.py:296] 78) loss = 6.809, grad_norm = 3.583
+I0609 17:06:12.360805 140135207376640 logging_writer.py:48] [79] global_step=79, grad_norm=2.267956, loss=6.783844
+I0609 17:06:12.364249 140176238815040 submission.py:296] 79) loss = 6.784, grad_norm = 2.268
+I0609 17:06:13.171693 140141575026432 logging_writer.py:48] [80] global_step=80, grad_norm=2.522314, loss=6.767191
+I0609 17:06:13.175209 140176238815040 submission.py:296] 80) loss = 6.767, grad_norm = 2.522
+I0609 17:06:13.985201 140135207376640 logging_writer.py:48] [81] global_step=81, grad_norm=3.892227, loss=6.766560
+I0609 17:06:13.989015 140176238815040 submission.py:296] 81) loss = 6.767, grad_norm = 3.892
+I0609 17:06:14.795708 140141575026432 logging_writer.py:48] [82] global_step=82, grad_norm=5.116556, loss=6.764776
+I0609 17:06:14.799171 140176238815040 submission.py:296] 82) loss = 6.765, grad_norm = 5.117
+I0609 17:06:15.604345 140135207376640 logging_writer.py:48] [83] global_step=83, grad_norm=5.842230, loss=6.773888
+I0609 17:06:15.607693 140176238815040 submission.py:296] 83) loss = 6.774, grad_norm = 5.842
+I0609 17:06:16.415675 140141575026432 logging_writer.py:48] [84] global_step=84, grad_norm=7.116628, loss=6.762835
+I0609 17:06:16.419113 140176238815040 submission.py:296] 84) loss = 6.763, grad_norm = 7.117
+I0609 17:06:17.227617 140135207376640 logging_writer.py:48] [85] global_step=85, grad_norm=7.682065, loss=6.753218
+I0609 17:06:17.231043 140176238815040 submission.py:296] 85) loss = 6.753, grad_norm = 7.682
+I0609 17:06:18.038421 140141575026432 logging_writer.py:48] [86] global_step=86, grad_norm=8.424859, loss=6.766985
+I0609 17:06:18.041684 140176238815040 submission.py:296] 86) loss = 6.767, grad_norm = 8.425
+I0609 17:06:18.844869 140135207376640 logging_writer.py:48] [87] global_step=87, grad_norm=8.825132, loss=6.737270
+I0609 17:06:18.848098 140176238815040 submission.py:296] 87) loss = 6.737, grad_norm = 8.825
+I0609 17:06:19.650902 140141575026432 logging_writer.py:48] [88] global_step=88, grad_norm=8.505745, loss=6.739983
+I0609 17:06:19.655266 140176238815040 submission.py:296] 88) loss = 6.740, grad_norm = 8.506
+I0609 17:06:20.460951 140135207376640 logging_writer.py:48] [89] global_step=89, grad_norm=8.371445, loss=6.730752
+I0609 17:06:20.464804 140176238815040 submission.py:296] 89) loss = 6.731, grad_norm = 8.371
+I0609 17:06:21.273393 140141575026432 logging_writer.py:48] [90] global_step=90, grad_norm=8.559445, loss=6.688611
+I0609 17:06:21.276822 140176238815040 submission.py:296] 90) loss = 6.689, grad_norm = 8.559
+I0609 17:06:22.082391 140135207376640 logging_writer.py:48] [91] global_step=91, grad_norm=7.663992, loss=6.680608
+I0609 17:06:22.085750 140176238815040 submission.py:296] 91) loss = 6.681, grad_norm = 7.664
+I0609 17:06:22.890123 140141575026432 logging_writer.py:48] [92] global_step=92, grad_norm=7.283005, loss=6.655886
+I0609 17:06:22.893896 140176238815040 submission.py:296] 92) loss = 6.656, grad_norm = 7.283
+I0609 17:06:23.699474 140135207376640 logging_writer.py:48] [93] global_step=93, grad_norm=6.571341, loss=6.630461
+I0609 17:06:23.703126 140176238815040 submission.py:296] 93) loss = 6.630, grad_norm = 6.571
+I0609 17:06:24.509248 140141575026432 logging_writer.py:48] [94] global_step=94, grad_norm=5.964424, loss=6.607821
+I0609 17:06:24.512670 140176238815040 submission.py:296] 94) loss = 6.608, grad_norm = 5.964
+I0609 17:06:25.321784 140135207376640 logging_writer.py:48] [95] global_step=95, grad_norm=4.958774, loss=6.580132
+I0609 17:06:25.325078 140176238815040 submission.py:296] 95) loss = 6.580, grad_norm = 4.959
+I0609 17:06:26.128726 140141575026432 logging_writer.py:48] [96] global_step=96, grad_norm=3.658485, loss=6.568997
+I0609 17:06:26.132209 140176238815040 submission.py:296] 96) loss = 6.569, grad_norm = 3.658
+I0609 17:06:26.937821 140135207376640 logging_writer.py:48] [97] global_step=97, grad_norm=2.936540, loss=6.540025
+I0609 17:06:26.941447 140176238815040 submission.py:296] 97) loss = 6.540, grad_norm = 2.937
+I0609 17:06:27.744741 140141575026432 logging_writer.py:48] [98] global_step=98, grad_norm=1.970121, loss=6.522923
+I0609 17:06:27.748159 140176238815040 submission.py:296] 98) loss = 6.523, grad_norm = 1.970
+I0609 17:06:28.555762 140135207376640 logging_writer.py:48] [99] global_step=99, grad_norm=1.968527, loss=6.515246
+I0609 17:06:28.559031 140176238815040 submission.py:296] 99) loss = 6.515, grad_norm = 1.969
+I0609 17:06:29.364125 140141575026432 logging_writer.py:48] [100] global_step=100, grad_norm=2.366739, loss=6.512393
+I0609 17:06:29.367385 140176238815040 submission.py:296] 100) loss = 6.512, grad_norm = 2.367
+I0609 17:11:48.024985 140135207376640 logging_writer.py:48] [500] global_step=500, grad_norm=0.555407, loss=5.798949
+I0609 17:11:48.029245 140176238815040 submission.py:296] 500) loss = 5.799, grad_norm = 0.555
+I0609 17:18:26.590372 140141575026432 logging_writer.py:48] [1000] global_step=1000, grad_norm=0.654191, loss=5.566938
+I0609 17:18:26.595011 140176238815040 submission.py:296] 1000) loss = 5.567, grad_norm = 0.654
+I0609 17:25:07.030796 140141575026432 logging_writer.py:48] [1500] global_step=1500, grad_norm=2.124882, loss=3.760645
+I0609 17:25:07.039431 140176238815040 submission.py:296] 1500) loss = 3.761, grad_norm = 2.125
+I0609 17:31:45.765367 140141393868544 logging_writer.py:48] [2000] global_step=2000, grad_norm=1.133613, loss=2.939167
+I0609 17:31:45.770651 140176238815040 submission.py:296] 2000) loss = 2.939, grad_norm = 1.134
+I0609 17:38:25.587256 140141575026432 logging_writer.py:48] [2500] global_step=2500, grad_norm=1.099317, loss=2.653338
+I0609 17:38:25.595952 140176238815040 submission.py:296] 2500) loss = 2.653, grad_norm = 1.099
+I0609 17:45:03.419085 140141393868544 logging_writer.py:48] [3000] global_step=3000, grad_norm=1.186271, loss=2.479597
+I0609 17:45:03.424654 140176238815040 submission.py:296] 3000) loss = 2.480, grad_norm = 1.186
+I0609 17:45:08.193197 140176238815040 spec.py:298] Evaluating on the training split.
+I0609 17:45:19.630770 140176238815040 spec.py:310] Evaluating on the validation split.
+I0609 17:45:29.603448 140176238815040 spec.py:326] Evaluating on the test split.
+I0609 17:45:35.183865 140176238815040 submission_runner.py:419] Time since start: 2467.85s, 	Step: 3007, 	{'train/ctc_loss': 3.5595908248204093, 'train/wer': 0.7208449720670391, 'validation/ctc_loss': 3.756255729480611, 'validation/wer': 0.7277265485443924, 'validation/num_examples': 5348, 'test/ctc_loss': 3.4784320762629846, 'test/wer': 0.6730648142506043, 'test/num_examples': 2472, 'score': 2407.3476181030273, 'total_duration': 2467.846046924591, 'accumulated_submission_time': 2407.3476181030273, 'accumulated_eval_time': 59.27908420562744, 'accumulated_logging_time': 0.03775787353515625}
+I0609 17:45:35.203953 140141575026432 logging_writer.py:48] [3007] accumulated_eval_time=59.279084, accumulated_logging_time=0.037758, accumulated_submission_time=2407.347618, global_step=3007, preemption_count=0, score=2407.347618, test/ctc_loss=3.478432, test/num_examples=2472, test/wer=0.673065, total_duration=2467.846047, train/ctc_loss=3.559591, train/wer=0.720845, validation/ctc_loss=3.756256, validation/num_examples=5348, validation/wer=0.727727
+I0609 17:52:09.710244 140141575026432 logging_writer.py:48] [3500] global_step=3500, grad_norm=1.141246, loss=2.354113
+I0609 17:52:09.718229 140176238815040 submission.py:296] 3500) loss = 2.354, grad_norm = 1.141
+I0609 17:58:47.451267 140141393868544 logging_writer.py:48] [4000] global_step=4000, grad_norm=0.932836, loss=2.139153
+I0609 17:58:47.456042 140176238815040 submission.py:296] 4000) loss = 2.139, grad_norm = 0.933
+I0609 18:05:26.588739 140141575026432 logging_writer.py:48] [4500] global_step=4500, grad_norm=0.917703, loss=2.033376
+I0609 18:05:26.596819 140176238815040 submission.py:296] 4500) loss = 2.033, grad_norm = 0.918
+I0609 18:12:04.125183 140141393868544 logging_writer.py:48] [5000] global_step=5000, grad_norm=0.711131, loss=1.960814
+I0609 18:12:04.129836 140176238815040 submission.py:296] 5000) loss = 1.961, grad_norm = 0.711
+I0609 18:18:42.815045 140141575026432 logging_writer.py:48] [5500] global_step=5500, grad_norm=0.662230, loss=1.897242
+I0609 18:18:42.823379 140176238815040 submission.py:296] 5500) loss = 1.897, grad_norm = 0.662
+I0609 18:25:19.836941 140141393868544 logging_writer.py:48] [6000] global_step=6000, grad_norm=0.641045, loss=1.836024
+I0609 18:25:19.843638 140176238815040 submission.py:296] 6000) loss = 1.836, grad_norm = 0.641
+I0609 18:25:35.741965 140176238815040 spec.py:298] Evaluating on the training split.
+I0609 18:25:47.980871 140176238815040 spec.py:310] Evaluating on the validation split.
+I0609 18:25:58.343243 140176238815040 spec.py:326] Evaluating on the test split.
+I0609 18:26:03.987828 140176238815040 submission_runner.py:419] Time since start: 4896.65s, 	Step: 6021, 	{'train/ctc_loss': 0.6616621584018464, 'train/wer': 0.22201248254189945, 'validation/ctc_loss': 0.8854581661580772, 'validation/wer': 0.26255974508762614, 'validation/num_examples': 5348, 'test/ctc_loss': 0.6073678644589974, 'test/wer': 0.20116588467085086, 'test/num_examples': 2472, 'score': 4806.664809703827, 'total_duration': 4896.649829864502, 'accumulated_submission_time': 4806.664809703827, 'accumulated_eval_time': 87.52438926696777, 'accumulated_logging_time': 0.06956958770751953}
+I0609 18:26:04.007763 140141575026432 logging_writer.py:48] [6021] accumulated_eval_time=87.524389, accumulated_logging_time=0.069570, accumulated_submission_time=4806.664810, global_step=6021, preemption_count=0, score=4806.664810, test/ctc_loss=0.607368, test/num_examples=2472, test/wer=0.201166, total_duration=4896.649830, train/ctc_loss=0.661662, train/wer=0.222012, validation/ctc_loss=0.885458, validation/num_examples=5348, validation/wer=0.262560
+I0609 18:32:26.923109 140141575026432 logging_writer.py:48] [6500] global_step=6500, grad_norm=0.518498, loss=1.775368
+I0609 18:32:26.935891 140176238815040 submission.py:296] 6500) loss = 1.775, grad_norm = 0.518
+/usr/local/lib/python3.8/dist-packages/torch/optim/lr_scheduler.py:163: UserWarning: The epoch parameter in `scheduler.step()` was not necessary and is being deprecated where possible. Please use `scheduler.step()` to step the scheduler. During the deprecation, if epoch is different from None, the closed form is used instead of the new chainable form, where available. Please open an issue if you are unable to replicate your use case: https://github.com/pytorch/pytorch/issues/new/choose.
+  warnings.warn(EPOCH_DEPRECATION_WARNING, UserWarning)
+/usr/local/lib/python3.8/dist-packages/torch/optim/lr_scheduler.py:163: UserWarning: The epoch parameter in `scheduler.step()` was not necessary and is being deprecated where possible. Please use `scheduler.step()` to step the scheduler. During the deprecation, if epoch is different from None, the closed form is used instead of the new chainable form, where available. Please open an issue if you are unable to replicate your use case: https://github.com/pytorch/pytorch/issues/new/choose.
+  warnings.warn(EPOCH_DEPRECATION_WARNING, UserWarning)
+/usr/local/lib/python3.8/dist-packages/torch/optim/lr_scheduler.py:163: UserWarning: The epoch parameter in `scheduler.step()` was not necessary and is being deprecated where possible. Please use `scheduler.step()` to step the scheduler. During the deprecation, if epoch is different from None, the closed form is used instead of the new chainable form, where available. Please open an issue if you are unable to replicate your use case: https://github.com/pytorch/pytorch/issues/new/choose.
+  warnings.warn(EPOCH_DEPRECATION_WARNING, UserWarning)
+/usr/local/lib/python3.8/dist-packages/torch/optim/lr_scheduler.py:163: UserWarning: The epoch parameter in `scheduler.step()` was not necessary and is being deprecated where possible. Please use `scheduler.step()` to step the scheduler. During the deprecation, if epoch is different from None, the closed form is used instead of the new chainable form, where available. Please open an issue if you are unable to replicate your use case: https://github.com/pytorch/pytorch/issues/new/choose.
+  warnings.warn(EPOCH_DEPRECATION_WARNING, UserWarning)
+/usr/local/lib/python3.8/dist-packages/torch/optim/lr_scheduler.py:163: UserWarning: The epoch parameter in `scheduler.step()` was not necessary and is being deprecated where possible. Please use `scheduler.step()` to step the scheduler. During the deprecation, if epoch is different from None, the closed form is used instead of the new chainable form, where available. Please open an issue if you are unable to replicate your use case: https://github.com/pytorch/pytorch/issues/new/choose.
+  warnings.warn(EPOCH_DEPRECATION_WARNING, UserWarning)
+/usr/local/lib/python3.8/dist-packages/torch/optim/lr_scheduler.py:163: UserWarning: The epoch parameter in `scheduler.step()` was not necessary and is being deprecated where possible. Please use `scheduler.step()` to step the scheduler. During the deprecation, if epoch is different from None, the closed form is used instead of the new chainable form, where available. Please open an issue if you are unable to replicate your use case: https://github.com/pytorch/pytorch/issues/new/choose.
+  warnings.warn(EPOCH_DEPRECATION_WARNING, UserWarning)
+/usr/local/lib/python3.8/dist-packages/torch/optim/lr_scheduler.py:163: UserWarning: The epoch parameter in `scheduler.step()` was not necessary and is being deprecated where possible. Please use `scheduler.step()` to step the scheduler. During the deprecation, if epoch is different from None, the closed form is used instead of the new chainable form, where available. Please open an issue if you are unable to replicate your use case: https://github.com/pytorch/pytorch/issues/new/choose.
+  warnings.warn(EPOCH_DEPRECATION_WARNING, UserWarning)
+/usr/local/lib/python3.8/dist-packages/torch/optim/lr_scheduler.py:163: UserWarning: The epoch parameter in `scheduler.step()` was not necessary and is being deprecated where possible. Please use `scheduler.step()` to step the scheduler. During the deprecation, if epoch is different from None, the closed form is used instead of the new chainable form, where available. Please open an issue if you are unable to replicate your use case: https://github.com/pytorch/pytorch/issues/new/choose.
+  warnings.warn(EPOCH_DEPRECATION_WARNING, UserWarning)
+I0609 18:39:03.819713 140141393868544 logging_writer.py:48] [7000] global_step=7000, grad_norm=0.662412, loss=1.737773
+I0609 18:39:03.824824 140176238815040 submission.py:296] 7000) loss = 1.738, grad_norm = 0.662
+I0609 18:45:42.272188 140141575026432 logging_writer.py:48] [7500] global_step=7500, grad_norm=0.511158, loss=1.702954
+I0609 18:45:42.279209 140176238815040 submission.py:296] 7500) loss = 1.703, grad_norm = 0.511
+I0609 18:52:19.462387 140141393868544 logging_writer.py:48] [8000] global_step=8000, grad_norm=0.482489, loss=1.603549
+I0609 18:52:19.467850 140176238815040 submission.py:296] 8000) loss = 1.604, grad_norm = 0.482
+I0609 18:58:58.181970 140141575026432 logging_writer.py:48] [8500] global_step=8500, grad_norm=0.474148, loss=1.608085
+I0609 18:58:58.190442 140176238815040 submission.py:296] 8500) loss = 1.608, grad_norm = 0.474
+I0609 19:05:35.478635 140141393868544 logging_writer.py:48] [9000] global_step=9000, grad_norm=0.445606, loss=1.604100
+I0609 19:05:35.484135 140176238815040 submission.py:296] 9000) loss = 1.604, grad_norm = 0.446
+I0609 19:06:04.076557 140176238815040 spec.py:298] Evaluating on the training split.
+I0609 19:06:16.183018 140176238815040 spec.py:310] Evaluating on the validation split.
+I0609 19:06:26.603605 140176238815040 spec.py:326] Evaluating on the test split.
+I0609 19:06:32.076221 140176238815040 submission_runner.py:419] Time since start: 7324.74s, 	Step: 9037, 	{'train/ctc_loss': 0.4695329357979842, 'train/wer': 0.16306411487430167, 'validation/ctc_loss': 0.6965321729957806, 'validation/wer': 0.20678800753150195, 'validation/num_examples': 5348, 'test/ctc_loss': 0.4462152800180657, 'test/wer': 0.15176812300692624, 'test/num_examples': 2472, 'score': 7205.509074211121, 'total_duration': 7324.738170146942, 'accumulated_submission_time': 7205.509074211121, 'accumulated_eval_time': 115.52340197563171, 'accumulated_logging_time': 0.0994265079498291}
+I0609 19:06:32.098439 140141575026432 logging_writer.py:48] [9037] accumulated_eval_time=115.523402, accumulated_logging_time=0.099427, accumulated_submission_time=7205.509074, global_step=9037, preemption_count=0, score=7205.509074, test/ctc_loss=0.446215, test/num_examples=2472, test/wer=0.151768, total_duration=7324.738170, train/ctc_loss=0.469533, train/wer=0.163064, validation/ctc_loss=0.696532, validation/num_examples=5348, validation/wer=0.206788
+I0609 19:12:42.214220 140141575026432 logging_writer.py:48] [9500] global_step=9500, grad_norm=0.437767, loss=1.540422
+I0609 19:12:42.223218 140176238815040 submission.py:296] 9500) loss = 1.540, grad_norm = 0.438
+I0609 19:19:19.115283 140141393868544 logging_writer.py:48] [10000] global_step=10000, grad_norm=0.524773, loss=1.607017
+I0609 19:19:19.121224 140176238815040 submission.py:296] 10000) loss = 1.607, grad_norm = 0.525
+I0609 19:25:57.603889 140141575026432 logging_writer.py:48] [10500] global_step=10500, grad_norm=0.419920, loss=1.504853
+I0609 19:25:57.611363 140176238815040 submission.py:296] 10500) loss = 1.505, grad_norm = 0.420
+I0609 19:32:34.541325 140141393868544 logging_writer.py:48] [11000] global_step=11000, grad_norm=0.518172, loss=1.512586
+I0609 19:32:34.546988 140176238815040 submission.py:296] 11000) loss = 1.513, grad_norm = 0.518
+I0609 19:39:13.323168 140141575026432 logging_writer.py:48] [11500] global_step=11500, grad_norm=0.330670, loss=1.470494
+I0609 19:39:13.330535 140176238815040 submission.py:296] 11500) loss = 1.470, grad_norm = 0.331
+I0609 19:45:50.609014 140141393868544 logging_writer.py:48] [12000] global_step=12000, grad_norm=0.509863, loss=1.480625
+I0609 19:45:50.614861 140176238815040 submission.py:296] 12000) loss = 1.481, grad_norm = 0.510
+I0609 19:46:32.716174 140176238815040 spec.py:298] Evaluating on the training split.
+I0609 19:46:44.993747 140176238815040 spec.py:310] Evaluating on the validation split.
+I0609 19:46:55.538772 140176238815040 spec.py:326] Evaluating on the test split.
+I0609 19:47:01.030155 140176238815040 submission_runner.py:419] Time since start: 9753.69s, 	Step: 12054, 	{'train/ctc_loss': 0.3868201646192401, 'train/wer': 0.1368933310055866, 'validation/ctc_loss': 0.6087171398589762, 'validation/wer': 0.18559358856756628, 'validation/num_examples': 5348, 'test/ctc_loss': 0.37915583767501126, 'test/wer': 0.129628501208539, 'test/num_examples': 2472, 'score': 9604.8902053833, 'total_duration': 9753.692287445068, 'accumulated_submission_time': 9604.8902053833, 'accumulated_eval_time': 143.8369562625885, 'accumulated_logging_time': 0.13180279731750488}
+I0609 19:47:01.051424 140141575026432 logging_writer.py:48] [12054] accumulated_eval_time=143.836956, accumulated_logging_time=0.131803, accumulated_submission_time=9604.890205, global_step=12054, preemption_count=0, score=9604.890205, test/ctc_loss=0.379156, test/num_examples=2472, test/wer=0.129629, total_duration=9753.692287, train/ctc_loss=0.386820, train/wer=0.136893, validation/ctc_loss=0.608717, validation/num_examples=5348, validation/wer=0.185594
+I0609 19:52:57.803601 140141575026432 logging_writer.py:48] [12500] global_step=12500, grad_norm=0.449318, loss=1.458145
+I0609 19:52:57.812886 140176238815040 submission.py:296] 12500) loss = 1.458, grad_norm = 0.449
+I0609 19:59:34.630669 140141393868544 logging_writer.py:48] [13000] global_step=13000, grad_norm=0.408018, loss=1.422701
+I0609 19:59:34.635829 140176238815040 submission.py:296] 13000) loss = 1.423, grad_norm = 0.408
+I0609 20:06:13.440043 140141575026432 logging_writer.py:48] [13500] global_step=13500, grad_norm=0.322730, loss=1.383893
+I0609 20:06:13.447603 140176238815040 submission.py:296] 13500) loss = 1.384, grad_norm = 0.323
+I0609 20:12:50.219941 140141393868544 logging_writer.py:48] [14000] global_step=14000, grad_norm=0.341403, loss=1.374959
+I0609 20:12:50.225659 140176238815040 submission.py:296] 14000) loss = 1.375, grad_norm = 0.341
+I0609 20:19:28.655169 140141575026432 logging_writer.py:48] [14500] global_step=14500, grad_norm=0.400729, loss=1.409693
+I0609 20:19:28.663590 140176238815040 submission.py:296] 14500) loss = 1.410, grad_norm = 0.401
+I0609 20:26:05.327018 140141393868544 logging_writer.py:48] [15000] global_step=15000, grad_norm=0.462481, loss=1.393246
+I0609 20:26:05.357913 140176238815040 submission.py:296] 15000) loss = 1.393, grad_norm = 0.462
+I0609 20:27:01.706187 140176238815040 spec.py:298] Evaluating on the training split.
+I0609 20:27:13.998071 140176238815040 spec.py:310] Evaluating on the validation split.
+I0609 20:27:24.515103 140176238815040 spec.py:326] Evaluating on the test split.
+I0609 20:27:30.177165 140176238815040 submission_runner.py:419] Time since start: 12182.84s, 	Step: 15072, 	{'train/ctc_loss': 0.33061579319569256, 'train/wer': 0.1202917685055866, 'validation/ctc_loss': 0.5646237830740155, 'validation/wer': 0.1702022884179018, 'validation/num_examples': 5348, 'test/ctc_loss': 0.33730951392025293, 'test/wer': 0.11581662705908638, 'test/num_examples': 2472, 'score': 12004.317006111145, 'total_duration': 12182.839210033417, 'accumulated_submission_time': 12004.317006111145, 'accumulated_eval_time': 172.3076295852661, 'accumulated_logging_time': 0.1628258228302002}
+I0609 20:27:30.197432 140141575026432 logging_writer.py:48] [15072] accumulated_eval_time=172.307630, accumulated_logging_time=0.162826, accumulated_submission_time=12004.317006, global_step=15072, preemption_count=0, score=12004.317006, test/ctc_loss=0.337310, test/num_examples=2472, test/wer=0.115817, total_duration=12182.839210, train/ctc_loss=0.330616, train/wer=0.120292, validation/ctc_loss=0.564624, validation/num_examples=5348, validation/wer=0.170202
+I0609 20:33:12.449034 140141575026432 logging_writer.py:48] [15500] global_step=15500, grad_norm=0.408484, loss=1.303991
+I0609 20:33:12.457844 140176238815040 submission.py:296] 15500) loss = 1.304, grad_norm = 0.408
+I0609 20:39:49.326106 140141393868544 logging_writer.py:48] [16000] global_step=16000, grad_norm=0.420608, loss=1.387301
+I0609 20:39:49.351521 140176238815040 submission.py:296] 16000) loss = 1.387, grad_norm = 0.421
+I0609 20:46:28.379023 140141575026432 logging_writer.py:48] [16500] global_step=16500, grad_norm=0.604341, loss=1.329590
+I0609 20:46:28.386449 140176238815040 submission.py:296] 16500) loss = 1.330, grad_norm = 0.604
+I0609 20:53:05.687226 140141393868544 logging_writer.py:48] [17000] global_step=17000, grad_norm=0.531176, loss=1.341658
+I0609 20:53:05.692254 140176238815040 submission.py:296] 17000) loss = 1.342, grad_norm = 0.531
+I0609 20:59:42.677323 140141575026432 logging_writer.py:48] [17500] global_step=17500, grad_norm=0.338382, loss=1.344433
+I0609 20:59:42.682865 140176238815040 submission.py:296] 17500) loss = 1.344, grad_norm = 0.338
+I0609 21:06:21.607323 140141575026432 logging_writer.py:48] [18000] global_step=18000, grad_norm=0.402402, loss=1.350816
+I0609 21:06:21.616153 140176238815040 submission.py:296] 18000) loss = 1.351, grad_norm = 0.402
+I0609 21:07:30.753141 140176238815040 spec.py:298] Evaluating on the training split.
+I0609 21:07:43.232297 140176238815040 spec.py:310] Evaluating on the validation split.
+I0609 21:07:53.636688 140176238815040 spec.py:326] Evaluating on the test split.
+I0609 21:07:59.283999 140176238815040 submission_runner.py:419] Time since start: 14611.95s, 	Step: 18088, 	{'train/ctc_loss': 0.28733018252710935, 'train/wer': 0.10697996682960893, 'validation/ctc_loss': 0.5230535561237944, 'validation/wer': 0.15907883937623715, 'validation/num_examples': 5348, 'test/ctc_loss': 0.3096377185624879, 'test/wer': 0.10698108991936303, 'test/num_examples': 2472, 'score': 14403.64236164093, 'total_duration': 14611.946224212646, 'accumulated_submission_time': 14403.64236164093, 'accumulated_eval_time': 200.8381152153015, 'accumulated_logging_time': 0.19353747367858887}
+I0609 21:07:59.305019 140141575026432 logging_writer.py:48] [18088] accumulated_eval_time=200.838115, accumulated_logging_time=0.193537, accumulated_submission_time=14403.642362, global_step=18088, preemption_count=0, score=14403.642362, test/ctc_loss=0.309638, test/num_examples=2472, test/wer=0.106981, total_duration=14611.946224, train/ctc_loss=0.287330, train/wer=0.106980, validation/ctc_loss=0.523054, validation/num_examples=5348, validation/wer=0.159079
+I0609 21:13:27.382111 140141393868544 logging_writer.py:48] [18500] global_step=18500, grad_norm=0.362480, loss=1.320401
+I0609 21:13:27.387034 140176238815040 submission.py:296] 18500) loss = 1.320, grad_norm = 0.362
+I0609 21:20:06.236293 140141575026432 logging_writer.py:48] [19000] global_step=19000, grad_norm=0.514977, loss=1.309439
+I0609 21:20:06.248985 140176238815040 submission.py:296] 19000) loss = 1.309, grad_norm = 0.515
+I0609 21:26:43.263449 140141393868544 logging_writer.py:48] [19500] global_step=19500, grad_norm=0.430707, loss=1.337691
+I0609 21:26:43.268636 140176238815040 submission.py:296] 19500) loss = 1.338, grad_norm = 0.431
+I0609 21:33:21.278949 140176238815040 spec.py:298] Evaluating on the training split.
+I0609 21:33:33.696654 140176238815040 spec.py:310] Evaluating on the validation split.
+I0609 21:33:44.726018 140176238815040 spec.py:326] Evaluating on the test split.
+I0609 21:33:50.381116 140176238815040 submission_runner.py:419] Time since start: 16163.04s, 	Step: 20000, 	{'train/ctc_loss': 0.26969913627393405, 'train/wer': 0.10108240223463687, 'validation/ctc_loss': 0.5062119244618998, 'validation/wer': 0.15407714961618307, 'validation/num_examples': 5348, 'test/ctc_loss': 0.30013105684237695, 'test/wer': 0.10373123717831535, 'test/num_examples': 2472, 'score': 15924.823437213898, 'total_duration': 16163.04326581955, 'accumulated_submission_time': 15924.823437213898, 'accumulated_eval_time': 229.94000935554504, 'accumulated_logging_time': 0.22588014602661133}
+I0609 21:33:50.402173 140141575026432 logging_writer.py:48] [20000] accumulated_eval_time=229.940009, accumulated_logging_time=0.225880, accumulated_submission_time=15924.823437, global_step=20000, preemption_count=0, score=15924.823437, test/ctc_loss=0.300131, test/num_examples=2472, test/wer=0.103731, total_duration=16163.043266, train/ctc_loss=0.269699, train/wer=0.101082, validation/ctc_loss=0.506212, validation/num_examples=5348, validation/wer=0.154077
+I0609 21:33:50.423143 140141393868544 logging_writer.py:48] [20000] global_step=20000, preemption_count=0, score=15924.823437
+I0609 21:33:51.167259 140176238815040 checkpoint_utils.py:240] Saved checkpoint to /experiment_runs/timing_v4_b_pytorch/nadamw/librispeech_conformer_pytorch/trial_1/checkpoint_20000.
+I0609 21:33:51.274533 140176238815040 submission_runner.py:581] Tuning trial 1/1
+I0609 21:33:51.274803 140176238815040 submission_runner.py:582] Hyperparameters: Hyperparameters(learning_rate=0.0019814680146414726, one_minus_beta1=0.045677535963609565, beta2=0.999, warmup_factor=0.05, weight_decay=0.010340635370188849, label_smoothing=0.1, dropout_rate=0.0)
+I0609 21:33:51.275352 140176238815040 submission_runner.py:583] Metrics: {'eval_results': [(1, {'train/ctc_loss': 31.283705716861054, 'train/wer': 1.6452841305865922, 'validation/ctc_loss': 29.34477973678923, 'validation/wer': 1.4346642205378264, 'validation/num_examples': 5348, 'test/ctc_loss': 29.527075940383252, 'test/wer': 1.485040521601365, 'test/num_examples': 2472, 'score': 8.169419050216675, 'total_duration': 40.45938324928284, 'accumulated_submission_time': 8.169419050216675, 'accumulated_eval_time': 32.28881239891052, 'accumulated_logging_time': 0, 'global_step': 1, 'preemption_count': 0}), (3007, {'train/ctc_loss': 3.5595908248204093, 'train/wer': 0.7208449720670391, 'validation/ctc_loss': 3.756255729480611, 'validation/wer': 0.7277265485443924, 'validation/num_examples': 5348, 'test/ctc_loss': 3.4784320762629846, 'test/wer': 0.6730648142506043, 'test/num_examples': 2472, 'score': 2407.3476181030273, 'total_duration': 2467.846046924591, 'accumulated_submission_time': 2407.3476181030273, 'accumulated_eval_time': 59.27908420562744, 'accumulated_logging_time': 0.03775787353515625, 'global_step': 3007, 'preemption_count': 0}), (6021, {'train/ctc_loss': 0.6616621584018464, 'train/wer': 0.22201248254189945, 'validation/ctc_loss': 0.8854581661580772, 'validation/wer': 0.26255974508762614, 'validation/num_examples': 5348, 'test/ctc_loss': 0.6073678644589974, 'test/wer': 0.20116588467085086, 'test/num_examples': 2472, 'score': 4806.664809703827, 'total_duration': 4896.649829864502, 'accumulated_submission_time': 4806.664809703827, 'accumulated_eval_time': 87.52438926696777, 'accumulated_logging_time': 0.06956958770751953, 'global_step': 6021, 'preemption_count': 0}), (9037, {'train/ctc_loss': 0.4695329357979842, 'train/wer': 0.16306411487430167, 'validation/ctc_loss': 0.6965321729957806, 'validation/wer': 0.20678800753150195, 'validation/num_examples': 5348, 'test/ctc_loss': 0.4462152800180657, 'test/wer': 0.15176812300692624, 'test/num_examples': 2472, 'score': 7205.509074211121, 'total_duration': 7324.738170146942, 'accumulated_submission_time': 7205.509074211121, 'accumulated_eval_time': 115.52340197563171, 'accumulated_logging_time': 0.0994265079498291, 'global_step': 9037, 'preemption_count': 0}), (12054, {'train/ctc_loss': 0.3868201646192401, 'train/wer': 0.1368933310055866, 'validation/ctc_loss': 0.6087171398589762, 'validation/wer': 0.18559358856756628, 'validation/num_examples': 5348, 'test/ctc_loss': 0.37915583767501126, 'test/wer': 0.129628501208539, 'test/num_examples': 2472, 'score': 9604.8902053833, 'total_duration': 9753.692287445068, 'accumulated_submission_time': 9604.8902053833, 'accumulated_eval_time': 143.8369562625885, 'accumulated_logging_time': 0.13180279731750488, 'global_step': 12054, 'preemption_count': 0}), (15072, {'train/ctc_loss': 0.33061579319569256, 'train/wer': 0.1202917685055866, 'validation/ctc_loss': 0.5646237830740155, 'validation/wer': 0.1702022884179018, 'validation/num_examples': 5348, 'test/ctc_loss': 0.33730951392025293, 'test/wer': 0.11581662705908638, 'test/num_examples': 2472, 'score': 12004.317006111145, 'total_duration': 12182.839210033417, 'accumulated_submission_time': 12004.317006111145, 'accumulated_eval_time': 172.3076295852661, 'accumulated_logging_time': 0.1628258228302002, 'global_step': 15072, 'preemption_count': 0}), (18088, {'train/ctc_loss': 0.28733018252710935, 'train/wer': 0.10697996682960893, 'validation/ctc_loss': 0.5230535561237944, 'validation/wer': 0.15907883937623715, 'validation/num_examples': 5348, 'test/ctc_loss': 0.3096377185624879, 'test/wer': 0.10698108991936303, 'test/num_examples': 2472, 'score': 14403.64236164093, 'total_duration': 14611.946224212646, 'accumulated_submission_time': 14403.64236164093, 'accumulated_eval_time': 200.8381152153015, 'accumulated_logging_time': 0.19353747367858887, 'global_step': 18088, 'preemption_count': 0}), (20000, {'train/ctc_loss': 0.26969913627393405, 'train/wer': 0.10108240223463687, 'validation/ctc_loss': 0.5062119244618998, 'validation/wer': 0.15407714961618307, 'validation/num_examples': 5348, 'test/ctc_loss': 0.30013105684237695, 'test/wer': 0.10373123717831535, 'test/num_examples': 2472, 'score': 15924.823437213898, 'total_duration': 16163.04326581955, 'accumulated_submission_time': 15924.823437213898, 'accumulated_eval_time': 229.94000935554504, 'accumulated_logging_time': 0.22588014602661133, 'global_step': 20000, 'preemption_count': 0})], 'global_step': 20000}
+I0609 21:33:51.275469 140176238815040 submission_runner.py:584] Timing: 15924.823437213898
+I0609 21:33:51.275528 140176238815040 submission_runner.py:586] Total number of evals: 8
+I0609 21:33:51.275595 140176238815040 submission_runner.py:587] ====================
+I0609 21:33:51.275783 140176238815040 submission_runner.py:655] Final librispeech_conformer score: 15924.823437213898

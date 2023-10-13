@@ -24,6 +24,7 @@ flags.DEFINE_boolean('rsync_data', True, 'Whether or not to transfer the data fr
 flags.DEFINE_integer('num_runs', 1, 'Number of times to repeat a run.')
 flags.DEFINE_string('workload', None, 'Workload to run, if None, run all workloads.')
 flags.DEFINE_boolean('local', True, 'Whether or not to mount the local algorithmic-efficiency repo to the container.')
+flags.DEFINE_integer('run_start_index', 0, 'Start index of the runs')
 FLAGS = flags.FLAGS
 
 
@@ -88,6 +89,7 @@ def main(_):
     framework = FLAGS.framework
     tag = f':{FLAGS.tag}' if FLAGS.tag is not None else ''
     num_runs = FLAGS.num_runs
+    start_index = FLAGS.run_start_index
     experiment_basename=FLAGS.experiment_basename
     rsync_data = 'true' if FLAGS.rsync_data else 'false'
     docker_image_url = FLAGS.docker_image_url
@@ -101,7 +103,7 @@ def main(_):
 
     # For each runnable workload check if there are any containers running and if not launch next container command
     for workload in workloads:
-        for n in range(num_runs):
+        for n in range(start_index, start_index + num_runs):
             wait_until_container_not_running()
             os.system("sudo sh -c 'echo 3 > /proc/sys/vm/drop_caches'") # clear caches
             print('='*100)
@@ -109,7 +111,7 @@ def main(_):
             max_steps = int(WORKLOADS[workload]['max_steps'])
             algorithm = WORKLOADS[workload]['algorithm']
 
-            experiment_name = f'{experiment_basename}/{algorithm}'
+            experiment_name = f'{experiment_basename}/{algorithm}_run{n}'
             if workload == 'conformer':
                 tuning_tag = '_conformer'
             else:
