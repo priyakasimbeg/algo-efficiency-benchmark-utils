@@ -108,10 +108,10 @@ def print_df(df):
 
 
 def main(_):
-    source_log_dir = '/home/kasimbeg/mlcommons-runs/fastmri_target_resetting'
+    source_log_dir = '/home/kasimbeg/mlcommons-runs/targets_check_fastmri'
     destination_log_dir = 'logs/target_setting_fastmri'
 
-    copy = True
+    copy = False
     if copy: 
         files = glob.glob(f"{source_log_dir}/*/*_jax/*.log")
         if not os.path.exists(destination_log_dir):
