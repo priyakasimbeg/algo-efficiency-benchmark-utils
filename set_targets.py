@@ -109,7 +109,7 @@ def print_df(df):
 
 def main(_):
     source_log_dir = '/home/kasimbeg/mlcommons-runs/targets_check_fastmri'
-    destination_log_dir = 'logs/target_setting_fastmri'
+    destination_log_dir = 'logs/target_setting_conformer'
 
     copy = False
     if copy: 

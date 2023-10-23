@@ -24,6 +24,7 @@ flags.DEFINE_string('docker_image_url', 'us-central1-docker.pkg.dev/training-alg
 flags.DEFINE_integer('run_percentage', 20, 'Percentage of max num steps to run for.')
 flags.DEFINE_string('experiment_basename', 'timing', 'Name of top sub directory in experiment dir.')
 flags.DEFINE_boolean('rsync_data', True, 'Whether or not to transfer the data from GCP w rsync.')
+flags.DEFINE_boolean('local', False, 'Mount local algorithmic-efficiency repo.')
 
 FLAGS = flags.FLAGS
 
@@ -97,9 +98,13 @@ def main(_):
             tuning_tag = '_conformer'
         else:
             tuning_tag = ''
+        mount_repo_flag = ''
+        if FLAGS.local:
+            mount_repo_flag = '-v /home/kasimbeg/algorithmic-efficiency:/algorithmic-efficiency '
         command = ('docker run -t -d -v /home/kasimbeg/data/:/data/ '
                    '-v /home/kasimbeg/experiment_runs/:/experiment_runs '
                    '-v /home/kasimbeg/experiment_runs/logs:/logs '
+                   f'{mount_repo_flag}'
                    '--gpus all --ipc=host '
                    f'{docker_image_url}{tag} '
                    f'-d {dataset} '
