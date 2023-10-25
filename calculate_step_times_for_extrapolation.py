@@ -40,8 +40,8 @@ MAX_STEPS = {
     'fastmri': 27142,
     'ogbg': 60000,
     'wmt': 100000,
-    'librispeech_conformer': 100000,
-    'librispeech_deepspeech': 60000,
+    'librispeech_conformer': 80000,
+    'librispeech_deepspeech': 48000,
 }
 
 if not os.path.exists(OUTPUT_DIR):
